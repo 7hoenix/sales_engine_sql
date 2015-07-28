@@ -1,22 +1,18 @@
+require 'csv'
+
 class Loader
   def initialize
   end
 
-  def loadcsv(filename)
-    lines = get_lines(filename)
-    columns = get_columns(lines[0])
-    
-  end
-  def get_lines(filename)
-    File.readlines(filename)
-  end
-  def get_columns(str)
-    columns = str.split(',').map do |column|
-      column = column.chomp
-      column = column.to_sym
-      column
+  def load_csv(str)
+    records  = {}
+    args = {:headers => true,
+            :header_converters => :symbol,
+            :converters => :all}
+    CSV.foreach(str, args) do |row|
+        records[row.fields[0]] = Hash[row.headers[1..-1].zip(row.fields[1..-1])]
     end
+    records
   end
-
 
 end

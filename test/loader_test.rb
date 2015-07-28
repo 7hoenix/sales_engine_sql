@@ -13,19 +13,12 @@ class LoaderTest < Minitest::Test
 
     assert @loader
   end
-  def test_it_can_read_a_file
-    lines = @loader.get_lines("./README.md")
+  def test_it_loads_a_hash_of_hashes     
+    hash = @loader.load_csv('./data/merchants.csv')
     
-    assert lines
-  end
-
-  def test_it_can_parse_columns_from_a_header_line
-    header =  "id,name,created_at,updated_at\n"
-    columns = @loader.get_columns(header)
+    expected = {:name=>"Willms and Sons", :created_at=>"2012-03-27 14:53:59 UTC", :updated_at=>"2012-03-27 14:53:59 UTC"}
+    result = hash[3]
     
-    expected = [:id,:name,:created_at,:updated_at]
-    result = columns
-    
-    assert_equal expected,result
+    assert_equal(expected, result)
   end
 end
