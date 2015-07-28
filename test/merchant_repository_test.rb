@@ -20,6 +20,6 @@ class MerchantRepositoryTest < Minitest::Test
     assert_equal expected,  result
   end
   def test_we_can_populate_merchants
-    assert @merchant_repository.merchants[1]
+    assert @merchant_repository.merchants.length > 20
   end
 end

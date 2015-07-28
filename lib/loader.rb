@@ -1,8 +1,6 @@
 require 'csv'
 
 class Loader
-  def initialize
-  end
 
   def load_csv(str)
     records  = {}

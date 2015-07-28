@@ -10,11 +10,6 @@ class MerchantTest < Minitest::Test
                         :creadted_at => "sometime",
                         :updated_at => "someothertime"}
   end
-  
-  def test_something
-    assert true
-  end
-  
   def test_it_has_an_id_accessor
     @merchant = Merchant.new(@example_record1)
     assert @merchant.respond_to?(:id)

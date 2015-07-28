@@ -6,13 +6,12 @@ class LoaderTest < Minitest::Test
     @loader = Loader.new
   end
 
-  def test_something
-    assert true
-  end
+  
   def test_it_doesnt_need_any_args_to_instantiate
 
     assert @loader
   end
+  
   def test_it_loads_a_hash_of_hashes     
     hash = @loader.load_csv('./data/merchants.csv')
     

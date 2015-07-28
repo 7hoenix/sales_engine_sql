@@ -7,7 +7,6 @@ class SalesEngineTest < Minitest::Test
   def setup
     @engine = SalesEngine.new
   end
-  
   def test_we_can_start_our_engine
     assert @engine.startup
   end
