@@ -7,7 +7,7 @@ class MerchantTest < Minitest::Test
   def setup
     @example_record1 =  {:id => '1',
                         :name => 'Matt',
-                        :creadted_at => "sometime",
+                        :created_at => "sometime",
                         :updated_at => "someothertime"}
   end
   def test_it_has_a_name_accessor

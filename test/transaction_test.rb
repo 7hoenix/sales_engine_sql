@@ -9,7 +9,7 @@ class TransactionTest < Minitest::Test
                         :credit_card_number => '892384923',
                         :credit_card_expiration_date => "9283",
                         :result => "good",
-                        :creadted_at => "sometime",
+                        :created_at => "sometime",
                         :updated_at => "someothertime"}
   end
   def test_it_has_a_invoice_id_accessor

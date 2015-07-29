@@ -8,7 +8,7 @@ class InvoiceTest < Minitest::Test
     @example_record1 =  {:customer_id => '230',
                          :merchant_id => '5603',
                          :status => "shipped",
-                        :creadted_at => "sometime",
+                        :created_at => "sometime",
                         :updated_at => "someothertime"}
   end
   def test_it_has_a_customer_id_accessor
