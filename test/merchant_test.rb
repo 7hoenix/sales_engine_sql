@@ -10,10 +10,6 @@ class MerchantTest < Minitest::Test
                         :creadted_at => "sometime",
                         :updated_at => "someothertime"}
   end
-  def test_it_has_an_id_accessor
-    @merchant = Merchant.new(@example_record1)
-    assert @merchant.respond_to?(:id)
-  end
   def test_it_has_a_name_accessor
     @merchant = Merchant.new(@example_record1)
     assert @merchant.respond_to?(:name)
@@ -25,6 +21,10 @@ class MerchantTest < Minitest::Test
   def test_it_has_a_updated_at_accessor
     @merchant = Merchant.new(@example_record1)
     assert @merchant.respond_to?(:updated_at)
+  end
+  def test_it_does_NOT_have_an_accessor_it_shouldnt
+    @merchant = Merchant.new(@example_record1)
+    refute @merchant.respond_to?(:description)
   end
   
   

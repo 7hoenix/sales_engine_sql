@@ -4,6 +4,7 @@ class SalesEngine
   attr_accessor :merchant_repository
   def initialize
   end
+
   def startup
     @merchant_repository = MerchantRepository.new
   end
