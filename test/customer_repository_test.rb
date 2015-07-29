@@ -32,4 +32,10 @@ class CustomerRepositoryTest < Minitest::Test
     
     assert_equal expected, result
   end
+  def test_all_returns_all     
+    expected = @customer_repository.customers
+    result = @customer_repository.all
+    assert_equal(expected, result)
+  end
+  
 end

@@ -1,9 +1,13 @@
 require 'pry'
-h = {1 => {:name => "john", :date => "now"}, 2 => {:name => "sallly", :date => "later"}}
-
-h.each_with_index do |merchant, index|
-  binding.pry
-  id = merchant[0]
-  record = merchant[1]
-  @merchant[id] = Merchant.new(record)
+module TestModule
+  def say_hi
+    'hi'
+  end
 end
+class TestClass
+  include TestModule
+end
+
+test = TestClass.new
+
+puts test.say_hi
