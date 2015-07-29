@@ -1,6 +1,6 @@
 require 'pry'
-require_relative '../lib/loader.rb'
-require_relative '../lib/invoice.rb'
+require_relative '../loader.rb'
+require_relative '../objects/invoice.rb'
 
 class InvoiceRepository
   attr_accessor :invoices

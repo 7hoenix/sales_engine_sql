@@ -1,5 +1,5 @@
 require_relative 'test_helper.rb'
-require_relative '../lib/merchant'
+require_relative '../lib/objects/merchant'
 
 class MerchantTest < Minitest::Test
   

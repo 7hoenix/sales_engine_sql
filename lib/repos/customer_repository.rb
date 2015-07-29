@@ -1,6 +1,6 @@
 require 'pry'
-require_relative '../lib/loader.rb'
-require_relative '../lib/customer.rb'
+require_relative '../loader.rb'
+require_relative '../objects/customer.rb'
 
 class CustomerRepository
   attr_accessor :customers

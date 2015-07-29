@@ -1,6 +1,6 @@
 require 'pry'
-require_relative '../lib/loader.rb'
-require_relative '../lib/transaction'
+require_relative '../loader.rb'
+require_relative '../objects/transaction.rb'
 
 class TransactionRepository
   attr_accessor :transactions

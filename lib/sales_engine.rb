@@ -1,9 +1,9 @@
-require_relative '../lib/merchant_repository'
-require_relative '../lib/invoice_repository'
-require_relative '../lib/item_repository'
-require_relative '../lib/invoice_item_repository'
-require_relative '../lib/customer_repository'
-require_relative '../lib/transaction_repository'
+require_relative './repos/merchant_repository'
+require_relative './repos/invoice_repository'
+require_relative './repos/item_repository'
+require_relative './repos/invoice_item_repository'
+require_relative './repos/customer_repository'
+require_relative './repos/transaction_repository'
 
 
 class SalesEngine
@@ -19,6 +19,9 @@ class SalesEngine
     @customer_repository = CustomerRepository.new
     @transaction_repository = TransactionRepository.new
   end
+
+
+
 end
 
 if __FILE__  == $0
@@ -29,3 +32,4 @@ if __FILE__  == $0
 
 
 end
+

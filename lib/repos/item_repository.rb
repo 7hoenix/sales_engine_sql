@@ -1,6 +1,6 @@
 require 'pry'
-require_relative '../lib/loader.rb'
-require_relative '../lib/item.rb'
+require_relative '../loader.rb'
+require_relative '../objects/item.rb'
 
 class ItemRepository
   attr_accessor :items

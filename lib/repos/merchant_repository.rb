@@ -1,5 +1,5 @@
-require_relative '../lib/loader.rb'
-require_relative '../lib/merchant.rb'
+require_relative '../loader.rb'
+require_relative '../objects/merchant.rb'
 
 class MerchantRepository
   attr_accessor :merchants

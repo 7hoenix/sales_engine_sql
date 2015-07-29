@@ -1,5 +1,5 @@
 require_relative 'test_helper.rb'
-require_relative '../lib/item'
+require_relative '../lib/objects/item'
 
 class ItemTest < Minitest::Test
   

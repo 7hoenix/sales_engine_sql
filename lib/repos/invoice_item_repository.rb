@@ -1,7 +1,6 @@
 require 'pry'
-require_relative '../lib/loader.rb'
-require_relative '../lib/invoice_item.rb'
-
+require_relative '../loader.rb'
+require_relative '../objects/invoice_item.rb'
 class InvoiceItemRepository
   attr_accessor :invoice_items
   def initialize(filename='./data/invoice_items.csv')
