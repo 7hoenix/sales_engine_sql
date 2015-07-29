@@ -1,27 +1,27 @@
 require 'pry'
 require_relative '../lib/loader.rb'
-require_relative '../lib/invoice.rb'
+require_relative '../lib/item.rb'
 
-class InvoiceRepository
-  attr_accessor :invoices
-  def initialize(filename='./data/invoices.csv')
+class ItemRepository
+  attr_accessor :items
+  def initialize(filename='./data/item.csv')
     @loader = Loader.new
     loaded_csvs = @loader.load_csv(filename)
-    @invoices = populate_invoices(loaded_csvs)
+    @items = populate_items(loaded_csvs)
   end
 
-  def add_invoice(record)
-    Invoice.new(record)
+  def add_item(record)
+    Item.new(record)
   end
 
-  def populate_invoices(loaded_csvs)
-    invoices = {}
-    loaded_csvs.each do |invoice|
-      id = invoice.first
-      record = invoice.last
-      invoices[id] = add_invoice(record)
+  def populate_items(loaded_csvs)
+    items = {}
+    loaded_csvs.each do |item|
+      id = item.first
+      record = item.last
+      items[id] = add_item(record)
     end
-    invoices
+    items
   end
 
 end

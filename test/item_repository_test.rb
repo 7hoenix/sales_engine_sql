@@ -19,7 +19,7 @@ class ItemRepositoryTest < Minitest::Test
                         :updated_at => "someothertime",}
     item = @item_repository.add_item(item_record)
     
-    expected = "340"
+    expected = 75107
     result = item.unit_price
     
     assert_equal expected,  result
@@ -28,10 +28,8 @@ class ItemRepositoryTest < Minitest::Test
     assert @item_repository.items.length > 20
   end
   def test_we_can_access_a_item_info_from_the_item_repo_class
-    
-    expected = 302
+    expected = 34018
     result = @item_repository.items[10].unit_price
-    
     assert_equal expected, result
   end
 end
