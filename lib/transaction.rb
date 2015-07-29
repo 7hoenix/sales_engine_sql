@@ -1,7 +1,7 @@
 class Transaction
   attr_accessor :invoice_id,
-                :credit_card_number, 
-                :credit_card_expiration_date, 
+                :credit_card_number,
+                :credit_card_expiration_date,
                 :result, :created_at, :updated_at
 
   def initialize(record)

@@ -19,7 +19,7 @@ class TransactionRepositoryTest < Minitest::Test
                         :updated_at => "someothertime"}
     transaction = @transaction_repository.add_transaction(transaction_record)
     
-    expected = "340"
+    expected = "someothertime"
     result = transaction.updated_at
     
     assert_equal expected,  result
@@ -29,9 +29,8 @@ class TransactionRepositoryTest < Minitest::Test
   end
   def test_we_can_access_a_invoices_info_from_the_invoice_repo_class
     
-    expected = 3
-    result = @transaction_repository.transactions[10].customer_id
-    
+    expected = 4923661117104166
+    result = @transaction_repository.transactions[10].credit_card_number     
     assert_equal expected, result
   end
 end
