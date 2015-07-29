@@ -13,7 +13,7 @@ class LoaderTest < Minitest::Test
   end
   
   def test_it_loads_a_hash_of_hashes     
-    hash = @loader.load_csv('./data/merchants.csv')
+    hash = @loader.load_csv('./fixtures/merchants.csv')
     
     expected = {:name=>"Willms and Sons", :created_at=>"2012-03-27 14:53:59 UTC", :updated_at=>"2012-03-27 14:53:59 UTC"}
     result = hash[3]

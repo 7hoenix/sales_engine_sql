@@ -4,7 +4,7 @@ require_relative '../lib/merchant_repository'
 class MerchantRepositoryTest < Minitest::Test
   
   def setup
-    @merchant_repository = MerchantRepository.new
+    @merchant_repository = MerchantRepository.new('./fixtures/Merchants.csv')
   end  
   def test_make_sure_we_can_instantiate
     assert @merchant_repository.class == MerchantRepository
