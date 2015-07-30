@@ -37,5 +37,12 @@ class CustomerRepositoryTest < Minitest::Test
     result = @customer_repository.all
     assert_equal(expected, result)
   end
+  def test_random_returns_random
+    @customer_repository.stub(:rand, 54) do
+      expected = @customer_repository.customers[54]
+      assert_equal(expected, @customer_repository.random)
+    end
+
+  end
   
 end

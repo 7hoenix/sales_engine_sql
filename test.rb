@@ -11,3 +11,4 @@ end
 test = TestClass.new
 
 puts test.say_hi
+
