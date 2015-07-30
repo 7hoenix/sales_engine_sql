@@ -26,6 +26,12 @@ class MerchantTest < Minitest::Test
     @merchant = Merchant.new(@example_record1)
     refute @merchant.respond_to?(:description)
   end
+  # def test_it_has_access_to_relationship_module
+  #   result = @merchant.items
+  #   
+  #   assert_equal("hi", result)
+  #   
+  # end
   
   
 end
