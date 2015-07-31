@@ -9,6 +9,7 @@ module Find
       found[0]
     end
   end
+  
   def find_all_by(x, match)
     x = x.to_sym
     match = match.to_s.downcase

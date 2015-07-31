@@ -9,11 +9,7 @@ class TestClass1
   
 end
 
-
 class ListTest < Minitest::Test
-  
-  
-  
   def test_we_can_set_our_list_of_things
     test1 = TestClass1.new
     

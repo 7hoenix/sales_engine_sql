@@ -3,7 +3,10 @@ require_relative '../objects/merchant.rb'
 
 class MerchantRepository
   attr_accessor :merchants
-  def initialize(filename='./data/fixtures/merchants.csv')
+
+  def initialize(args)
+    @engine = args.fetch(:engine, nil)
+    filename = args.fetch(:filename, './data/fixtures/merchants.csv')
     @loader = Loader.new
     loaded_csvs = @loader.load_csv(filename)
     @merchants = populate_merchants(loaded_csvs)

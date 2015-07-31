@@ -9,7 +9,6 @@ class TestClass1
   
 end
 
-
 class ListTest < Minitest::Test   
   def test_we_can_set_our_list_of_things_as_a_hash
     test1 = TestClass1.new

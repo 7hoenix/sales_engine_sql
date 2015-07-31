@@ -4,7 +4,7 @@ require_relative '../lib/repos/item_repository'
 class ItemRepositoryTest < Minitest::Test
   
   def setup
-    @item_repository = ItemRepository.new('./fixtures/items.csv')
+    @item_repository = ItemRepository.new(:filename => './fixtures/items.csv')
   end  
   def test_make_sure_we_can_instantiate
     assert @item_repository.class == ItemRepository
