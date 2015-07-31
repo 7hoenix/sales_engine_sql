@@ -9,8 +9,8 @@ class Loader
             :converters => :all}
     CSV.foreach(str, args) do |row|
         id = row.fields[0]
-        headers = row.headers[1..-1]
-        fields = row.fields[1..-1]
+        headers = row.headers[0..-1]
+        fields = row.fields[0..-1]
         records[id] = Hash[headers.zip(fields)]
     end
     records

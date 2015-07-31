@@ -5,8 +5,10 @@ class Item
                 :merchant_id,
                 :created_at,
                 :updated_at
+  attr_reader :id
 
   def initialize(record)
+        @id = record[:id]
     @name        = record[:name]
     @description = record[:description]
     @unit_price  = record[:unit_price]

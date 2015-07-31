@@ -20,5 +20,24 @@ module Find
     else
       []
     end
-  end
+  end  
+
+  # def objects(data)
+  #   data.map do |row|
+  #     row[:repository] = self
+  #     holds_type.new(row)
+  #   end
+  # end
+
+  # def find_prefix
+  #   "find_by_".length
+  # end
+
+  # def find_all_prefix
+  #   "find_all_by_".length
+  # end
+
+
+
+
 end
