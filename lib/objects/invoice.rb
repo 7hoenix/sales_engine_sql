@@ -9,6 +9,7 @@ class Invoice
     @status      = record[:status]
     @created_at  = record[:created_at]
     @updated_at  = record[:updated_at]
+    @repository  = record.fetch(:repository, nil)
   end
 
 end
