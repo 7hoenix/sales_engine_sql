@@ -20,6 +20,7 @@ class InvoiceRepository
     loaded_csvs.each do |invoice|
       id = invoice.first
       record = invoice.last
+      record[:repository] = self
       invoices[id] = add_invoice(record)
     end
     invoices

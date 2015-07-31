@@ -18,6 +18,7 @@ class MerchantRepository
     loaded_csvs.each do |merchant|
       id = merchant.first
       record = merchant.last
+      record[:repository] = self
       merchants[id] = add_merchant(record)
     end
     merchants

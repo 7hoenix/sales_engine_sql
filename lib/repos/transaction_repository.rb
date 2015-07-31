@@ -19,6 +19,7 @@ class TransactionRepository
     loaded_csvs.each do |transaction|
       id = transaction.first
       record = transaction.last
+      record[:repository] = self
       transactions[id] = add_transaction(record)
     end
     transactions

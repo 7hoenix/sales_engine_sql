@@ -2,7 +2,7 @@ class InvoiceItem
   attr_accessor :item_id, :invoice_id,
                 :quantity , :unit_price,
                 :created_at, :updated_at
-  attr_reader :id
+  attr_reader :id, :repository
 
   def initialize(record)
     @id          = record[:id]

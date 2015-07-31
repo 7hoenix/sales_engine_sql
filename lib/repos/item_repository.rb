@@ -19,6 +19,7 @@ class ItemRepository
     loaded_csvs.each do |item|
       id = item.first
       record = item.last
+      record[:repository] = self
       items[id] = add_item(record)
     end
     items

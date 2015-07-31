@@ -27,6 +27,7 @@ class CustomerRepository
     loaded_csvs.each do |customer|
       id = customer.first
       record = customer.last
+      record[:repository] = self
       customers[id] = add_customer(record)
     end
     customers

@@ -1,6 +1,6 @@
 class Invoice
   attr_accessor :customer_id, :merchant_id, :status , :created_at, :updated_at
-  attr_reader :id
+  attr_reader :id, :repository
 
   def initialize(record)
     @id = record[:id]
