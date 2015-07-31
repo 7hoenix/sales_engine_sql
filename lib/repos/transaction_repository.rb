@@ -15,6 +15,7 @@ class TransactionRepository
     @loader = Loader.new
     loaded_csvs = @loader.load_csv(filename)
     @transactions = populate_transactions(loaded_csvs)
+    @records = @transactions
   end
 
   def add_transaction(record)

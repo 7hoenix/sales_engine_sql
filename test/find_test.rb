@@ -48,8 +48,8 @@ class ListTest < Minitest::Test
     @cust_repo = CustomerRepository.new(:filename => './fixtures/customers.csv')
 
     expected = @cust_repo.customers[26].last_name
-    result = @cust_repo.find_all_by_last_name("Sawayn")
+    result = @cust_repo.find_all_by_last_name("Sawayn").first.last_name
 
-    assert_equal(expected, result.includes?(last_name))
+    assert_equal(expected, result)
   end
 end

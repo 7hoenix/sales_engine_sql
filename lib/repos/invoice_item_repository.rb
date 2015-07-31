@@ -15,6 +15,7 @@ class InvoiceItemRepository
     @loader = Loader.new
     loaded_csvs = @loader.load_csv(filename)
     @invoice_items = populate_invoice_items(loaded_csvs)
+    @records = @invoice_items
   end
 
   def add_invoice_item(record)

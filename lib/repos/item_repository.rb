@@ -15,6 +15,7 @@ class ItemRepository
     @loader = Loader.new
     loaded_csvs = @loader.load_csv(filename)
     @items = populate_items(loaded_csvs)
+    @records = @items
   end
 
   def add_item(record)

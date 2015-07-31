@@ -16,6 +16,7 @@ class CustomerRepository
     loaded_csvs = @loader.load_csv(filename)
     @customers = populate_customers(loaded_csvs)
     self.record_type = @customers
+    @records = @customers
   end
 
   def items

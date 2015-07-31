@@ -14,6 +14,7 @@ class MerchantRepository
     @loader = Loader.new
     loaded_csvs = @loader.load_csv(filename)
     @merchants = populate_merchants(loaded_csvs)
+    @records = @merchants
   end
 
   def add_merchant(record)
