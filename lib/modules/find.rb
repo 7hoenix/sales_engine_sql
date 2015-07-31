@@ -16,11 +16,17 @@ module Find
       found = @records.select do |id, record|
         match == record.send(x).to_s.downcase
       end
-      return found.to_a
+      return objects(found.to_a)
     else
       []
     end
-  end  
+  end
+
+  def objects(hashed)
+    hashed.each_with_object([]) do |(id, record), array|
+      array << record
+    end
+  end
 
   # def objects(data)
   #   data.map do |row|
