@@ -6,12 +6,14 @@ require_relative '../modules/util'
 class CustomerRepository
   include Util
   attr_accessor :customers
-  def initialize(filename='./data/customers.csv')
+
+  def initialize(filename='./data/fixtures/customers.csv')
     @loader = Loader.new
     loaded_csvs = @loader.load_csv(filename)
     @customers = populate_customers(loaded_csvs)
     self.record_type = @customers
   end
+
   def items
     @customers
   end

@@ -1,9 +1,11 @@
 require 'pry'
 require_relative '../loader.rb'
 require_relative '../objects/invoice_item.rb'
+
 class InvoiceItemRepository
   attr_accessor :invoice_items
-  def initialize(filename='./data/invoice_items.csv')
+
+  def initialize(filename='./data/fixtures/invoice_items.csv')
     @loader = Loader.new
     loaded_csvs = @loader.load_csv(filename)
     @invoice_items = populate_invoice_items(loaded_csvs)

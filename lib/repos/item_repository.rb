@@ -4,7 +4,7 @@ require_relative '../objects/item.rb'
 
 class ItemRepository
   attr_accessor :items
-  def initialize(filename='./data/items.csv')
+  def initialize(filename='./data/fixtures/items.csv')
     @loader = Loader.new
     loaded_csvs = @loader.load_csv(filename)
     @items = populate_items(loaded_csvs)

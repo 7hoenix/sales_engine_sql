@@ -4,7 +4,7 @@ require_relative '../objects/transaction.rb'
 
 class TransactionRepository
   attr_accessor :transactions
-  def initialize(filename='./data/transactions.csv')
+  def initialize(filename='./data/fixtures/transactions.csv')
     @loader = Loader.new
     loaded_csvs = @loader.load_csv(filename)
     @transactions = populate_transactions(loaded_csvs)

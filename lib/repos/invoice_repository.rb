@@ -4,7 +4,8 @@ require_relative '../objects/invoice.rb'
 
 class InvoiceRepository
   attr_accessor :invoices
-  def initialize(filename='./data/invoices.csv')
+
+  def initialize(filename='./data/fixtures/invoices.csv')
     @loader = Loader.new
     loaded_csvs = @loader.load_csv(filename)
     @invoices = populate_invoices(loaded_csvs)
