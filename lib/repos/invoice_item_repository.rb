@@ -1,9 +1,13 @@
 require 'pry'
 require_relative '../loader.rb'
 require_relative '../objects/invoice_item.rb'
+require_relative '../modules/util'
 
 class InvoiceItemRepository
+  include Util
+
   attr_accessor :invoice_items
+  attr_reader :engine
 
   def initialize(args)
     @engine = args.fetch(:engine, nil)

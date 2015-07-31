@@ -11,7 +11,7 @@ module Find
   end
   
   def find_all_by(x, match)
-    x = x.to_sym
+    x = x.to_sym if x.class != Symbol
     match = match.to_s.downcase
     if @records[1].respond_to?(x)
       found = @records.select do |id, record|

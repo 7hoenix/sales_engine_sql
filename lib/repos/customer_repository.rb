@@ -5,7 +5,9 @@ require_relative '../modules/util'
 
 class CustomerRepository
   include Util
+
   attr_accessor :customers
+  attr_reader :engine
 
   def initialize(args)
     @engine = args.fetch(:engine, nil)

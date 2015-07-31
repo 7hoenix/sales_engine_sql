@@ -1,9 +1,14 @@
 require 'pry'
 require_relative '../loader.rb'
 require_relative '../objects/transaction.rb'
+require_relative '../modules/util'
 
 class TransactionRepository
+  include Util
+
   attr_accessor :transactions
+  attr_reader :engine
+
   def initialize(args)
     @engine = args.fetch(:engine, nil)
     filename = args.fetch(:filename, './data/fixtures/transactions.csv')

@@ -1,8 +1,12 @@
 require_relative '../loader.rb'
 require_relative '../objects/merchant.rb'
+require_relative '../modules/util'
 
 class MerchantRepository
+  include Util
+
   attr_accessor :merchants
+  attr_reader :engine
 
   def initialize(args)
     @engine = args.fetch(:engine, nil)

@@ -12,7 +12,10 @@ class Customer
     @created_at  = record[:created_at]
     @updated_at  = record[:updated_at]
     @repository  = record.fetch(:repository, nil)
+  end
 
+  def invoices
+    repository.get(__callee__, self.id, :customer_id)
   end
 
 end
