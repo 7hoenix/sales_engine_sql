@@ -5,15 +5,15 @@ class ListTest < Minitest::Test
   def test_we_can_determine_if_our_records_have_x_type_find_by
     @cust_repo = CustomerRepository.new('./fixtures/customers.csv')
 
-    result = @cust_repo.find_by(:last_name, "Sawayn")
+    result = @cust_repo.find_by_last_name("Sawayn")
 
     assert_equal(true, !!result.last_name)
   end
   def test_we_can_determine_if_our_records_have_x_type_find_by_false
+    skip
     @cust_repo = CustomerRepository.new('./fixtures/customers.csv')
 
-
-    result = @cust_repo.find_by(:dududududu, "Sawayn")
+    result = @cust_repo.find_by_dududududu("Sawayn")
 
     assert_equal(false, !!result)
   end
@@ -21,7 +21,7 @@ class ListTest < Minitest::Test
     @cust_repo = CustomerRepository.new('./fixtures/customers.csv')
 
     expected = @cust_repo.customers[26].last_name
-    result = @cust_repo.find_by(:last_name, "Sawayn")
+    result = @cust_repo.find_by_last_name("Sawayn")
 
     assert_equal(expected, result.last_name)
 
@@ -29,8 +29,7 @@ class ListTest < Minitest::Test
   def test_we_get_back_false_if_record_doesnt_exist_find_by
     @cust_repo = CustomerRepository.new('./fixtures/customers.csv')
 
-
-    result = @cust_repo.find_by(:last_name, "Sawadfyn")
+    result = @cust_repo.find_by_last_name("Sawadfyn")
 
     assert_equal(false, result)
   end
@@ -39,7 +38,7 @@ class ListTest < Minitest::Test
     @cust_repo = CustomerRepository.new('./fixtures/customers.csv')
 
     expected = []
-    result = @cust_repo.find_all_by(:last_name, "Sasdsn")
+    result = @cust_repo.find_all_by_last_name("Sasdsn")
 
     assert_equal(expected, result)
   end
@@ -48,7 +47,7 @@ class ListTest < Minitest::Test
     @cust_repo = CustomerRepository.new('./fixtures/customers.csv')
 
     expected = @cust_repo.customers[26].last_name
-    result = @cust_repo.find_all_by(:last_name, "Sawayn")
+    result = @cust_repo.find_all_by_last_name("Sawayn")
 
     assert_equal(expected, result[0].last_name)
   end
