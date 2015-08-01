@@ -1,81 +1,34 @@
 require_relative 'test_helper.rb'
 require_relative '../lib/modules/util'
+require_relative '../lib/sales_engine'
 
 class TestClass1
   include Util
   def initialize
     self.records="bye"
   end
-  
 end
 
-class ListTest < Minitest::Test   
-  def test_we_can_set_our_list_of_things_as_a_hash
-    test1 = TestClass1.new
-    
-    test1.records = { 1 => {:name => 'bringle pop',
-      :description => 'fizzy, lizzy, bringle pop',
-      :unit_price => 75107,
-      :merchant_id => 250,
-      :created_at => "sometime",
-      :updated_at => "someothertime",}, 
-      2 => {:name => 'bringled pop',
-        :description => 'fizzy, lizzy, bringled pop',
-        :unit_price => 75108,
-        :merchant_id => 250,
-        :created_at => "sometime",
-        :updated_at => "someothertime",} }
-      assert_equal(75108, test1.records[2][:unit_price])
-  end
-  def test_we_can_return_our_list_of_things_as_a_hash
-        test1 = TestClass1.new
-      records = { 1 => {:name => 'bringle pop',
-        :description => 'fizzy, lizzy, bringle pop',
-        :unit_price => 75107,
-        :merchant_id => 250,
-        :created_at => "sometime",
-        :updated_at => "someothertime",}, 
-        2 => {:name => 'bringled pop',
-          :description => 'fizzy, lizzy, bringled pop',
-          :unit_price => 75108,
-          :merchant_id => 250,
-          :created_at => "sometime",
-          :updated_at => "someothertime",} }
-      test1.records = records
-      expected = records
-      result = test1.all
-      assert_equal(expected, result)
-  end
-  def test_random_returns_a_random_thing
-    test1 = TestClass1.new
-    
-    records = { 1 => {:name => 'bringle pop',
-      :description => 'fizzy, lizzy, bringle pop',
-      :unit_price => 75107,
-      :merchant_id => 250,
-      :created_at => "sometime",
-      :updated_at => "someothertime",}, 
-      2 => {:name => 'bringled pop',
-        :description => 'fizzy, lizzy, bringled pop',
-        :unit_price => 75108,
-        :merchant_id => 250,
-        :created_at => "sometime",
-        :updated_at => "someothertime",} }
-        
-    test1.records = records
-    expected = records[1]
-    test1.stub :rand, 1 do
-      result = test1.random
-      assert_equal(expected, result)
-    end
+class ListTest < Minitest::Test
+  def setup
+    @se = SalesEngine.new
+    @se.startup
   end
 
-  
+  def test_it_finds_a_random_customer
+    cust_1 = @se.customer_repository.random
+    cust_2 = @se.customer_repository.random
+    cust_3 = @se.customer_repository.random
+    customers = [cust_1, cust_2, cust_3]
+
+    assert customers.all?{|element| element.is_a?(Customer)}, "Missing random customers or at least one is not a Customer object"
+    refute (cust_1 == cust_2) == cust_3, "Ain't random or sample too small"
+  end
+
   def test_it_returns_all_customers
-    all_customers = @repo.all
+    all_customers = @se.customer_repository.all
 
-    assert all_customers.length == @repo.repository.length, "All objects array and repository length do not match"
+    assert all_customers.length == @se.customer_repository.records.length, "All objects array and repository length do not match"
     assert all_customers.all?{|element| element.is_a?(Customer)}, "Not all objects in array are customers"
   end
-
 end

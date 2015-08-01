@@ -4,11 +4,9 @@ module List
   include Find
 
   def all
-    objects(@records)
+    objects(records)
   end
   def random
-    length = @records.length
-    random_index = rand(0..length-1)
-    objects(@records[random_index]).reduce
+    records.values.sample
   end
 end

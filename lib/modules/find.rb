@@ -1,4 +1,5 @@
 require 'pry'
+
 module Find
 
   def find_by(x, match)
@@ -9,7 +10,7 @@ module Find
       found[0]
     end
   end
-  
+
   def find_all_by(x, match)
     x = x.to_sym if x.class != Symbol
     match = match.to_s.downcase
