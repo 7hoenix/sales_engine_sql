@@ -16,4 +16,8 @@ class Transaction
     @repository                   = record.fetch(:repository, nil)
   end
 
+  def invoice
+    repository.get(__callee__, invoice_id, :id).reduce
+  end
+
 end
