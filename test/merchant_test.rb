@@ -60,12 +60,26 @@ class MerchantTest < Minitest::Test
     assert items.all?{|item| item.is_a?(Item)}
     assert items.all?{|item| item.merchant_id == 76}
   end
-  # def test_it_has_access_to_relationship_module
-  #   result = @merchant.items
-  #   
-  #   assert_equal("hi", result)
-  #   
-  # end
+  def test_it_retrieves_invoice_items
+    merchant = @se.merchant_repository.find_by_id("8")
+    iis = merchant.invoice_items
+    iis_ids = iis.map{|element| element.id}
+
+    assert iis.all?{|element| element.is_a?(InvoiceItem)}, "Not all are InvoiceItems"
+    assert iis.all?{|element| element.invoice_id == 12}, "Not finding invoice number 12"
+    assert_includes(iis_ids, 60, "60 isn't in invoice_item ids")
+  end
+
+  def test_it_knows_its_total_revenue
+    skip
+    merchant = @se.merchant_repository.find_by_id("8")
+    rev = merchant.revenue
+
+    expected = 2*78031 + 2*41702 + 6*71340 + 6*7196 + 3*41702 + 8*22546
+    actual = rev
+
+    assert_equal expected, actual
+  end
   
   
 end

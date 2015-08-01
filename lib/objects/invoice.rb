@@ -12,4 +12,23 @@ class Invoice
     @repository  = record.fetch(:repository, nil)
   end
 
+  def transactions
+    repository.get(__callee__, id, :invoice_id)
+  end
+
+  def invoice_items
+    repository.get(__callee__, id, :invoice_id)
+  end
+
+  def items
+    invoice_items.map{|ii| repository.get(__callee__, ii.item_id, :id)}.flatten
+  end
+
+  def customer
+    repository.get(__callee__, customer_id, :id).reduce
+  end
+
+  def merchant
+    repository.get(__callee__, merchant_id, :id).reduce
+  end
 end
