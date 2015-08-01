@@ -50,7 +50,7 @@ module FindByX
   def find_by_created_at(match)
     find_by(column_name(__callee__), match)
   end
-  
+
   def find_all_by_created_at(match)
     find_all_by(column_name(__callee__), match)
   end

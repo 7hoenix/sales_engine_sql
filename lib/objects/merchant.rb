@@ -35,5 +35,4 @@ class Merchant
       acc + ii.total_price
     end
   end
-  
 end

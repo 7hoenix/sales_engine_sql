@@ -1,7 +1,4 @@
-require 'pry'
-
 module Find
-
   def find_by(x, match)
     found = find_all_by(x, match)
     if found.first.nil?
@@ -29,5 +26,4 @@ module Find
       array << record
     end
   end
-
 end
