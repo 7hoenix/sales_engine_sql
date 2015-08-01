@@ -18,4 +18,12 @@ class Item
     @repository  = record.fetch(:repository, nil)
   end
 
+  def invoice_items
+    repository.get(__callee__, id, :item_id)
+  end
+
+  def merchant
+    repository.get(__callee__, merchant_id, :id).reduce
+  end
+
 end

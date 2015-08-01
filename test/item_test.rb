@@ -1,45 +1,88 @@
 require_relative 'test_helper.rb'
 require_relative '../lib/objects/item'
+require_relative '../lib/sales_engine.rb'
 
 class ItemTest < Minitest::Test
-  
-  
+
+
   def setup
-    @example_record1 =  {:name => 'bringle pop',
-                        :description => 'fizzy, lizzy, bringle pop',
-                        :unit_price => 75107,
-                        :merchant_id => 250,
-                        :created_at => "sometime",
-                        :updated_at => "someothertime",}
+    @example_record1 =
+    {
+      :name => 'bringle pop',
+      :description => 'fizzy, lizzy, bringle pop',
+      :unit_price => 75107,
+      :merchant_id => 250,
+      :created_at => "sometime",
+      :updated_at => "someothertime"
+    }
+    @se = SalesEngine.new
+    @se.startup
   end
+
   def test_it_has_a_name_accessor
     @item = Item.new(@example_record1)
     assert @item.respond_to?(:name)
   end
+
   def test_it_has_a_description_accessor
     @item = Item.new(@example_record1)
     assert @item.respond_to?(:description)
   end
+
   def test_it_has_a_unit_price_accessor
     @item = Item.new(@example_record1)
     assert @item.respond_to?(:unit_price)
   end
+
   def test_it_has_a_merchant_id_accessor
     @item = Item.new(@example_record1)
     assert @item.respond_to?(:merchant_id)
   end
+
   def test_it_has_a_created_at_accessor
     @item = Item.new(@example_record1)
     assert @item.respond_to?(:created_at)
   end
+
   def test_it_has_a_updated_at_accessor
     @item = Item.new(@example_record1)
     assert @item.respond_to?(:updated_at)
   end
+
   def test_it_does_NOT_have_an_accessor_it_should_not
     @item = Item.new(@example_record1)
     refute @item.respond_to?(:first_name)
   end
-  
-  
+
+  def test_it_finds_invoice_items_for_itself
+    item = @se.item_repository.find_by_id("539")
+    invoice_items = item.invoice_items
+    invoice_item_ids = invoice_items.map {|element| element.item_id}
+
+    assert invoice_items.all?{|element| element.is_a?(InvoiceItem)}
+    assert invoice_item_ids.all?{|x| x == 539}
+  end
+
+  def test_it_finds_other_invoice_items_for_itself
+    item = @se.item_repository.find_by_id("1918")
+    invoice_items = item.invoice_items
+    invoice_item_ids = invoice_items.map {|element| element.item_id}
+
+    assert invoice_items.all?{|element| element.is_a?(InvoiceItem)}
+    assert invoice_item_ids.all?{|x| x == 1918}
+  end
+
+  def test_it_finds_merchant_for_itself
+    item = @se.item_repository.find_by_id("1")
+    merchant = item.merchant
+
+    assert_equal merchant.id, 1
+  end
+
+  def test_it_finds_other_merchant_for_itself
+    item = @se.item_repository.find_by_id("292")
+    merchant = item.merchant
+
+    assert_equal merchant.id, 18
+  end
 end
