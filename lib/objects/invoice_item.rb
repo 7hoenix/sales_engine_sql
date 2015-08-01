@@ -13,7 +13,18 @@ class InvoiceItem
     @created_at  = record[:created_at]
     @updated_at  = record[:updated_at]
     @repository  = record.fetch(:repository, nil)
+  end
 
+  def invoice
+    repository.get(__callee__, invoice_id, :id).reduce
+  end
+
+  def item
+    repository.get(__callee__, item_id, :id).reduce
+  end
+
+  def total_price
+    quantity * unit_price
   end
 
 end
