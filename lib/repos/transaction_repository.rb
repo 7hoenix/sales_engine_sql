@@ -7,7 +7,7 @@ class TransactionRepository
   include Util
 
   attr_accessor :transactions
-  attr_reader :engine
+  attr_reader :engine, :records
 
   def initialize(args)
     @engine = args.fetch(:engine, nil)

@@ -1,4 +1,8 @@
+require_relative '../modules/record_like.rb'
+
 class Invoice
+  include RecordLike
+
   attr_accessor :customer_id, :merchant_id, :status , :created_at, :updated_at
   attr_reader :id, :repository
 

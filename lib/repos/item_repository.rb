@@ -7,7 +7,7 @@ class ItemRepository
   include Util
 
   attr_accessor :items
-  attr_reader :engine
+  attr_reader :engine, :records
 
   def initialize(args)
     @engine = args.fetch(:engine, nil)

@@ -1,4 +1,8 @@
+require_relative '../modules/record_like.rb'
+
 class Transaction
+  include RecordLike
+
   attr_accessor :invoice_id,
                 :credit_card_number,
                 :credit_card_expiration_date,

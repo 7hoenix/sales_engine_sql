@@ -43,7 +43,7 @@ class ListTest < Minitest::Test
           :updated_at => "someothertime",} }
       test1.records = records
       expected = records
-      result = test1.all     
+      result = test1.all
       assert_equal(expected, result)
   end
   def test_random_returns_a_random_thing
@@ -69,4 +69,13 @@ class ListTest < Minitest::Test
       assert_equal(expected, result)
     end
   end
+
+  
+  def test_it_returns_all_customers
+    all_customers = @repo.all
+
+    assert all_customers.length == @repo.repository.length, "All objects array and repository length do not match"
+    assert all_customers.all?{|element| element.is_a?(Customer)}, "Not all objects in array are customers"
+  end
+
 end

@@ -1,5 +1,8 @@
+require_relative '../modules/record_like'
 require_relative '../modules/relationship'
+
 class Merchant
+  include RecordLike
   include Relationships
 
   attr_accessor :name, :created_at , :updated_at

@@ -7,7 +7,7 @@ class CustomerRepository
   include Util
 
   attr_accessor :customers
-  attr_reader :engine
+  attr_reader :engine, :records
 
   def initialize(args)
     @engine = args.fetch(:engine, nil)

@@ -6,7 +6,7 @@ class MerchantRepository
   include Util
 
   attr_accessor :merchants
-  attr_reader :engine
+  attr_reader :engine, :records
 
   def initialize(args)
     @engine = args.fetch(:engine, nil)
@@ -30,6 +30,10 @@ class MerchantRepository
       merchants[id] = add_merchant(record)
     end
     merchants
+  end
+
+  def most_revenue(x)
+    all.max_by(x) {|merchant| merchant.revenue}
   end
 
 end

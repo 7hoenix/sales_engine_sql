@@ -7,7 +7,7 @@ class InvoiceRepository
   include Util
 
   attr_accessor :invoices
-  attr_reader :engine
+  attr_reader :engine, :records
 
   def initialize(args)
     @engine = args.fetch(:engine, nil)

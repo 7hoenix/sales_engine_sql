@@ -1,4 +1,8 @@
+require_relative '../modules/record_like.rb'
+
 class Item
+  include RecordLike
+
   attr_accessor :name,
                 :description,
                 :unit_price,
