@@ -71,7 +71,6 @@ class MerchantTest < Minitest::Test
   end
 
   def test_it_knows_its_total_revenue
-    skip
     merchant = @se.merchant_repository.find_by_id("8")
     rev = merchant.revenue
 
