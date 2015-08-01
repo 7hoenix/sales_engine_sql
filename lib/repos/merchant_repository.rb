@@ -36,4 +36,8 @@ class MerchantRepository
     all.max_by(x) {|merchant| merchant.revenue}
   end
 
+  def most_items(x)
+    all.max_by(x) {|merchant| merchant.items.length}
+  end
+
 end
