@@ -41,7 +41,7 @@ class Merchant
 
   def invoice_items(invoices)
     invoices.map do |invoice|
-      repository.get(__callee__, invoice.id, :invoice_id)
+      invoice.invoice_items
     end.flatten
   end
 
@@ -81,7 +81,10 @@ class Merchant
   end
 
   def favorite_customer
-
-
+    by_cust_id = paid_invoices.group_by{|invoice| invoice.customer_id}
+    by_cust_id.sort_by do |id, invoices| 
+      invoices.inject(0) do |acc, invoice|
+      end
+    end
   end
 end
