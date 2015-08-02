@@ -15,4 +15,9 @@ module RecordLike
   def to_dollars(cents)
     (cents / 100).round(2)
   end
+
+  def inspect
+    values = columns.map{|column| self.send(column)}
+    columns.zip(values).to_h
+  end
 end
