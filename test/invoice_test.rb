@@ -119,5 +119,26 @@ class InvoiceTest < Minitest::Test
     assert_equal merch.id, 79
   end
 
+  def test_it_knows_that_an_invoice_has_not_been_paid
+    invoice = @se.invoice_repository.find_by_id(48)
+
+    refute invoice.paid?
+  end
+
+  def test_it_knows_that_another_invoice_has_not_been_paid
+    invoice = @se.invoice_repository.find_by_id(13)
+
+    refute invoice.paid?
+  end
+
+
+  def test_it_knows_that_an_invoice_has_been_paid
+    invoice = @se.invoice_repository.find_by_id(12)
+
+    assert invoice.paid?
+  end
+
+
+
 
 end

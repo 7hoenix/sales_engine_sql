@@ -35,4 +35,12 @@ class Invoice
   def merchant
     repository.get(__callee__, merchant_id, :id).reduce
   end
+
+  def paid?
+    !(transactions.all? {|transaction| transaction.result == "failed" })
+  end
+
+  # def paid_invoice_items
+  #   invoice_items.keep {|ii| repository.find_by_id(ii.invoice_id).paid?}
+  # end
 end

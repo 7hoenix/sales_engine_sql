@@ -35,6 +35,21 @@ class Merchant
     end
   end
 
+  def paid_invoices
+    invoices.select{|invoice| invoice.paid?}
+    # (&:paid?)
+  end
+
+  def paid_invoices_for(date)
+    if date == "all"
+      paid_invoices
+    else
+      paid_invoices.select do |invoice|
+        invoice.created_at.to_date == DateTime.parse(date).to_date
+      end
+    end
+  end
+
   def invoice_items_for(date)
     invoice_items(invoices_for(date))
   end
@@ -46,9 +61,7 @@ class Merchant
   end
 
   def paid_invoice_items_for(date = "all")
-    invoice_items_for(date).reject do |ii|
-      zero_revenue_invoices.include?(ii.invoice_id)
-    end
+    invoice_items(paid_invoices_for(date))
   end
 
   def revenue(date = "all")
@@ -67,16 +80,6 @@ class Merchant
   def transactions_by_invoice_id
     transactions.group_by do |transaction|
       transaction.invoice_id
-    end
-  end
-
-  def paid_invoices
-    Set.new(invoices) - Set.new(zero_revenue_invoices)
-  end
-
-  def zero_revenue_invoices
-    transactions_by_invoice_id.each_with_object([]) do |(key, values), failures|
-      failures << key if values.all? {|charge| charge.result == "failed"}
     end
   end
 

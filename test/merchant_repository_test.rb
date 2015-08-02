@@ -36,18 +36,18 @@ class MerchantRepositoryTest < Minitest::Test
   end
 
   def test_it_knows_merchant_with_most_revenue
-    expected = @se.merchant_repository.find_by_id(44)
+    expected = @se.merchant_repository.find_by_id(84)
     actual = @se.merchant_repository.most_revenue(1)
 
     assert_equal 1, actual.length, "Supposed to find only one"
     assert_equal expected, actual.first
   end
 
-  def test_it_knows_top_10_merchants_for_revenue
-    top_10 = @se.merchant_repository.most_revenue(10)
+  def test_it_knows_top_3_merchants_for_revenue
+    top_3 = @se.merchant_repository.most_revenue(3)
 
-    expected = [44, 84, 78, 79, 86, 38, 14, 53, 90, 26]
-    actual = top_10.map {|merchant| merchant.id}
+    expected = [84, 79, 86]
+    actual = top_3.map {|x| x.id}
 
     assert_equal expected, actual
   end

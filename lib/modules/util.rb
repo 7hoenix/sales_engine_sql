@@ -49,4 +49,8 @@ module Util
   def to_dollars(cents)
     (cents / 100).round(2)
   end
+
+  def inspect
+    self.object_id
+  end
 end
