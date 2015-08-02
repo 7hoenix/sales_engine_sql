@@ -78,8 +78,7 @@ class Merchant
     customers = paid_invoices.group_by{|invoice| invoice.customer}
     customers.max_by do |id, invoices|
       invoices.length
-    end
-    # repository.engine.customer_repository.find_by_id(favorite.first)
+    end.first
   end
 
   def customers_with_pending_invoices

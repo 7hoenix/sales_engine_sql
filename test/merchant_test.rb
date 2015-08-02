@@ -144,5 +144,15 @@ class MerchantTest < Minitest::Test
     assert_equal expected, actual
   end
 
+  def test_it_has_a_favorite_customer_based_on_successful_transactions
+    merchant = @se.merchant_repository.find_by_id(1)
+
+    expected = 7
+    actual = merchant.favorite_customer.id
+
+    assert_equal expected, actual
+  end
+
+
 
 end
