@@ -46,15 +46,18 @@
       ],
       "/Users/plato/Projects/Turing/1module/sales_pidgeon/lib/loader.rb": [
         1,
-        null,
         1,
         null,
         1,
+        null,
+        1,
         529,
         529,
         null,
         null,
         529,
+        75313,
+        75313,
         75313,
         75313,
         75313,
@@ -756,6 +759,7 @@
         11596,
         11596,
         11596,
+        11596,
         null,
         84,
         null,
@@ -1418,6 +1422,7 @@
       "/Users/plato/Projects/Turing/1module/sales_pidgeon/test/loader_test.rb": [
         1,
         1,
+        1,
         null,
         1,
         1,
@@ -1796,6 +1801,6 @@
         null
       ]
     },
-    "timestamp": 1438482989
+    "timestamp": 1438485345
   }
 }

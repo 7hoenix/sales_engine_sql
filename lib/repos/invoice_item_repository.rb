@@ -1,4 +1,4 @@
-require 'pry'
+require 'bigdecimal'
 require_relative '../loader.rb'
 require_relative '../objects/invoice_item.rb'
 require_relative '../modules/util'
@@ -28,6 +28,7 @@ class InvoiceItemRepository
       id = invoice_item.first
       record = invoice_item.last
       record[:repository] = self
+      record[:unit_price] = BigDecimal.new(record[:unit_price])
       invoice_items[id] = add_invoice_item(record)
     end
     invoice_items

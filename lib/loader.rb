@@ -1,4 +1,5 @@
 require 'csv'
+require 'date'
 
 class Loader
 
@@ -11,6 +12,8 @@ class Loader
         id = row.fields[0]
         headers = row.headers[0..-1]
         fields = row.fields[0..-1]
+        fields[-2] = DateTime.parse(fields[-1])
+        fields[-1] = DateTime.parse(fields[-1])
         records[id] = Hash[headers.zip(fields)]
     end
     records
