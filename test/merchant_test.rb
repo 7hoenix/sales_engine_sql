@@ -108,8 +108,23 @@ class MerchantTest < Minitest::Test
   end
 
   def test_it_knows_revenue_for_given_date
-    
+    date = "2012-03-21"
+    merchant = @se.merchant_repository.find_by_id("8")
+
+    expected = merchant.revenue
+    actual = merchant.revenue(date)
+
+    assert_equal expected, actual
   end
 
+  def test_returns_zero_if_no_revenue_is_found_for_given_date
+    date = "2012-03-27"
+    merchant = @se.merchant_repository.find_by_id("8")
+
+    expected = BigDecimal.new(0)
+    actual = merchant.revenue(date)
+
+    assert_equal expected, actual
+  end
 
 end
