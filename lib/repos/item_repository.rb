@@ -1,7 +1,8 @@
-require 'pry'
+require 'bigdecimal'
 require_relative '../loader.rb'
 require_relative '../objects/item.rb'
 require_relative '../modules/util'
+
 
 class ItemRepository
   include Util
@@ -27,6 +28,7 @@ class ItemRepository
     loaded_csvs.each do |item|
       id = item.first
       record = item.last
+      record[:unit_price] = BigDecimal.new(record[:unit_price])
       record[:repository] = self
       items[id] = add_item(record)
     end

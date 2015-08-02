@@ -28,3 +28,4 @@ id,customer_id,merchant_id,status,created_at,updated_at
 27,7,63,shipped,2012-03-12 04:54:11 UTC,2012-03-12 04:54:11 UTC
 28,7,99,shipped,2012-03-19 18:54:11 UTC,2012-03-19 18:54:11 UTC
 29,7,1,shipped,2012-03-25 13:54:11 UTC,2012-03-25 13:54:11 UTC
+48,11,56,shipped,2012-03-16 05:54:12 UTC,2012-03-16 05:54:12 UTC

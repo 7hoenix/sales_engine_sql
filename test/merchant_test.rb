@@ -60,6 +60,7 @@ class MerchantTest < Minitest::Test
     assert items.all?{|item| item.is_a?(Item)}
     assert items.all?{|item| item.merchant_id == 76}
   end
+
   def test_it_retrieves_invoice_items
     merchant = @se.merchant_repository.find_by_id("8")
     iis = merchant.invoice_items
@@ -68,6 +69,16 @@ class MerchantTest < Minitest::Test
     assert iis.all?{|element| element.is_a?(InvoiceItem)}, "Not all are InvoiceItems"
     assert iis.all?{|element| element.invoice_id == 12}, "Not finding invoice number 12"
     assert_includes(iis_ids, 60, "60 isn't in invoice_item ids")
+  end
+
+  def test_it_knows_invoices_with_zero_succeeding_transactions
+    merchant = @se.merchant_repository.find_by_id(34)
+    transactions = merchant.transactions
+
+    expected = [13]
+    actual = merchant.zero_revenue_invoices
+
+    assert_equal expected, actual
   end
 
   def test_it_knows_its_total_revenue
@@ -79,6 +90,12 @@ class MerchantTest < Minitest::Test
 
     assert_equal expected, actual
   end
-  
-  
+
+  def test_it_returns_zero_revenue_for_merchant_with_all_failed_transactions
+    merchant = @se.merchant_repository.find_by_id("56")
+    rev = merchant.revenue
+
+    assert_equal 0, rev
+  end
+
 end
