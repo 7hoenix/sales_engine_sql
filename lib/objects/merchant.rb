@@ -71,21 +71,10 @@ class Merchant
     to_dollars(cents)
   end
 
-  def transactions
-    invoices.map do |invoice|
-      repository.get(__callee__, invoice.id, :invoice_id)
-    end.flatten
-  end
-
-  def transactions_by_invoice_id
-    transactions.group_by do |transaction|
-      transaction.invoice_id
-    end
-  end
-
   def favorite_customer
+    #assumes at most one successful transaction per invoice
     by_cust_id = paid_invoices.group_by{|invoice| invoice.customer_id}
-    by_cust_id.sort_by do |id, invoices| 
+    by_cust_id.max_by do |id, invoices| 
       invoices.inject(0) do |acc, invoice|
       end
     end

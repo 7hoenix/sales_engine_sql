@@ -40,6 +40,13 @@ class Invoice
     !(transactions.all? {|transaction| transaction.result == "failed" })
   end
 
+  def total_billed
+    cents = invoice_items.reduce(0) do |acc, ii|
+      acc + ii.total_price
+    end
+    to_dollars(cents)
+  end
+
   # def paid_invoice_items
   #   invoice_items.keep {|ii| repository.find_by_id(ii.invoice_id).paid?}
   # end

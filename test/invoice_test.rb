@@ -131,11 +131,22 @@ class InvoiceTest < Minitest::Test
     refute invoice.paid?
   end
 
-
   def test_it_knows_that_an_invoice_has_been_paid
     invoice = @se.invoice_repository.find_by_id(12)
 
     assert invoice.paid?
+  end
+
+  def test_it_knows_the_total_dollars_invoiced_for
+    invoice = @se.invoice_repository.find_by_id("8")
+    total = invoice.total_billed
+
+    expected_cents = 2 * 50051 + 5 * 50051 + 2 * 35772 + 2 * 70783 + 8 * 35772 + 9 * 70783 + 7 * 70783 + 7 * 70783
+    expected_dollars = BigDecimal.new(expected_cents) / 100
+    expected = expected_dollars.round(2)
+    actual = total
+
+    assert_equal expected, actual
   end
 
 
