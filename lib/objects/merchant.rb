@@ -29,8 +29,6 @@ class Merchant
       invoices
     else
       invoices.select do |invoice|
-        puts "invoice created at #{invoice.created_at.to_date}"
-        puts "comparing with #{DateTime.parse(date).to_date}"
         invoice.created_at.to_date == DateTime.parse(date).to_date
       end
     end
