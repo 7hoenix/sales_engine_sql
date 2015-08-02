@@ -24,20 +24,34 @@ class Merchant
     repository.get(__callee__, id, :merchant_id)
   end
 
-  def invoice_items
+  def invoices_for(date)
+    if date == "all"
+      invoices
+    else
+      invoices.select do |invoice|
+        invoice.created_at.date == DateTime.parse(date).date
+      end
+    end
+  end
+
+  def invoice_items_for(date)
+    invoice_items(invoices_for(date))
+  end
+
+  def invoice_items(invoices)
     invoices.map do |invoice|
       repository.get(__callee__, invoice.id, :invoice_id)
     end.flatten
   end
 
-  def paid_invoice_items
-    invoice_items.reject do |ii|
+  def paid_invoice_items_for(date)
+    invoice_items_for(date).reject do |ii|
       zero_revenue_invoices.include?(ii.invoice_id)
     end
   end
 
-  def revenue
-    cents = paid_invoice_items.reduce(0) do |acc, ii|
+  def revenue(date = "all")
+    cents = paid_invoice_items_for(date).reduce(0) do |acc, ii|
       acc + ii.total_price
     end
     to_dollars(cents)

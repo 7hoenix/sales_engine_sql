@@ -14,22 +14,27 @@ class MerchantTest < Minitest::Test
     @se = SalesEngine.new
     @se.startup
   end
+
   def test_it_has_a_name_accessor
     @merchant = Merchant.new(@example_record1)
     assert @merchant.respond_to?(:name)
   end
+
   def test_it_has_a_created_at_accessor
     @merchant = Merchant.new(@example_record1)
     assert @merchant.respond_to?(:created_at)
   end
+
   def test_it_has_a_updated_at_accessor
     @merchant = Merchant.new(@example_record1)
     assert @merchant.respond_to?(:updated_at)
   end
+
   def test_it_does_NOT_have_an_accessor_it_shouldnt
     @merchant = Merchant.new(@example_record1)
     refute @merchant.respond_to?(:description)
   end
+
   def test_it_retrieves_invoices
     merchant = @se.merchant_repository.find_by_id("8")
     invoices = merchant.invoices
@@ -64,7 +69,8 @@ class MerchantTest < Minitest::Test
 
   def test_it_retrieves_invoice_items
     merchant = @se.merchant_repository.find_by_id("8")
-    iis = merchant.invoice_items
+    invoices = merchant.invoices
+    iis = merchant.invoice_items(invoices)
     iis_ids = iis.map{|element| element.id}
 
     assert iis.all?{|element| element.is_a?(InvoiceItem)}, "Not all are InvoiceItems"
@@ -100,5 +106,10 @@ class MerchantTest < Minitest::Test
 
     assert_equal 0, rev
   end
+
+  def test_it_knows_revenue_for_given_date
+    
+  end
+
 
 end

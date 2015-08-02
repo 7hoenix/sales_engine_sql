@@ -68,4 +68,9 @@ class MerchantRepositoryTest < Minitest::Test
 
     assert_equal expected, actual
   end
+
+  def test_it_knows_revenue_by_date_across_merchants
+    # merch = @se.merchant_repository.find_by_id
+
+  end
 end
