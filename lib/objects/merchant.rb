@@ -1,3 +1,4 @@
+require 'set'
 require_relative '../modules/record_like'
 require_relative '../modules/relationship'
 
@@ -44,7 +45,7 @@ class Merchant
     end.flatten
   end
 
-  def paid_invoice_items_for(date)
+  def paid_invoice_items_for(date = "all")
     invoice_items_for(date).reject do |ii|
       zero_revenue_invoices.include?(ii.invoice_id)
     end
@@ -64,14 +65,23 @@ class Merchant
   end
 
   def transactions_by_invoice_id
-    transactions.group_by do |transaction| 
+    transactions.group_by do |transaction|
       transaction.invoice_id
     end
+  end
+
+  def paid_invoices
+    Set.new(invoices) - Set.new(zero_revenue_invoices)
   end
 
   def zero_revenue_invoices
     transactions_by_invoice_id.each_with_object([]) do |(key, values), failures|
       failures << key if values.all? {|charge| charge.result == "failed"}
     end
+  end
+
+  def favorite_customer
+
+
   end
 end

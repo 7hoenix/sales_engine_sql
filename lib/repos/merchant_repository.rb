@@ -41,9 +41,11 @@ class MerchantRepository
   end
 
   def revenue(date)
-    all.inject(0) do |acc, merchant|
-      acc + merchant.revenue(date)
-    end
+    sum = 0
+    all.each do |merchant|
+      sum += merchant.revenue(date)
+      end
+    sum
   end
 
 end

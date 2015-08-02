@@ -54,7 +54,7 @@ class MerchantRepositoryTest < Minitest::Test
 
   def test_it_knows_merchant_with_most_items
     expected = @se.merchant_repository.find_by_id(83)
-    actual = @se.merchant_repository.most_revenue(1)
+    actual = @se.merchant_repository.most_items(1)
 
     assert_equal 1, actual.length, "Supposed to find only one"
     assert_equal expected, actual.first
@@ -70,15 +70,13 @@ class MerchantRepositoryTest < Minitest::Test
   end
 
   def test_it_knows_revenue_by_date_across_merchants
-    skip
-    merch_1 = @se.merchant_repository.find_by_id(41)
-    merch_2 = @se.merchant_repository.find_by_id(44)
-    merch_3 = @se.merchant_repository.find_by_id(27)
+    date = "2012-03-07"
+    merchants = [27,41,44,53].map {|id| @se.merchant_repository.find_by_id(id)}
 
-    expected = merch_1.revenue + merch_2.revenue + merch_3.revenue
-    actual = @se.merchant_repository.revenue("2012-03-07")
+    expected = merchants.inject(0){|acc, merch| acc + merch.revenue(date)}
+    actual = @se.merchant_repository.revenue(date)
 
-    assert_equal expected.to_f, actual.to_f
+    assert_equal expected, actual
   end
 
   def test_it_knows_revenue_by_date_across_merchants_for_different_date
@@ -89,5 +87,9 @@ class MerchantRepositoryTest < Minitest::Test
     actual = @se.merchant_repository.revenue("2012-03-27")
 
     assert_equal expected, actual
+  end
+
+  def test_it_knows_the_customer_with_the_most_successful_transactions
+    
   end
 end

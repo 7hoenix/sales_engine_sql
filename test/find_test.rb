@@ -41,7 +41,7 @@ class FindTest < Minitest::Test
   end
 
   def test_it_finds_by_id
-    record = {:id => "4", :first_name => "Leanne", :last_name => "Braun",
+    record = {:id => 4, :first_name => "Leanne", :last_name => "Braun",
       :created_at => "2012-03-27 14:54:10 UTC", :updated_at => "2012-03-27 14:54:10 UTC",
       :repository => @cust_repo_1}
     
@@ -52,7 +52,7 @@ class FindTest < Minitest::Test
   end
 
   def test_it_finds_by_different_id
-    record = {:id => "2", :first_name => "Cecelia", :last_name => "Osinski",
+    record = {:id => 2, :first_name => "Cecelia", :last_name => "Osinski",
       :created_at => "2012-03-27 14:54:10 UTC", :updated_at => "2012-03-27 14:54:10 UTC",
       :repository => @cust_repo_1}
 
@@ -63,7 +63,7 @@ class FindTest < Minitest::Test
   end
 
   def test_it_finds_by_first_name
-    record = {:id => "4", :first_name => "Leanne", :last_name => "Braun",
+    record = {:id => 4, :first_name => "Leanne", :last_name => "Braun",
       :created_at => "2012-03-27 14:54:10 UTC", :updated_at => "2012-03-27 14:54:10 UTC",
       :repository => @cust_repo_1}
 
