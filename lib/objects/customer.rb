@@ -22,4 +22,22 @@ class Customer
     repository.get(__callee__, self.id, :customer_id)
   end
 
+  def paid_invoices
+    invoices.select{|invoice| invoice.paid?}
+  end
+
+  def transactions
+    invoices.map {|invoice| invoice.transactions}.flatten
+  end
+
+  def merchants_from_paid_invoices
+    paid_invoices.map {|invoice| invoice.merchant }
+  end
+
+  def favorite_merchant
+    merchants = paid_invoices.group_by{|invoice| invoice.merchant}
+    merchants.max_by do |id, invoices|
+      invoices.length
+    end.first
+  end
 end

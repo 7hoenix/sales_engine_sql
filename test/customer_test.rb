@@ -6,10 +6,12 @@ class CustomerTest < Minitest::Test
 
 
   def setup
-    @example_record1 =  {:first_name => 'george',
-                        :last_name => 'timothy',
-                        :created_at => "sometime",
-                        :updated_at => "someothertime"}
+    @example_record1 =  {
+      :first_name => 'george',
+      :last_name => 'timothy',
+      :created_at => "sometime",
+      :updated_at => "someothertime"
+    }
     @se = SalesEngine.new
     @se.startup
   end
@@ -48,5 +50,35 @@ class CustomerTest < Minitest::Test
     invoice_ids = invoices.map{|x| x.id}.sort
 
     assert_equal [9], invoice_ids
+  end
+
+  def test_it_finds_transactions
+    cust = @se.customer_repository.find_by_id(2)
+    transactions = cust.transactions
+
+    expected = [8]
+    actual = transactions.map {|trans| trans.id}
+
+    assert_equal expected, actual
+  end
+
+  def test_it_finds_other_transactions
+    cust = @se.customer_repository.find_by_id(1)
+    transactions = cust.transactions
+
+    expected = [1,2,3,4,5,6,7]
+    actual = transactions.map {|trans| trans.id}
+
+    assert_equal expected, actual
+  end
+
+  def test_it_has_a_favorite_merchant 
+    #most number successful transactions for a merchant
+    cust = @se.customer_repository.find_by_id(7777777)
+
+    expected = 63
+    actual = cust.favorite_merchant.id
+
+    assert_equal expected, actual
   end
 end
