@@ -23,6 +23,13 @@ class ItemRepository
     Item.new(record)
   end
 
+  def create(args)
+    # invoice_repository.create(customer: customer, merchant: merchant, status: "shipped",
+    #                      items: [item1, item2, item3])
+  end
+
+
+
   def populate_items(loaded_csvs)
     items = {}
     loaded_csvs.each do |item|

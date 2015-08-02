@@ -41,16 +41,6 @@ class Item
     repository.get(__callee__, merchant_id, :id).reduce
   end
 
-  # def invoice_items_for(date)
-  #   if date == "all"
-  #     invoice_items
-  #   else
-  #     invoice_items.select do |ii|
-  #       ii.created_at.to_date == DateTime.parse(date).to_date
-  #     end
-  #   end
-  # end
-
   def invoices
     invoice_items.map{|ii| ii.invoice}
   end
@@ -80,15 +70,10 @@ class Item
   end
 
   def revenue(date = "all")
-    cents = paid_invoice_items_for(date).reduce(0) {|acc, ii| acc + ii.total_price}
+    cents = paid_invoice_items_for(date).reduce(0) do |acc, ii|
+      acc + ii.total_price
+    end
     to_dollars(cents)
   end
-
-
-
-
-
-
-
 
 end

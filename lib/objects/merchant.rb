@@ -82,7 +82,6 @@ class Merchant
   end
 
   def customers_with_pending_invoices
-    #collection of Customers with pending invoices
     customers = unpaid_invoices.map{|invoice| invoice.customer}.uniq
   end
 end
