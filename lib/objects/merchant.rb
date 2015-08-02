@@ -37,9 +37,10 @@ class Merchant
   end
 
   def revenue
-    paid_invoice_items.reduce(0) do |acc, ii|
+    cents = paid_invoice_items.reduce(0) do |acc, ii|
       acc + ii.total_price
     end
+    to_dollars(cents)
   end
 
   def transactions

@@ -10,4 +10,8 @@ module RecordLike
   def columns
     self.instance_variables.map{|var| var.to_s.delete('@').to_sym}
   end
+
+  def to_dollars(cents)
+    (cents / 100).round(2)
+  end
 end

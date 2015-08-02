@@ -1,3 +1,4 @@
+require 'bigdecimal'
 require_relative 'test_helper.rb'
 require_relative '../lib/objects/merchant'
 require_relative '../lib/sales_engine.rb'
@@ -85,7 +86,9 @@ class MerchantTest < Minitest::Test
     merchant = @se.merchant_repository.find_by_id("8")
     rev = merchant.revenue
 
-    expected = 2*78031 + 2*41702 + 6*71340 + 6*7196 + 3*41702 + 8*22546
+    expected_cents = 2*78031 + 2*41702 + 6*71340 + 6*7196 + 3*41702 + 8*22546
+    expected_dollars = BigDecimal.new(expected_cents) / 100
+    expected = expected_dollars.round(2)
     actual = rev
 
     assert_equal expected, actual
