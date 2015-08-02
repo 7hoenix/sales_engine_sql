@@ -40,7 +40,7 @@ class Merchant
   end
 
   def unpaid_invoices
-    invoices.reject{|invoice| invoice.paid?}
+    invoices.reject(&:paid?)
   end
 
   def paid_invoices_for(date)
