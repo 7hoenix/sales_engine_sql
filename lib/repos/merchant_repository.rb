@@ -40,4 +40,10 @@ class MerchantRepository
     all.max_by(x) {|merchant| merchant.items.length}
   end
 
+  def revenue(date)
+    all.inject(0) do |acc, merchant|
+      acc + merchant.revenue(date)
+    end
+  end
+
 end

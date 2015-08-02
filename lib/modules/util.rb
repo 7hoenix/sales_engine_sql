@@ -45,4 +45,8 @@ module Util
       :merchant => :merchant_repository
     }
   end
+
+  def to_dollars(cents)
+    (cents / 100).round(2)
+  end
 end

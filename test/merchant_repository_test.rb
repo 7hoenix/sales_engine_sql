@@ -70,7 +70,24 @@ class MerchantRepositoryTest < Minitest::Test
   end
 
   def test_it_knows_revenue_by_date_across_merchants
-    # merch = @se.merchant_repository.find_by_id
+    skip
+    merch_1 = @se.merchant_repository.find_by_id(41)
+    merch_2 = @se.merchant_repository.find_by_id(44)
+    merch_3 = @se.merchant_repository.find_by_id(27)
 
+    expected = merch_1.revenue + merch_2.revenue + merch_3.revenue
+    actual = @se.merchant_repository.revenue("2012-03-07")
+
+    assert_equal expected.to_f, actual.to_f
+  end
+
+  def test_it_knows_revenue_by_date_across_merchants_for_different_date
+    merch_1 = @se.merchant_repository.find_by_id(86)
+    date = "2012-03-27"
+
+    expected = merch_1.revenue(date)
+    actual = @se.merchant_repository.revenue("2012-03-27")
+
+    assert_equal expected, actual
   end
 end
