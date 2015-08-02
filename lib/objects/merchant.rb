@@ -36,8 +36,11 @@ class Merchant
   end
 
   def paid_invoices
-    invoices.select{|invoice| invoice.paid?}
-    # (&:paid?)
+    invoices.select(&:paid?)
+  end
+
+  def unpaid_invoices
+    invoices.reject{|invoice| invoice.paid?}
   end
 
   def paid_invoices_for(date)
@@ -65,18 +68,22 @@ class Merchant
   end
 
   def revenue(date = "all")
-    cents = paid_invoice_items_for(date).reduce(0) do |acc, ii|
-      acc + ii.total_price
+    paid_invoices_for(date).reduce(0) do |acc, invoice| 
+      acc + invoice.total_billed
     end
-    to_dollars(cents)
   end
 
   def favorite_customer
     #assumes at most one successful transaction per invoice
-    by_cust_id = paid_invoices.group_by{|invoice| invoice.customer_id}
-    by_cust_id.max_by do |id, invoices| 
-      invoices.inject(0) do |acc, invoice|
-      end
+    customers = paid_invoices.group_by{|invoice| invoice.customer}
+    customers.max_by do |id, invoices|
+      invoices.length
     end
+    # repository.engine.customer_repository.find_by_id(favorite.first)
+  end
+
+  def customers_with_pending_invoices
+    #collection of Customers with pending invoices
+    customers = unpaid_invoices.map{|invoice| invoice.customer}.uniq
   end
 end
