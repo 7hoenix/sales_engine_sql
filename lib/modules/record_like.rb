@@ -1,3 +1,5 @@
+require 'date'
+
 module RecordLike
   def ==(other)
     if other.is_a?(self.class)

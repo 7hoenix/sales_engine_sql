@@ -116,4 +116,33 @@ class MerchantTest < Minitest::Test
 
     assert_equal expected, actual
   end
+
+  def test_it_has_collection_of_unpaid_invoices
+    merchant = @se.merchant_repository.find_by_id(34)
+
+    expected = [13]
+    actual = merchant.unpaid_invoices.map{|invoice| invoice.id}
+
+    assert_equal expected, actual
+  end
+
+  def test_it_returns_empty_array_if_all_invoices_paid
+    merchant = @se.merchant_repository.find_by_id(1)
+
+    expected = []
+    actual = merchant.unpaid_invoices
+
+    assert_equal expected, actual
+  end
+
+  def test_it_has_collection_of_customers_with_unpaid_invoices
+    merchant = @se.merchant_repository.find_by_id(34)
+
+    expected = [3]
+    actual = merchant.customers_with_pending_invoices.map{|cust| cust.id}
+
+    assert_equal expected, actual
+  end
+
+
 end

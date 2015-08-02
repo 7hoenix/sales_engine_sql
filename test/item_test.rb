@@ -85,4 +85,17 @@ class ItemTest < Minitest::Test
 
     assert_equal merchant.id, 18
   end
+
+  def test_it_knows_its_revenue
+    item = @se.item_repository.find_by_id(1)
+
+    expected_cents = 2 * 75107
+    expected_big_cents = BigDecimal.new(expected_cents)
+    expected_dollars = expected_big_cents / 100
+    actual = item.revenue
+
+    assert_equal expected_dollars, actual
+  end
+
+
 end
