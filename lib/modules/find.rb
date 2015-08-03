@@ -9,16 +9,11 @@ module Find
   end
 
   def find_all_by(x, match)
-    # x = x.to_sym if x.class != Symbol
-    match = match.to_s.downcase# unless match.is_a?(Numeric)
-    if @records[1].respond_to?(x)
-      found = @records.select do |id, record|
-        match == record.send(x).to_s.downcase
-      end
-      return objects(found.to_a)
-    else
-      []
+    match = match.to_s.downcase
+    found = @records.select do |id, record|
+      match == record.send(x).to_s.downcase
     end
+    objects(found.to_a)
   end
 
   def objects(hashed)
