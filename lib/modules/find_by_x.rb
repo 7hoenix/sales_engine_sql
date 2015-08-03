@@ -144,7 +144,11 @@ module FindByX
   end
 
   def column_name(method)
-    method.slice(find_prefix..-1)
+    if method.to_s.include?("all")
+      method.slice(find_all_prefix..-1)
+    else
+      method.slice(find_prefix..-1)
+    end
   end
 
   def find_prefix
