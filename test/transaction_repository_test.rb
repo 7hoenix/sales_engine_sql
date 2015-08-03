@@ -4,7 +4,7 @@ require_relative '../lib/repos/transaction_repository'
 class TransactionRepositoryTest < Minitest::Test
   
   def setup
-    @transaction_repository = TransactionRepository.new(:filename => './fixtures/transactions.csv')
+    @transaction_repository = TransactionRepository.new(:path => './fixtures/')
   end  
   def test_make_sure_we_can_instantiate
     assert @transaction_repository.class == TransactionRepository

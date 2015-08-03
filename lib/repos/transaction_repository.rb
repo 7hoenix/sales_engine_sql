@@ -11,9 +11,10 @@ class TransactionRepository
 
   def initialize(args)
     @engine = args.fetch(:engine, nil)
-    filename = args.fetch(:filename, './data/fixtures/transactions.csv')
+    filename = args.fetch(:filename, 'transactions.csv')
+    path = args.fetch(:path, './data/fixtures/') + filename
     @loader = Loader.new
-    loaded_csvs = @loader.load_csv(filename)
+    loaded_csvs = @loader.load_csv(path)
     @transactions = populate_transactions(loaded_csvs)
     @records = @transactions
   end
@@ -31,6 +32,10 @@ class TransactionRepository
       transactions[id] = add_transaction(record)
     end
     transactions
+  end
+
+  def inspect
+    "#<#{self.class} #{@transactions.size} rows>"
   end
 
 end

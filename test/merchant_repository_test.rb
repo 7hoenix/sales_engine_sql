@@ -4,7 +4,7 @@ require_relative '../lib/sales_engine.rb'
 
 class MerchantRepositoryTest < Minitest::Test
   def setup
-    @merchant_repository = MerchantRepository.new(:filename => './fixtures/Merchants.csv')
+    @merchant_repository = MerchantRepository.new(:path => './fixtures/')
     @se = SalesEngine.new
     @se.startup
   end 

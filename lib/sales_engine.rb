@@ -9,18 +9,19 @@ require_relative './repos/transaction_repository'
 class SalesEngine
   attr_accessor :merchant_repository
   attr_reader :invoice_repository, :item_repository, :invoice_item_repository,
-    :customer_repository, :transaction_repository
+    :customer_repository, :transaction_repository, :path
 
-  def initialize
+  def initialize(path = './data/fixtures/')
+    @path = path
   end
 
   def startup
-    @merchant_repository = MerchantRepository.new(:engine => self)
-    @invoice_repository = InvoiceRepository.new(:engine => self)
-    @item_repository = ItemRepository.new(:engine => self)
-    @invoice_item_repository = InvoiceItemRepository.new(:engine => self)
-    @customer_repository = CustomerRepository.new(:engine => self)
-    @transaction_repository = TransactionRepository.new(:engine => self)
+    @merchant_repository = MerchantRepository.new(:path => path, :engine => self)
+    @invoice_repository = InvoiceRepository.new(:path => path, :engine => self)
+    @item_repository = ItemRepository.new(:path => path, :engine => self)
+    @invoice_item_repository = InvoiceItemRepository.new(:path => path, :engine => self)
+    @customer_repository = CustomerRepository.new(:path => path, :engine => self)
+    @transaction_repository = TransactionRepository.new(:path => path, :engine => self)
   end
 
 end

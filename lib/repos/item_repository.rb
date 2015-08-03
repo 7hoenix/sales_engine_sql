@@ -12,9 +12,10 @@ class ItemRepository
 
   def initialize(args)
     @engine = args.fetch(:engine, nil)
-    filename = args.fetch(:filename, './data/fixtures/items.csv')
+    filename = args.fetch(:filename, 'items.csv')
+    path = args.fetch(:path, './data/fixtures/') + filename
     @loader = Loader.new
-    loaded_csvs = @loader.load_csv(filename)
+    loaded_csvs = @loader.load_csv(path)
     @items = populate_items(loaded_csvs)
     @records = @items
   end
@@ -48,6 +49,10 @@ class ItemRepository
 
   def most_items(x)
     all.max_by(x) {|item| item.quantity_sold}
+  end
+
+  def inspect
+    "#<#{self.class} #{@items.size} rows>"
   end
 
 end

@@ -11,9 +11,10 @@ class CustomerRepository
 
   def initialize(args)
     @engine = args.fetch(:engine, nil)
-    filename = args.fetch(:filename, './data/fixtures/customers.csv')
+    filename = args.fetch(:filename, 'customers.csv')
+    path = args.fetch(:path, './data/fixtures/') + filename
     @loader = Loader.new
-    loaded_csvs = @loader.load_csv(filename)
+    loaded_csvs = @loader.load_csv(path)
     @customers = populate_customers(loaded_csvs)
     self.record_type = @customers
     @records = @customers
@@ -38,4 +39,7 @@ class CustomerRepository
     customers
   end
 
+  def inspect
+    "#<#{self.class} #{@customers.size} rows>"
+  end
 end

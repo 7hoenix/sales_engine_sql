@@ -5,7 +5,7 @@ require_relative '../lib/sales_engine'
 class ItemRepositoryTest < Minitest::Test
   
   def setup
-    @item_repository = ItemRepository.new(:filename => './fixtures/items.csv')
+    @item_repository = ItemRepository.new(:path => './fixtures/')
     @se = SalesEngine.new
     @se.startup
   end

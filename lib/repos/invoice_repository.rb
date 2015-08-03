@@ -11,9 +11,10 @@ class InvoiceRepository
 
   def initialize(args)
     @engine = args.fetch(:engine, nil)
-    filename = args.fetch(:filename, './data/fixtures/invoices.csv')
+    filename = args.fetch(:filename, 'invoices.csv')
+    path = args.fetch(:path, './data/fixtures/') + filename
     @loader = Loader.new
-    loaded_csvs = @loader.load_csv(filename)
+    loaded_csvs = @loader.load_csv(path)
     @invoices = populate_invoices(loaded_csvs)
     @records = @invoices
   end
@@ -33,4 +34,7 @@ class InvoiceRepository
     invoices
   end
 
+  def inspect
+    "#<#{self.class} #{@invoices.size} rows>"
+  end
 end

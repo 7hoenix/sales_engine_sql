@@ -4,7 +4,7 @@ require_relative '../lib/repos/invoice_repository'
 class InvoiceRepositoryTest < Minitest::Test
   
   def setup
-    @invoice_repository = InvoiceRepository.new(:filename => './fixtures/invoices.csv')
+    @invoice_repository = InvoiceRepository.new(:path => './fixtures/')
   end  
   def test_make_sure_we_can_instantiate
     assert @invoice_repository.class == InvoiceRepository

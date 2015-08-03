@@ -11,9 +11,10 @@ class InvoiceItemRepository
 
   def initialize(args)
     @engine = args.fetch(:engine, nil)
-    filename = args.fetch(:filename, './data/fixtures/invoice_items.csv')
+    filename = args.fetch(:filename, 'invoice_items.csv')
+    path = args.fetch(:path, './data/fixtures/') + filename
     @loader = Loader.new
-    loaded_csvs = @loader.load_csv(filename)
+    loaded_csvs = @loader.load_csv(path)
     @invoice_items = populate_invoice_items(loaded_csvs)
     @records = @invoice_items
   end
@@ -32,6 +33,10 @@ class InvoiceItemRepository
       invoice_items[id] = add_invoice_item(record)
     end
     invoice_items
+  end
+
+  def inspect
+    "#<#{self.class} #{@invoice_items.size} rows>"
   end
 
 end

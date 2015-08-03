@@ -10,9 +10,10 @@ class MerchantRepository
 
   def initialize(args)
     @engine = args.fetch(:engine, nil)
-    filename = args.fetch(:filename, './data/fixtures/merchants.csv')
+    filename = args.fetch(:filename, 'merchants.csv')
+    path = args.fetch(:path, './data/fixtures/') + filename
     @loader = Loader.new
-    loaded_csvs = @loader.load_csv(filename)
+    loaded_csvs = @loader.load_csv(path)
     @merchants = populate_merchants(loaded_csvs)
     @records = @merchants
   end
@@ -48,4 +49,7 @@ class MerchantRepository
     sum
   end
 
+  def inspect
+    "#<#{self.class} #{@merchants.size} rows>"
+  end
 end

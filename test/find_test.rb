@@ -4,9 +4,9 @@ require_relative '../lib/objects/customer'
 
 class FindTest < Minitest::Test
   def setup
-    @fixtures_1 = './data/fixtures/customers.csv'
-    @cust_repo = CustomerRepository.new(:filename => './fixtures/customers.csv')
-    @cust_repo_1 = CustomerRepository.new(:filename => @fixtures_1)
+    @fixtures_1 = './data/fixtures/'
+    @cust_repo = CustomerRepository.new(:path => './fixtures/')
+    @cust_repo_1 = CustomerRepository.new(:path => @fixtures_1)
   end
   def test_we_can_determine_if_our_records_have_x_type_find_by
     result = @cust_repo.find_by_last_name("Sawayn")
