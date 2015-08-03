@@ -76,4 +76,11 @@ class Item
     to_dollars(cents)
   end
 
+  #****ASSUMES SUCCESSFUL TRANSACTION NECESSARY TO BE CONSIDERED SOLD*****
+  def quantity_sold(date = "all")
+    paid_invoice_items_for(date).reduce(0) do |acc, ii|
+      ii.quantity
+    end
+  end
+
 end

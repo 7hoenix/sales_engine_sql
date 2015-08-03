@@ -106,5 +106,24 @@ class ItemTest < Minitest::Test
     assert_equal expected, actual
   end
 
+  def test_knows_quantity_sold_for_completed_transactions
+    item = @se.item_repository.find_by_id(539)
+
+    expected = 5
+    actual = item.quantity_sold
+
+    assert_equal expected, actual
+  end
+
+  def test_it_knows_a_different_quantity_sold
+    item = @se.item_repository.find_by_id(539)
+
+    expected = 5
+    actual = item.quantity_sold
+
+    assert_equal expected, actual
+
+  end
+
 
 end

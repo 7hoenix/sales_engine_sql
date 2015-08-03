@@ -24,11 +24,11 @@ class ItemRepository
   end
 
   def create(args)
-    # invoice_repository.create(customer: customer, merchant: merchant, status: "shipped",
+    # invoice_repository.create(customer: customer, merchant: merchant, 
+      #status: "shipped",
     #                      items: [item1, item2, item3])
+
   end
-
-
 
   def populate_items(loaded_csvs)
     items = {}
@@ -44,6 +44,10 @@ class ItemRepository
 
   def most_revenue(x)
     all.max_by(x) {|item| item.revenue}
+  end
+
+  def most_items(x)
+    all.max_by(x) {|item| item.quantity_sold}
   end
 
 end
