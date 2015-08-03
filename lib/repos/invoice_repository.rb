@@ -37,4 +37,8 @@ class InvoiceRepository
   def inspect
     "#<#{self.class} #{@invoices.size} rows>"
   end
+
+  def clean_status(match)
+    match =~ /\bshipped|unshipped\b/
+  end
 end

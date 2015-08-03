@@ -68,10 +68,11 @@ module FindByX
   end
 
   def find_all_by_quantity(match)
-    find_by(column_name(__callee__), match)
+    find_all_by(column_name(__callee__), match)
   end
 
   def find_by_unit_price(match)
+    match = (match * 100).to_i
     find_all_by(column_name(__callee__), match)
   end
 
@@ -116,7 +117,11 @@ module FindByX
   end
 
   def find_all_by_status(match)
-    find_all_by(column_name(__callee__), match)
+    if clean_status(match)
+      find_all_by(column_name(__callee__), match)
+    else
+      nil
+    end
   end
 
   def find_by_credit_card_number(match)
