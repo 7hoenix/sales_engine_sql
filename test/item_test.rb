@@ -4,7 +4,6 @@ require_relative '../lib/sales_engine.rb'
 
 class ItemTest < Minitest::Test
 
-
   def setup
     @example_record1 =
     {
@@ -116,13 +115,16 @@ class ItemTest < Minitest::Test
   end
 
   def test_it_knows_a_different_quantity_sold
-    item = @se.item_repository.find_by_id(539)
+    item = @se.item_repository.find_by_id(88888890)
 
-    expected = 5
+    expected = 13
     actual = item.quantity_sold
 
     assert_equal expected, actual
+  end
 
+  def test_it_knows_best_day_by_most_sales
+    
   end
 
 
