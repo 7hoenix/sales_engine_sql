@@ -27,12 +27,12 @@ class Item
     repository.get(__callee__, id, :item_id)
   end
 
-  def invoice_items_for(date)
-    if date == "all"
+  def invoice_items_for(invoice_date)
+    if invoice_date == "all"
       invoice_items
     else
       invoice_items.select do |ii|
-        ii.created_at == DateTime.parse(date).to_date
+        ii.invoice.created_at.to_date == DateTime.parse(invoice_date).to_date
       end
     end
   end
@@ -83,6 +83,15 @@ class Item
   end
 
   def dates_sold
-    paid_invoices.map{|invoice| invoice.created_at}
+    paid_invoices.map{|invoice| invoice.created_at.to_date}.uniq
   end
+
+  def best_day
+    if dates_sold.empty?
+      nil
+    else
+      dates_sold.max_by{|date| revenue(date.to_s) }
+    end
+  end
+
 end

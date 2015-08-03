@@ -12,7 +12,8 @@ module Relationships
   # end
 
   # def zero_revenue_invoices
-  #   transactions_by_invoice_id.each_with_object([]) do |(key, values), failures|
+  #   transactions_by_invoice_id.each_with_object([]) do |(key, values)
+  #failures|
   #     failures << key if values.all? {|charge| charge.result == "failed"}
   #   end
   # end

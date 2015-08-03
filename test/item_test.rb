@@ -124,7 +124,23 @@ class ItemTest < Minitest::Test
   end
 
   def test_it_knows_best_day_by_most_sales
-    
+    item = @se.item_repository.find_by_id(1)
+    best_day = item.best_day
+
+    expected = "2012-03-25"
+    actual = best_day.to_date.to_s
+
+    assert_equal expected, actual
+  end
+
+  def test_it_knows_a_different_best_day_by_most_sales
+    item = @se.item_repository.find_by_id(543)
+    best_day = item.best_day
+
+    expected = "2012-03-07"
+    actual = best_day.to_date.to_s
+
+    assert_equal expected, actual
   end
 
 

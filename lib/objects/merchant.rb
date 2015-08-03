@@ -68,7 +68,7 @@ class Merchant
   end
 
   def revenue(date = "all")
-    paid_invoices_for(date).reduce(0) do |acc, invoice| 
+    paid_invoices_for(date).reduce(0) do |acc, invoice|
       acc + invoice.total_billed
     end
   end
