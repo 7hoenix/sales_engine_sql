@@ -19,7 +19,7 @@ class InvoiceItemRepositoryTest < Minitest::Test
                         :updated_at => "someothertime"}
     invoice_item = @invoice_item_repository.add_invoice_item(invoice_item_record)
     
-    expected = "12412"
+    expected = BigDecimal.new("124.12")
     result = invoice_item.unit_price
     
     assert_equal expected,  result

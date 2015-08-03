@@ -47,7 +47,7 @@ module Util
   end
 
   def to_dollars(cents)
-    (cents / 100).round(2)
+    cents.round(2)
   end
 
   # def inspect

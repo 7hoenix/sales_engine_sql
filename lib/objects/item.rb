@@ -70,10 +70,9 @@ class Item
   end
 
   def revenue(date = "all")
-    cents = paid_invoice_items_for(date).reduce(0) do |acc, ii|
+    paid_invoice_items_for(date).reduce(0) do |acc, ii|
       acc + ii.total_price
     end
-    to_dollars(cents)
   end
 
   def quantity_sold(date = "all")

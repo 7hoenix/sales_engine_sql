@@ -15,7 +15,7 @@ module RecordLike
   end
 
   def to_dollars(cents)
-    (cents / 100).round(2)
+    (cents / 1).round(2)
   end
 
   def inspect

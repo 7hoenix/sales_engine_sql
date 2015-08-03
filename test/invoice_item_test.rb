@@ -89,7 +89,7 @@ class InvoiceItemTest < Minitest::Test
   def test_it_knows_total_price
     ii = @se.invoice_item_repository.find_by_id("44")
 
-    expected = 7 * 70783
+    expected = BigDecimal.new(7 * 70783) / 100
     actual = ii.total_price
 
     assert_equal expected, actual

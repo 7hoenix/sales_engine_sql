@@ -36,7 +36,7 @@ class ItemRepository
     loaded_csvs.each do |item|
       id = item.first
       record = item.last
-      record[:unit_price] = BigDecimal.new(record[:unit_price])
+      record[:unit_price] = (BigDecimal.new(record[:unit_price]) / 100)
       record[:repository] = self
       items[id] = add_item(record)
     end
