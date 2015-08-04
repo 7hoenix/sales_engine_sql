@@ -4,7 +4,6 @@ require_relative '../lib/modules/util'
 class TestClass1
   include Util
   def initialize
-    self.record_type="bye"
   end
   
 end

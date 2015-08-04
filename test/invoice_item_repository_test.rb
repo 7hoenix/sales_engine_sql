@@ -17,7 +17,7 @@ class InvoiceItemRepositoryTest < Minitest::Test
                          :unit_price => "12412",
                         :created_at => "sometime",
                         :updated_at => "someothertime"}
-    invoice_item = @invoice_item_repository.add_invoice_item(invoice_item_record)
+    invoice_item = @invoice_item_repository.create_record(invoice_item_record)
     
     expected = BigDecimal.new("124.12")
     result = invoice_item.unit_price

@@ -19,7 +19,7 @@ class InvoiceItemRepository
     @records = @invoice_items
   end
 
-  def add_invoice_item(record)
+  def create_record(record)
     InvoiceItem.new(record)
   end
 
@@ -30,7 +30,7 @@ class InvoiceItemRepository
       record = invoice_item.last
       record[:repository] = self
       record[:unit_price] = BigDecimal.new(record[:unit_price])
-      invoice_items[id] = add_invoice_item(record)
+      invoice_items[id] = create_record(record)
     end
     invoice_items
   end
@@ -64,7 +64,7 @@ class InvoiceItemRepository
         :created_at => timestamp,
         :updated_at => timestamp
       }
-      invoice_items[record[:id]] = add_invoice_item(record)
+      invoice_items[record[:id]] = create_record(record)
       end
     @records = @invoice_items
   end
