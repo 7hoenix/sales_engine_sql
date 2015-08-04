@@ -31,7 +31,5 @@ if __FILE__  == $0
   puts "engine starting up..."
   engine.startup
   puts "Done."
-
-
 end
 

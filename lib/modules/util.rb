@@ -50,10 +50,6 @@ module Util
     cents.round(2)
   end
 
-  # def inspect
-  #   self.object_id
-  # end
-
   def inspect
     "#<#{self.class} #{@repository.size} rows>"
   end

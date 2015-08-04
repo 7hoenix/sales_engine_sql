@@ -32,7 +32,7 @@ class Item
       invoice_items
     else
       invoice_items.select do |ii|
-        ii.invoice.created_at.to_date == DateTime.parse(invoice_date).to_date
+        ii.invoice.created_at.to_date == invoice_date.to_date
       end
     end
   end
@@ -58,7 +58,7 @@ class Item
       paid_invoices
     else
       paid_invoices.select do |invoice|
-        invoice.created_at.to_date == DateTime.parse(date).to_date
+        invoice.created_at.to_date == date.to_date
       end
     end
   end
@@ -89,7 +89,7 @@ class Item
     if dates_sold.empty?
       nil
     else
-      dates_sold.max_by{|date| revenue(date.to_s) }
+      dates_sold.max_by{|date| revenue(date) }
     end
   end
 

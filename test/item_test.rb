@@ -127,8 +127,8 @@ class ItemTest < Minitest::Test
     item = @se.item_repository.find_by_id(1)
     best_day = item.best_day
 
-    expected = "2012-03-25"
-    actual = best_day.to_date.to_s
+    expected = Date.parse("2012-03-25")
+    actual = best_day
 
     assert_equal expected, actual
   end
@@ -137,8 +137,8 @@ class ItemTest < Minitest::Test
     item = @se.item_repository.find_by_id(543)
     best_day = item.best_day
 
-    expected = "2012-03-07"
-    actual = best_day.to_date.to_s
+    expected = Date.parse("2012-03-07")
+    actual = best_day
 
     assert_equal expected, actual
   end

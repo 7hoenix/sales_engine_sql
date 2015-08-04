@@ -74,12 +74,10 @@ module FindByX
   end
 
   def find_by_unit_price(match)
-    match = (match * 100)
-    find_all_by(column_name(__callee__), match)
+    find_by(column_name(__callee__), match)
   end
 
   def find_all_by_unit_price(match)
-    match = (match * 100)
     find_all_by(column_name(__callee__), match)
   end
 
