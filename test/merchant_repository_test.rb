@@ -16,7 +16,7 @@ class MerchantRepositoryTest < Minitest::Test
   def test_we_can_make_instances_of_merchant
 
     hash = {:name=>"Willms and Sons", :created_at=>"2012-03-27 14:53:59 UTC", :updated_at=>"2012-03-27 14:53:59 UTC"}
-    merchant = @merchant_repository.add_merchant(hash)
+    merchant = @merchant_repository.create_record(hash)
     
     expected = "Willms and Sons"
     result = merchant.name

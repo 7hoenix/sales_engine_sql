@@ -20,7 +20,7 @@ class ItemRepository
     @records = @items
   end
 
-  def add_item(record)
+  def create_record(record)
     Item.new(record)
   end
 
@@ -31,7 +31,7 @@ class ItemRepository
       record = item.last
       record[:unit_price] = (BigDecimal.new(record[:unit_price]) / 100)
       record[:repository] = self
-      items[id] = add_item(record)
+      items[id] = create_record(record)
     end
     items
   end

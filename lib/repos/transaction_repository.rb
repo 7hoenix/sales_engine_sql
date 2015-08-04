@@ -19,7 +19,7 @@ class TransactionRepository
     @records = @transactions
   end
 
-  def add_transaction(record)
+  def create_record(record)
     Transaction.new(record)
   end
 
@@ -29,7 +29,7 @@ class TransactionRepository
       id = transaction.first
       record = transaction.last
       record[:repository] = self
-      transactions[id] = add_transaction(record)
+      transactions[id] = create_record(record)
     end
     transactions
   end
@@ -49,7 +49,7 @@ class TransactionRepository
     record[:result] = args[:result]
     record[:created_at] = timestamp
     record[:updated_at] = timestamp
-    transactions[record[:id]] = add_transaction(record)
+    transactions[record[:id]] = create_record(record)
     @records = @transactions
   end
 end

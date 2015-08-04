@@ -18,7 +18,7 @@ class MerchantRepository
     @records = @merchants
   end
 
-  def add_merchant(record)
+  def create_record(record)
     Merchant.new(record)
   end
 
@@ -28,7 +28,7 @@ class MerchantRepository
       id = merchant.first
       record = merchant.last
       record[:repository] = self
-      merchants[id] = add_merchant(record)
+      merchants[id] = create_record(record)
     end
     merchants
   end

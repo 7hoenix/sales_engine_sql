@@ -21,7 +21,7 @@ class ItemRepositoryTest < Minitest::Test
                         :merchant_id => 250,
                         :created_at => "sometime",
                         :updated_at => "someothertime",}
-    item = @item_repository.add_item(item_record)
+    item = @item_repository.create_record(item_record)
 
     expected = 75107
     result = item.unit_price

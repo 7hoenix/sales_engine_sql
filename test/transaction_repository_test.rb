@@ -20,7 +20,7 @@ class TransactionRepositoryTest < Minitest::Test
                         :result => "good",
                         :created_at => "sometime",
                         :updated_at => "someothertime"}
-    transaction = @transaction_repository.add_transaction(transaction_record)
+    transaction = @transaction_repository.create_record(transaction_record)
     
     expected = "someothertime"
     result = transaction.updated_at
