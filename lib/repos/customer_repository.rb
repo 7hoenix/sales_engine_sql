@@ -2,9 +2,11 @@ require 'pry'
 require_relative '../loader.rb'
 require_relative '../objects/customer.rb'
 require_relative '../modules/util'
+require_relative '../modules/table_like.rb'
 
 class CustomerRepository
   include Util
+  include TableLike
 
   attr_accessor :customers
   attr_reader :engine, :records

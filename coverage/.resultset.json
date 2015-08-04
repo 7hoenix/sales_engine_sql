@@ -6,7 +6,9 @@
         1,
         1,
         1,
+        1,
         null,
+        1,
         1,
         1,
         null,
@@ -150,14 +152,6 @@
         1,
         1,
         1,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
         null,
         1,
         0,
@@ -419,6 +413,13 @@
         null,
         1,
         2,
+        null,
+        null
+      ],
+      "/Users/plato/Projects/Turing/1module/sales_engine/lib/modules/table_like.rb": [
+        1,
+        1,
+        null,
         null,
         null
       ],
@@ -1226,8 +1227,6 @@
         36,
         null,
         null,
-        null,
-        null,
         1,
         1,
         1,
@@ -1237,8 +1236,6 @@
         1,
         1,
         1,
-        null,
-        null,
         null,
         null
       ],
@@ -2504,6 +2501,6 @@
         null
       ]
     },
-    "timestamp": 1438717923
+    "timestamp": 1438719292
   }
 }

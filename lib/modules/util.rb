@@ -7,14 +7,6 @@ module Util
   include Find
   include FindByX
 
-  # def record_type(records)
-  #   @records
-  # end
-
-  # def record_type=(records)
-  #   @records = records
-  # end
-
   def records
     @records
   end
