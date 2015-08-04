@@ -16,7 +16,7 @@ class CustomerRepository
     @loader = Loader.new
     loaded_csvs = @loader.load_csv(path)
     @customers = populate_customers(loaded_csvs)
-    self.record_type = @customers
+    # self.record_type = @customers
     @records = @customers
   end
 
