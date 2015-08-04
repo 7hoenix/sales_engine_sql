@@ -30,13 +30,13 @@ class InvoiceRepositoryTest < Minitest::Test
   end
 
   def test_we_can_populate_invoices
-    assert @invoice_repository.invoices.length > 20
+    assert @invoice_repository.records.length > 20
   end
 
   def test_we_can_access_a_invoices_info_from_the_invoice_repo_class
     
     expected = 3
-    result = @invoice_repository.invoices[10].customer_id
+    result = @invoice_repository.records[10].customer_id
     
     assert_equal expected, result
   end
