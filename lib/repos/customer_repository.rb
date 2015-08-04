@@ -26,7 +26,7 @@ class CustomerRepository
     @customers
   end
 
-  def add_customer(record)
+  def create_record(record)
     Customer.new(record)
   end
 
@@ -36,7 +36,7 @@ class CustomerRepository
       id = customer.first
       record = customer.last
       record[:repository] = self
-      customers[id] = add_customer(record)
+      customers[id] = create_record(record)
     end
     customers
   end

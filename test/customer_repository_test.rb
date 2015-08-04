@@ -15,7 +15,7 @@ class CustomerRepositoryTest < Minitest::Test
                         :last_name => 'timothy',
                         :created_at => "sometime",
                         :updated_at => "someothertime"}
-    customer = @customer_repository.add_customer(customer_record)
+    customer = @customer_repository.create_record(customer_record)
     
     expected = "timothy"
     result = customer.last_name
