@@ -44,13 +44,15 @@ class ItemRepository
   end
 
   def paid_invoice_items(for_object)
-    match = for_object.id
-    key = for_object.class.to_s.downcase + "_id"
-    args = {}
-    
-    args[:use] = __callee__
-    args[:repo] = :invoice_item_repository
-    engine.get(args).select{|ii| ii.send(key.to_sym) == match}
+    @paid_invoice_items ||= begin
+      match = for_object.id
+      key = for_object.class.to_s.downcase + "_id"
+      args = {}
+      
+      args[:use] = __callee__
+      args[:repo] = :invoice_item_repository
+      engine.get(args).select{|ii| ii.send(key.to_sym) == match}
+    end
   end
 
   def most_revenue(x)
