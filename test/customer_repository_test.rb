@@ -23,17 +23,17 @@ class CustomerRepositoryTest < Minitest::Test
     assert_equal expected,  result
   end
   def test_we_can_populate_customers
-    assert @customer_repository.customers.length > 20
+    assert @customer_repository.records.length > 20
   end
   def test_we_can_access_a_customer_info_from_the_customer_repo_class
     
     expected = "Reynolds"
-    result = @customer_repository.customers[10].last_name
+    result = @customer_repository.records[10].last_name
     
     assert_equal expected, result
   end
   def test_all_returns_all     
-    expected = @customer_repository.customers
+    expected = @customer_repository.records
     result = @customer_repository.all
     assert_equal(expected.length, result.length)
   end
