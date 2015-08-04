@@ -19,7 +19,7 @@ class InvoiceRepository
     @records = @invoices
   end
 
-  def add_invoice(record)
+  def create_record(record)
     Invoice.new(record)
   end
 
@@ -29,7 +29,7 @@ class InvoiceRepository
       id = invoice.first
       record = invoice.last
       record[:repository] = self
-      invoices[id] = add_invoice(record)
+      invoices[id] = create_record(record)
     end
     invoices
   end
@@ -57,7 +57,7 @@ class InvoiceRepository
       :repository => self
     }
     items = args[:items]
-    invoices[record[:id]] = add_invoice(record)
+    invoices[record[:id]] = create_record(record)
     records = invoices
     invoice = find_by_id(record[:id])
     invoice.add_items(items)

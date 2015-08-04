@@ -21,7 +21,7 @@ class InvoiceRepositoryTest < Minitest::Test
   def test_we_can_make_instances_of_Invoice
     
     invoice_record = {:customer_id =>"340", :merchant_id => "3052", :status => "shipped", :created_at=>"2012-03-27 14:53:59 UTC", :updated_at=>"2012-03-27 14:53:59 UTC"}
-    invoice = @invoice_repository.add_invoice(invoice_record)
+    invoice = @invoice_repository.create_record(invoice_record)
     
     expected = "340"
     result = invoice.customer_id
