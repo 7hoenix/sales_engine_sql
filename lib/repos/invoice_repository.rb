@@ -43,6 +43,6 @@ class InvoiceRepository
   end
 
   def paid_invoices
-    all.select(&:paid?)
+    @paid_invoices ||= all.select(&:paid?)
   end
 end

@@ -20,15 +20,15 @@ class InvoiceItem
   end
 
   def invoice
-    repository.get(__callee__, invoice_id, :id).reduce
+    @invoice ||= repository.get(__callee__, invoice_id, :id).reduce
   end
 
   def item
-    repository.get(__callee__, item_id, :id).reduce
+    @item ||= repository.get(__callee__, item_id, :id).reduce
   end
 
   def total_price
-    quantity * unit_price
+    @total_price ||= quantity * unit_price
   end
 
 end

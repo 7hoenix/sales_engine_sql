@@ -44,14 +44,12 @@ class ItemRepository
   end
 
   def paid_invoice_items(for_object)
-    #engine.get(what, from, with(self))
-    args = {}
     match = for_object.id
     key = for_object.class.to_s.downcase + "_id"
+    args = {}
+    
     args[:use] = __callee__
     args[:repo] = :invoice_item_repository
-
-    # puts "Callee: #{__callee__} Repository: :invoice_item.. with_value #{with_value} with_foreign #{with_foreign}"
     engine.get(args).select{|ii| ii.send(key.to_sym) == match}
   end
 

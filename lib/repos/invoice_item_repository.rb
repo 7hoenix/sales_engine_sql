@@ -39,8 +39,28 @@ class InvoiceItemRepository
     "#<#{self.class} #{@invoice_items.size} rows>"
   end
 
+  # def paid_invoice_items
+  #   @paid_invoice_items ||= engine.invoice_repository.paid_invoices.map do |invoice|
+  #     invoice.invoice_items
+  #   end.flatten
+  # end
+
   def paid_invoice_items
-    engine.invoice_repository.paid_invoices.map{|invoice| invoice.invoice_items}.flatten
+    args = {:repo => :invoice_repository, :use => :paid_invoices}
+    @paid_invoices ||= engine.get(args)
+    @paid_invoice_items ||= @paid_invoices.map do |invoice|
+      invoice.invoice_items
+    end.flatten
   end
+
+  # def paid_invoice_items(for_object)
+  #   match = for_object.id
+  #   key = for_object.class.to_s.downcase + "_id"
+  #   args = {}
+    
+  #   args[:use] = __callee__
+  #   args[:repo] = :invoice_item_repository
+  #   engine.get(args).select{|ii| ii.send(key.to_sym) == match}
+  # end
 
 end
