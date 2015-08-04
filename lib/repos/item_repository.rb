@@ -26,14 +26,18 @@ class ItemRepository
     Item.new(record)
   end
 
-  def paid_invoice_items(for_object)
-      match = for_object.id
-      key = for_object.class.to_s.downcase + "_id"
-      args = {}
-      
-      args[:use] = __callee__
-      args[:repo] = :invoice_item_repository
-      engine.get(args).select{|ii| ii.send(key.to_sym) == match}
+  def paid_invoice_items(for_item)
+    match = for_item.id
+    key = for_item.class.to_s.downcase + "_id"
+    args = {}
+    
+    args[:repo] = :invoice_item_repository
+    args[:use] = :paid_invoice_items
+    engine.get(args).select{|ii| ii.send(key.to_sym) == match}
+  end
+
+  def paid_invoices(for_item)
+    paid_invoice_items(for_item).map {|ii| ii.invoice}.uniq
   end
 
   def most_revenue(x)

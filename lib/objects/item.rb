@@ -9,7 +9,8 @@ class Item
                 :unit_price,
                 :merchant_id,
                 :created_at,
-                :updated_at
+                :updated_at,
+                :paid_invoices
   attr_reader :id, :repository
 
   def initialize(record)
@@ -36,7 +37,9 @@ class Item
   end
 
   def paid_invoices
-    invoices.select(&:paid?)
+    # invoices.select(&:paid?)
+    @paid_invoices ||= repository.paid_invoices(self)
+
     # repository.get(__callee__, id, :item_id)
   end
 

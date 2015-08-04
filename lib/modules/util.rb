@@ -3,56 +3,48 @@ require_relative './find'
 require_relative './find_by_x.rb'
 
 module Util
-  include List
-  include Find
-  include FindByX
+  # include List
+  # include Find
+  # include FindByX
 
-  # def records
-  #   @records
+  # def get(what, source_key_value, remote_key_name)
+  #   foreign_repo = repo_map[what.to_sym]
+  #   engine.send(foreign_repo).find_all_by(remote_key_name, source_key_value)
   # end
 
-  # def records=(records)
-  #   @records = records
+  # # factored out of get.. not yet retested/used
+  # def foreign_key_for(repo, class_name)
+  #   engine.send(repo).holds_type.foreign_keys[class_name]
   # end
 
-  def get(what, source_key_value, remote_key_name)
-    foreign_repo = repo_map[what.to_sym]
-    engine.send(foreign_repo).find_all_by(remote_key_name, source_key_value)
-  end
+  # def repo_map
+  #   {
+  #     :item => :item_repository,
+  #     :items => :item_repository,
+  #     :invoice => :invoice_repository,
+  #     :invoices => :invoice_repository,
+  #     :transactions => :transaction_repository,
+  #     :invoice_items => :invoice_item_repository,
+  #     :customer => :customer_repository,
+  #     :merchant => :merchant_repository,
+  #     :paid_invoices => :invoice_repository, #not yet used
+  #     :paid_invoice_items => :invoice_item_repository
+  #   }
+  # end
 
-  # factored out of get.. not yet retested/used
-  def foreign_key_for(repo, class_name)
-    engine.send(repo).holds_type.foreign_keys[class_name]
-  end
+  # def to_dollars(cents)
+  #   cents.round(2)
+  # end
 
-  def repo_map
-    {
-      :item => :item_repository,
-      :items => :item_repository,
-      :invoice => :invoice_repository,
-      :invoices => :invoice_repository,
-      :transactions => :transaction_repository,
-      :invoice_items => :invoice_item_repository,
-      :customer => :customer_repository,
-      :merchant => :merchant_repository,
-      :paid_invoices => :invoice_repository, #not yet used
-      :paid_invoice_items => :invoice_item_repository
-    }
-  end
+  # def inspect
+  #   "#<#{self.class} #{@repository.size} rows>"
+  # end
 
-  def to_dollars(cents)
-    cents.round(2)
-  end
+  # def timestamp
+  #   Time.now.utc.to_s
+  # end
 
-  def inspect
-    "#<#{self.class} #{@repository.size} rows>"
-  end
-
-  def timestamp
-    Time.now.utc.to_s
-  end
-
-  def next_id
-    all.last.id + 1
-  end
+  # def next_id
+  #   all.last.id + 1
+  # end
 end

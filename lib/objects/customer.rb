@@ -3,10 +3,7 @@ require_relative '../modules/record_like.rb'
 class Customer
   include RecordLike
 
-  attr_accessor :first_name,
-                :last_name,
-                :created_at,
-                :updated_at
+  attr_accessor :first_name, :last_name, :created_at, :updated_at
   attr_reader :id, :repository
 
   def initialize(record)
