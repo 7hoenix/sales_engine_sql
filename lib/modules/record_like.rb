@@ -3,9 +3,6 @@ require 'date'
 module RecordLike
   def ==(other)
     if other.is_a?(self.class)
-      # columns do |column|
-      #   self.send(column) == other.send(column)
-      # end.all?
       self.id == other.id
     end
   end
