@@ -32,6 +32,16 @@ class SalesEngine
     self.send(repo).send(use)
   end
 
+  # invoice.charge(credit_card_number: "4444333322221111",
+  #              credit_card_expiration: "10/13", result: "success"
+  def charge(args, invoice)
+    self.transaction_repository(args, invoice)
+  end
+
+  def add_items(args, invoice)
+    self.invoice_item_repository.add_items(args, invoice)
+  end
+
 end
 
 if __FILE__  == $0

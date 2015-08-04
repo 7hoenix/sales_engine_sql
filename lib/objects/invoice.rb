@@ -46,6 +46,14 @@ class Invoice
     end
   end
 
+  def add_items(items)
+    repository.add_item(items, self.id)
+  end
+
+  def charge(args)
+    repository(args, self)
+  end
+
   # def paid_invoice_items
   #   invoice_items.keep {|ii| repository.find_by_id(ii.invoice_id).paid?}
   # end

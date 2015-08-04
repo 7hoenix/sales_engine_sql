@@ -55,6 +55,9 @@ class ItemRepository
     # end
   end
 
+  # def paid_invoice_items
+  # end
+
   def most_revenue(x)
     all.max_by(x) {|item| item.revenue}
   end

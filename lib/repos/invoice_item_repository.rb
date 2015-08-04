@@ -53,6 +53,22 @@ class InvoiceItemRepository
     end.flatten
   end
 
+  def add_items(args, invoice)
+    args[:items].each do |item|
+      record = {
+        :id => next_id,
+        :invoice_id => invoice,
+        :item_id => item.id,
+        :unit_price => item.unit_price,
+        :repository => args[:repository],
+        :created_at => timestamp,
+        :updated_at => timestamp
+      }
+      end
+    invoice_items[id] = add_invoice_item(record)
+    @records = @invoice_items
+  end
+
   # def paid_invoice_items(for_object)
   #   match = for_object.id
   #   key = for_object.class.to_s.downcase + "_id"
