@@ -55,4 +55,12 @@ module Util
   def inspect
     "#<#{self.class} #{@repository.size} rows>"
   end
+
+  def timestamp
+    Time.now.utc.to_s
+  end
+
+  def next_id
+    all.last.id + 1
+  end
 end

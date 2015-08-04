@@ -28,7 +28,7 @@ class Item
   end
 
   def paid_invoice_items
-    repository.paid_invoice_items(self)
+    @paid_invoice_items ||= repository.paid_invoice_items(self)
   end
 
   def unpaid_invoices

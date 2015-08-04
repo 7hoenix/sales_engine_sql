@@ -58,7 +58,8 @@ class ItemRepositoryTest < Minitest::Test
   def test_it_knows_top_five_for_quanity_sold
     top_5 = @se.item_repository.most_items(5)
 
-    expected = [88888890, 88888889, 88888888, 937, 936]
+    # expected = [88888890, 88888889, 88888888, 937, 936]
+    expected = [227, 847, 543, 1162, 88888890]
     actual = top_5.map {|item| item.id}
 
     assert_equal expected, actual

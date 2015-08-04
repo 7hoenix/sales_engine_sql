@@ -6,8 +6,8 @@ require_relative '../modules/util'
 class InvoiceRepository
   include Util
 
-  attr_accessor :invoices
-  attr_reader :engine, :records
+  attr_accessor :invoices, :records
+  attr_reader :engine
 
   def initialize(args)
     @engine = args.fetch(:engine, nil)
@@ -45,4 +45,22 @@ class InvoiceRepository
   def paid_invoices
     @paid_invoices ||= all.select(&:paid?)
   end
+
+  def create(args)
+    record = {
+      :id => next_id,
+      :customer_id => (args[:customer].id),
+      :merchant_id => (args[:merchant].id),
+      :status => args[:status],
+      :created_at => timestamp,
+      :updated_at => timestamp,
+      :repository => self
+    }
+    invoices[record[:id]] = add_invoice(record)
+    records = invoices
+  end
+
+
+
+
 end
