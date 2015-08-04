@@ -37,10 +37,7 @@ class Item
   end
 
   def paid_invoices
-    # invoices.select(&:paid?)
     @paid_invoices ||= repository.paid_invoices(self)
-
-    # repository.get(__callee__, id, :item_id)
   end
 
   def invoice_items_for(invoice_date)

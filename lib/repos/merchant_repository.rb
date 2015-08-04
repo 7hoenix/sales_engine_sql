@@ -7,7 +7,7 @@ class MerchantRepository
   include Util
   include TableLike
 
-  attr_accessor :records
+  attr_accessor :records, :all_paid_invoices
   attr_reader :engine
 
   def initialize(args)
@@ -32,11 +32,20 @@ class MerchantRepository
   end
 
   def revenue(date)
-    sum = 0
-    all.each do |merchant|
-      sum += merchant.revenue(date)
+    all.inject(0) do |acc, merchant|
+      acc + merchant.revenue(date)
+    end
+  end
+
+  def paid_invoices(for_merchant)
+    args = {
+      :repo => :invoice_repository,
+      :use => :paid_invoices
+    }
+    @all_paid_invoices ||= engine.get(args)
+      all_paid_invoices.select do |invoice|
+        invoice.merchant_id == for_merchant.id
       end
-    sum
   end
 
   def inspect

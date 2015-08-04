@@ -18,7 +18,7 @@ class Merchant
   end
 
   def items
-    repository.get(__callee__, id, :merchant_id)
+    repository.get(:items, id, :merchant_id)
   end
 
   def invoices
@@ -36,7 +36,7 @@ class Merchant
   end
 
   def paid_invoices
-    invoices.select(&:paid?)
+    repository.paid_invoices(self)
   end
 
   def unpaid_invoices
