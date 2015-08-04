@@ -8,8 +8,8 @@ class CustomerRepository
   include Util
   include TableLike
 
-  attr_accessor :customers
-  attr_reader :engine, :records
+  attr_accessor :records
+  attr_reader :engine
 
   def initialize(args)
     @engine = args.fetch(:engine, nil)

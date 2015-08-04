@@ -2,7 +2,7 @@ require_relative 'test_helper.rb'
 require_relative '../lib/modules/util'
 
 class TestClass1
-  include Util
+  include TableLike
   def initialize
   end
   

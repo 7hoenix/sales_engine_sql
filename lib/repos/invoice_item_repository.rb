@@ -8,8 +8,8 @@ class InvoiceItemRepository
   include Util
   include TableLike
 
-  attr_accessor :invoice_items
-  attr_reader :engine, :records
+  attr_accessor :records
+  attr_reader :engine
 
   def initialize(args)
     @engine = args.fetch(:engine, nil)

@@ -8,7 +8,7 @@ class InvoiceRepository
   include Util
   include TableLike
 
-  attr_accessor :invoices, :records
+  attr_accessor :records
   attr_reader :engine
 
   def initialize(args)

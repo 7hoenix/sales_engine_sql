@@ -7,13 +7,13 @@ module Util
   include Find
   include FindByX
 
-  def records
-    @records
-  end
+  # def records
+  #   @records
+  # end
 
-  def records=(records)
-    @records = records
-  end
+  # def records=(records)
+  #   @records = records
+  # end
 
   def get(what, source_key_value, remote_key_name)
     foreign_repo = repo_map[what.to_sym]
