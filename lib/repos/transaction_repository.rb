@@ -1,10 +1,12 @@
 require 'pry'
-require_relative '../loader.rb'
-require_relative '../objects/transaction.rb'
+require_relative '../loader'
+require_relative '../objects/transaction'
 require_relative '../modules/util'
+require_relative '../modules/table_like'
 
 class TransactionRepository
   include Util
+  include TableLike
 
   attr_accessor :transactions
   attr_reader :engine, :records
@@ -15,27 +17,11 @@ class TransactionRepository
     path = args.fetch(:path, './data/fixtures/') + filename
     @loader = Loader.new
     loaded_csvs = @loader.load_csv(path)
-    @transactions = populate_transactions(loaded_csvs)
-    @records = @transactions
+    @records = build_from(loaded_csvs)
   end
 
   def create_record(record)
     Transaction.new(record)
-  end
-
-  def populate_transactions(loaded_csvs)
-    transactions = {}
-    loaded_csvs.each do |transaction|
-      id = transaction.first
-      record = transaction.last
-      record[:repository] = self
-      transactions[id] = create_record(record)
-    end
-    transactions
-  end
-
-  def inspect
-    "#<#{self.class} #{@transactions.size} rows>"
   end
 
   def count
@@ -49,7 +35,7 @@ class TransactionRepository
     record[:result] = args[:result]
     record[:created_at] = timestamp
     record[:updated_at] = timestamp
-    transactions[record[:id]] = create_record(record)
-    @records = @transactions
+    records[record[:id]] = create_record(record)
+    # @records = @transactions
   end
 end
