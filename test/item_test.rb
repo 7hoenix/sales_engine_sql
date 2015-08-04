@@ -99,7 +99,7 @@ class ItemTest < Minitest::Test
   def test_it_knows_a_zero_revenue
     item = @se.item_repository.find_by_id(719)
 
-    expected = (BigDecimal.new(0) / 100).round(2)
+    expected = (BigDecimal.new(0)).round(2)
     actual = item.revenue
 
     assert_equal expected, actual
@@ -109,6 +109,15 @@ class ItemTest < Minitest::Test
     item = @se.item_repository.find_by_id(539)
 
     expected = 5
+    actual = item.quantity_sold
+
+    assert_equal expected, actual
+  end
+
+  def test_composite_quantity
+    item = @se.item_repository.find_by_id(6)
+
+    expected = 7
     actual = item.quantity_sold
 
     assert_equal expected, actual

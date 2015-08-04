@@ -37,7 +37,7 @@ class Invoice
   end
 
   def paid?
-    !(transactions.all? {|transaction| transaction.result == "failed" })
+    transactions.any? {|transaction| transaction.successful?}
   end
 
   def total_billed

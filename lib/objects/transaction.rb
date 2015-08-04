@@ -24,4 +24,8 @@ class Transaction
     repository.get(__callee__, invoice_id, :id).reduce
   end
 
+  def successful?
+    result == "success"
+  end
+
 end

@@ -150,7 +150,7 @@ module FindByX
   end
 
   def find_all_by_result(match)
-    find_by(column_name(__callee__), match)
+    find_all_by(column_name(__callee__), match)
   end
 
   def column_name(method)

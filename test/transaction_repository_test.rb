@@ -1,10 +1,13 @@
 require_relative 'test_helper.rb'
 require_relative '../lib/repos/transaction_repository'
+require_relative '../lib/sales_engine.rb'
 
 class TransactionRepositoryTest < Minitest::Test
   
   def setup
     @transaction_repository = TransactionRepository.new(:path => './fixtures/')
+    @se = SalesEngine.new
+    @se.startup
   end  
   def test_make_sure_we_can_instantiate
     assert @transaction_repository.class == TransactionRepository
@@ -32,5 +35,12 @@ class TransactionRepositoryTest < Minitest::Test
     expected = 4923661117104166
     result = @transaction_repository.transactions[10].credit_card_number     
     assert_equal expected, result
+  end
+
+  def test_it_knows_the_number_of_successful_transactions
+    expected = 29
+    actual = @se.transaction_repository.count
+
+    assert_equal expected, actual
   end
 end

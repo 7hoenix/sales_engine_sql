@@ -38,4 +38,8 @@ class TransactionRepository
     "#<#{self.class} #{@transactions.size} rows>"
   end
 
+  def count
+    all.count{|trans| trans.successful?}
+  end
+
 end

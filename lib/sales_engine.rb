@@ -24,6 +24,14 @@ class SalesEngine
     @transaction_repository = TransactionRepository.new(:path => path, :engine => self)
   end
 
+    # engine.get(__callee__, :invoice_items_repository, with_value, with_foreign)
+  def get(args)
+    # puts args.inspect
+    repo = args.delete(:repo)
+    use = args.delete(:use)
+    self.send(repo).send(use)
+  end
+
 end
 
 if __FILE__  == $0

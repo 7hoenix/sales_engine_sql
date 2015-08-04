@@ -27,6 +27,19 @@ class Item
     repository.get(__callee__, id, :item_id)
   end
 
+  def paid_invoice_items
+    repository.paid_invoice_items(self)
+  end
+
+  def unpaid_invoices
+    invoices.reject(&:paid?)
+  end
+
+  def paid_invoices
+    invoices.select(&:paid?)
+    # repository.get(__callee__, id, :item_id)
+  end
+
   def invoice_items_for(invoice_date)
     if invoice_date == "all"
       invoice_items
@@ -45,14 +58,6 @@ class Item
     invoice_items.map{|ii| ii.invoice}
   end
 
-  def paid_invoices
-    invoices.select(&:paid?)
-  end
-
-  def unpaid_invoices
-    invoices.reject(&:paid?)
-  end
-
   def paid_invoices_for(date)
     if date == "all"
       paid_invoices
@@ -63,9 +68,13 @@ class Item
     end
   end
 
-  def paid_invoice_items_for(date = "all")
-    invoice_items_for(date).select do |ii|
-      ii.invoice.paid?
+  def paid_invoice_items_for(date)
+    if date == "all"
+      paid_invoice_items
+    else
+      paid_invoice_items.select do |ii|
+        ii.invoice.created_at.to_date == date.to_date
+      end
     end
   end
 
@@ -77,7 +86,7 @@ class Item
 
   def quantity_sold(date = "all")
     paid_invoice_items_for(date).reduce(0) do |acc, ii|
-      ii.quantity
+      acc + ii.quantity
     end
   end
 

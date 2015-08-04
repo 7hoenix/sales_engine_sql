@@ -39,4 +39,8 @@ class InvoiceItemRepository
     "#<#{self.class} #{@invoice_items.size} rows>"
   end
 
+  def paid_invoice_items
+    engine.invoice_repository.paid_invoices.map{|invoice| invoice.invoice_items}.flatten
+  end
+
 end

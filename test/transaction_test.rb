@@ -65,5 +65,15 @@ class TransactionTest < Minitest::Test
     assert_equal 29, invoice.id
   end
 
+  def test_it_knows_if_it_is_successful
+    trans = @se.transaction_repository.find_by_id(1)
 
+    assert trans.successful?
+  end
+
+  def test_it_knows_if_it_is_not_successful
+    trans = @se.transaction_repository.find_by_id(14)
+
+    refute trans.successful?
+  end
 end

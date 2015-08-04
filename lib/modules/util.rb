@@ -42,7 +42,9 @@ module Util
       :transactions => :transaction_repository,
       :invoice_items => :invoice_item_repository,
       :customer => :customer_repository,
-      :merchant => :merchant_repository
+      :merchant => :merchant_repository,
+      :paid_invoices => :invoice_repository, #not yet used
+      :paid_invoice_items => :invoice_item_repository
     }
   end
 

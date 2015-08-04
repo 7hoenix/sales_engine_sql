@@ -41,4 +41,8 @@ class InvoiceRepository
   def clean_status(match)
     match =~ /\bshipped|unshipped\b/
   end
+
+  def paid_invoices
+    all.select(&:paid?)
+  end
 end
