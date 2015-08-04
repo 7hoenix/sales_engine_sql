@@ -13,7 +13,8 @@ class InvoiceItem
     @item_id     = record[:item_id]
     @invoice_id  = record[:invoice_id]
     @quantity    = record[:quantity]
-    @unit_price  = BigDecimal.new(record[:unit_price]) / 100
+    @unit_price  = record[:unit_price]
+    # @unit_price  = BigDecimal.new(record[:unit_price]) / 100
     @created_at  = record[:created_at]
     @updated_at  = record[:updated_at]
     @repository  = record.fetch(:repository, nil)

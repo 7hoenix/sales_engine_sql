@@ -23,19 +23,19 @@ class ItemRepositoryTest < Minitest::Test
                         :updated_at => "someothertime",}
     item = @item_repository.create_record(item_record)
 
-    expected = 75107
+    expected = BigDecimal.new("75107") / 100
     result = item.unit_price
     
     assert_equal expected,  result
   end
 
   def test_we_can_populate_items
-    assert @item_repository.items.length > 20
+    assert @item_repository.records.length > 20
   end
 
   def test_we_can_access_a_item_info_from_the_item_repo_class
     expected = BigDecimal.new("340.18")
-    result = @item_repository.items[10].unit_price
+    result = @item_repository.records[10].unit_price
     assert_equal expected, result
   end
 
@@ -66,9 +66,9 @@ class ItemRepositoryTest < Minitest::Test
   end
 
   def test_it_returns_the_top_n_items_ranked_by_most_sold
-    most = @se.item_repository.most_items(37)
+    most = @se.item_repository.most_items(5)
 
-    assert_equal most[1].name "Item Nam Magnam"
+    assert_equal most[1].name, "Item Nam Magnam"
     # expect(most.last.name).to eq "Item Ut Quaerat"
   end
 

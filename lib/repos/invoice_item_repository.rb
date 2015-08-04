@@ -21,6 +21,7 @@ class InvoiceItemRepository
   end
 
   def create_record(record)
+    record[:unit_price] = BigDecimal.new(record[:unit_price]) / 100
     InvoiceItem.new(record)
   end
 
