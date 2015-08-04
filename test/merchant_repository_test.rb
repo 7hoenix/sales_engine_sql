@@ -25,12 +25,12 @@ class MerchantRepositoryTest < Minitest::Test
   end
 
   def test_we_can_populate_merchants
-    assert @merchant_repository.merchants.length > 20
+    assert @merchant_repository.records.length > 20
   end
 
   def test_we_can_access_a_merchants_info_from_the_merchant_repo_class
     expected = "Bechtelar, Jones and Stokes"
-    result = @merchant_repository.merchants[10].name
+    result = @merchant_repository.records[10].name
 
     assert_equal expected, result
   end

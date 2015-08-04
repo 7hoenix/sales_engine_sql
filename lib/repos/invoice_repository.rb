@@ -17,8 +17,6 @@ class InvoiceRepository
     path = args.fetch(:path, './data/fixtures/') + filename
     @loader = Loader.new
     loaded_csvs = @loader.load_csv(path)
-    # @invoices = populate_invoices(loaded_csvs)
-    # @records = @invoices
     @records = build_from(loaded_csvs)
   end
 
