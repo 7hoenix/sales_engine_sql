@@ -27,8 +27,4 @@ class CustomerRepository
   def create_record(record)
     Customer.new(record)
   end
-
-  def inspect
-    "#<#{self.class} #{@customers.size} rows>"
-  end
 end

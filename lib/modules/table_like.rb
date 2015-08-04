@@ -9,4 +9,8 @@ module TableLike
     end
     records
   end
+
+  def inspect
+    "#<#{self.class} #{@customers.size} rows>"
+  end
 end
