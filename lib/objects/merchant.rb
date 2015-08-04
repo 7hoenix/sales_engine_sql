@@ -35,14 +35,17 @@ class Merchant
     end
   end
 
+  #clean
   def paid_invoices
     repository.paid_invoices(self)
   end
 
   def unpaid_invoices
-    invoices.reject(&:paid?)
+    repository.unpaid_invoices(self)
+    # invoices.reject(&:paid?)
   end
 
+  #clean
   def paid_invoices_for(date)
     if date == "all"
       paid_invoices
@@ -73,6 +76,7 @@ class Merchant
     end
   end
 
+  #clean
   def favorite_customer
     #assumes at most one successful transaction per invoice
     customers = paid_invoices.group_by{|invoice| invoice.customer}

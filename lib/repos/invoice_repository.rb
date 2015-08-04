@@ -8,7 +8,7 @@ class InvoiceRepository
   include Util
   include TableLike
 
-  attr_accessor :records
+  attr_accessor :records, :paid_invoices, :unpaid_invoices
   attr_reader :engine
 
   def initialize(args)
@@ -30,6 +30,10 @@ class InvoiceRepository
 
   def paid_invoices
     @paid_invoices ||= all.select(&:paid?)
+  end
+
+  def unpaid_invoices
+    @unpaid_invoices ||= all.select{|i| !(i.paid?)}
   end
 
   def create(args)

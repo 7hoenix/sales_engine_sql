@@ -7,7 +7,7 @@ class MerchantRepository
   include Util
   include TableLike
 
-  attr_accessor :records, :all_paid_invoices
+  attr_accessor :records, :all_paid_invoices, :all_unpaid_invoices
   attr_reader :engine
 
   def initialize(args)
@@ -28,7 +28,15 @@ class MerchantRepository
   end
 
   def most_items(x)
-    all.max_by(x) {|merchant| merchant.items.length}
+    args = {
+      :use => :most_items,
+      :repo => :item_repository,
+      :x => x
+    }
+    engine.get(args).map do |item|
+      self.find_by_id(item.merchant_id)
+    end
+    # all.max_by(x) {|merchant| merchant.items.length}
   end
 
   def revenue(date)
@@ -43,9 +51,20 @@ class MerchantRepository
       :use => :paid_invoices
     }
     @all_paid_invoices ||= engine.get(args)
-      all_paid_invoices.select do |invoice|
-        invoice.merchant_id == for_merchant.id
-      end
+    all_paid_invoices.select do |invoice|
+      invoice.merchant_id == for_merchant.id
+    end
+  end
+
+  def unpaid_invoices(for_merchant)
+    args = {
+      :repo => :invoice_repository,
+      :use => :unpaid_invoices
+    }
+    @all_unpaid_invoices ||= engine.get(args)
+    all_unpaid_invoices.select do |invoice|
+      invoice.merchant_id == for_merchant.id
+    end
   end
 
   def inspect

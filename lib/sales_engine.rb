@@ -29,11 +29,14 @@ class SalesEngine
     # puts args.inspect
     repo = args.delete(:repo)
     use = args.delete(:use)
-    self.send(repo).send(use)
+    if args.keys.include?(:x)
+      x = args.delete(:x) 
+      self.send(repo).send(use, x)
+    else
+      self.send(repo).send(use)
+    end
   end
 
-  # invoice.charge(credit_card_number: "4444333322221111",
-  #              credit_card_expiration: "10/13", result: "success"
   def charge(args, invoice)
     self.transaction_repository.charge(args, invoice)
   end
