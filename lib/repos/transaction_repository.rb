@@ -1,11 +1,9 @@
 require 'pry'
 require_relative '../loader'
 require_relative '../objects/transaction'
-require_relative '../modules/util'
 require_relative '../modules/table_like'
 
 class TransactionRepository
-  include Util
   include TableLike
 
   attr_accessor :records

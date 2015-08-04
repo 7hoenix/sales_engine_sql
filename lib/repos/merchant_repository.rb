@@ -1,10 +1,8 @@
 require_relative '../loader'
 require_relative '../objects/merchant'
-require_relative '../modules/util'
 require_relative '../modules/table_like'
 
 class MerchantRepository
-  include Util
   include TableLike
 
   attr_accessor :records, :all_paid_invoices, :all_unpaid_invoices
@@ -65,9 +63,5 @@ class MerchantRepository
     all_unpaid_invoices.select do |invoice|
       invoice.merchant_id == for_merchant.id
     end
-  end
-
-  def inspect
-    "#<#{self.class} #{@merchants.size} rows>"
   end
 end

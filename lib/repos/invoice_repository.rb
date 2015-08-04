@@ -1,11 +1,9 @@
 require 'pry'
 require_relative '../loader'
 require_relative '../objects/invoice'
-require_relative '../modules/util'
 require_relative '../modules/table_like'
 
 class InvoiceRepository
-  include Util
   include TableLike
 
   attr_accessor :records, :paid_invoices, :unpaid_invoices
@@ -60,7 +58,4 @@ class InvoiceRepository
   def add_items(items, invoice)
     engine.add_items(items, invoice.id)
   end
-
-
-
 end

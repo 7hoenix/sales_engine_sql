@@ -1,11 +1,9 @@
 require 'bigdecimal'
 require_relative '../loader.rb'
 require_relative '../objects/invoice_item.rb'
-require_relative '../modules/util'
 require_relative '../modules/table_like'
 
 class InvoiceItemRepository
-  include Util
   include TableLike
 
   attr_accessor :records
@@ -47,15 +45,5 @@ class InvoiceItemRepository
       records[record[:id]] = create_record(record)
       end
   end
-
-  # def paid_invoice_items(for_object)
-  #   match = for_object.id
-  #   key = for_object.class.to_s.downcase + "_id"
-  #   args = {}
-    
-  #   args[:use] = __callee__
-  #   args[:repo] = :invoice_item_repository
-  #   engine.get(args).select{|ii| ii.send(key.to_sym) == match}
-  # end
 
 end

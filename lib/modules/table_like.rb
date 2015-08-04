@@ -48,7 +48,7 @@ module TableLike
   end
 
   def inspect
-    "#<#{self.class} #{@repository.size} rows>"
+    "#<#{self.class} #{@records.size} rows>"
   end
 
   def timestamp

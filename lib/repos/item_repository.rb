@@ -1,12 +1,10 @@
 require 'bigdecimal'
 require_relative '../loader.rb'
 require_relative '../objects/item'
-require_relative '../modules/util'
 require_relative '../modules/table_like'
 
 
 class ItemRepository
-  include Util
   include TableLike
 
   attr_accessor :records
@@ -46,10 +44,6 @@ class ItemRepository
 
   def most_items(x)
     all.max_by(x) {|item| item.quantity_sold}
-  end
-
-  def inspect
-    "#<#{self.class} #{@items.size} rows>"
   end
 
 end

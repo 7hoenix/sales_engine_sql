@@ -45,6 +45,11 @@ class SalesEngine
     self.invoice_item_repository.add_items(items, invoice_id)
   end
 
+  def inspect
+    #define this
+    "#{Class}"
+  end
+
 end
 
 if __FILE__  == $0
