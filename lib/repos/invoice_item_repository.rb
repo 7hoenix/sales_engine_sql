@@ -2,9 +2,11 @@ require 'bigdecimal'
 require_relative '../loader.rb'
 require_relative '../objects/invoice_item.rb'
 require_relative '../modules/util'
+require_relative '../modules/table_like'
 
 class InvoiceItemRepository
   include Util
+  include TableLike
 
   attr_accessor :invoice_items
   attr_reader :engine, :records
@@ -15,35 +17,12 @@ class InvoiceItemRepository
     path = args.fetch(:path, './data/fixtures/') + filename
     @loader = Loader.new
     loaded_csvs = @loader.load_csv(path)
-    @invoice_items = populate_invoice_items(loaded_csvs)
-    @records = @invoice_items
+    @records = build_from(loaded_csvs)
   end
 
   def create_record(record)
     InvoiceItem.new(record)
   end
-
-  def populate_invoice_items(loaded_csvs)
-    invoice_items = {}
-    loaded_csvs.each do |invoice_item|
-      id = invoice_item.first
-      record = invoice_item.last
-      record[:repository] = self
-      record[:unit_price] = BigDecimal.new(record[:unit_price])
-      invoice_items[id] = create_record(record)
-    end
-    invoice_items
-  end
-
-  def inspect
-    "#<#{self.class} #{@invoice_items.size} rows>"
-  end
-
-  # def paid_invoice_items
-  #   @paid_invoice_items ||= engine.invoice_repository.paid_invoices.map do |invoice|
-  #     invoice.invoice_items
-  #   end.flatten
-  # end
 
   def paid_invoice_items
     args = {:repo => :invoice_repository, :use => :paid_invoices}
@@ -64,9 +43,8 @@ class InvoiceItemRepository
         :created_at => timestamp,
         :updated_at => timestamp
       }
-      invoice_items[record[:id]] = create_record(record)
+      records[record[:id]] = create_record(record)
       end
-    @records = @invoice_items
   end
 
   # def paid_invoice_items(for_object)

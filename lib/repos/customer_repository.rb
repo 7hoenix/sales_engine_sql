@@ -20,10 +20,6 @@ class CustomerRepository
     @records = build_from(loaded_csvs)
   end
 
-  # def items
-  #   @customers
-  # end
-
   def create_record(record)
     Customer.new(record)
   end

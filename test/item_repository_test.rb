@@ -66,7 +66,7 @@ class ItemRepositoryTest < Minitest::Test
   end
 
   def test_it_returns_the_top_n_items_ranked_by_most_sold
-    most = engine.item_repository.most_items(37)
+    most = @se.item_repository.most_items(37)
 
     assert_equal most[1].name "Item Nam Magnam"
     # expect(most.last.name).to eq "Item Ut Quaerat"
