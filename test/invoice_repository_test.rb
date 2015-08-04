@@ -56,4 +56,33 @@ class InvoiceRepositoryTest < Minitest::Test
     assert_equal invoice.customer_id, @customer_1.id
     assert_equal invoice.merchant_id, @merchant_1.id
   end
+
+
+  def test_it_creates_a_new_invoice
+    customer = @se.customer_repository.find_by_id(7)
+    merchant = @se.merchant_repository.find_by_id(22)
+    items = [].concat((1..3).map { @se.item_repository.random })
+    invoice = @se.invoice_repository.create(customer: customer, merchant: merchant, items: items)
+
+    items.map(&:name).each do |name|
+      assert_includes(invoice.items.map(&:name), name, "Missing #{name}")
+    end
+
+      #   expect(invoice.merchant_id).to eq merchant.id
+      #   expect(invoice.customer.id).to eq customer.id
+      # end
+    end
+
+  def test_it_creates_a_transaction
+    customer = @se.customer_repository.find_by_id(7)
+    merchant = @se.merchant_repository.find_by_id(22)
+    invoice = @se.invoice_repository.find_by_id(3)
+        
+    prior_transaction_count = invoice.transactions.count
+    invoice.charge(credit_card_number: '1111222233334444',  credit_card_expiration_date: "10/14", result: "success")
+    invoice = @se.invoice_repository.find_by_id(invoice.id)
+
+    assert_equal invoice.transactions.count, prior_transaction_count.next
+  end
+
 end

@@ -47,11 +47,11 @@ class Invoice
   end
 
   def add_items(items)
-    repository.add_item(items, self.id)
+    repository.add_items(items, self)
   end
 
   def charge(args)
-    repository(args, self)
+    repository.charge(args, self)
   end
 
   # def paid_invoice_items

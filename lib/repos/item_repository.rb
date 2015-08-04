@@ -24,13 +24,6 @@ class ItemRepository
     Item.new(record)
   end
 
-  def create(args)
-    # invoice_repository.create(customer: customer, merchant: merchant
-      #status: "shipped",
-    #                      items: [item1, item2, item3])
-
-  end
-
   def populate_items(loaded_csvs)
     items = {}
     loaded_csvs.each do |item|
@@ -44,7 +37,6 @@ class ItemRepository
   end
 
   def paid_invoice_items(for_object)
-    # @paid_invoice_items ||= begin
       match = for_object.id
       key = for_object.class.to_s.downcase + "_id"
       args = {}
@@ -52,11 +44,7 @@ class ItemRepository
       args[:use] = __callee__
       args[:repo] = :invoice_item_repository
       engine.get(args).select{|ii| ii.send(key.to_sym) == match}
-    # end
   end
-
-  # def paid_invoice_items
-  # end
 
   def most_revenue(x)
     all.max_by(x) {|item| item.revenue}
