@@ -6,7 +6,8 @@ class Transaction
   attr_accessor :invoice_id,
                 :credit_card_number,
                 :credit_card_expiration_date,
-                :result, :created_at, :updated_at
+                :result, :created_at, :updated_at,
+                :cached_invoice
   attr_reader :id, :repository
 
   def initialize(record)
@@ -21,7 +22,7 @@ class Transaction
   end
 
   def invoice
-    repository.get(__callee__, invoice_id, :id).reduce
+    cached_invoice ||= repository.get(__callee__, invoice_id, :id).reduce
   end
 
   def successful?

@@ -7,7 +7,7 @@ require_relative '../modules/table_like'
 class ItemRepository
   include TableLike
 
-  attr_accessor :records
+  attr_accessor :records, :cached_paid_invoice_items
   attr_reader :engine
 
   def initialize(args)
@@ -23,14 +23,17 @@ class ItemRepository
     Item.new(record)
   end
 
-  def paid_invoice_items(for_item)
-    match = for_item.id
-    key = for_item.class.to_s.downcase + "_id"
-    args = {}
-    
-    args[:repo] = :invoice_item_repository
-    args[:use] = :paid_invoice_items
-    engine.get(args).select{|ii| ii.send(key.to_sym) == match}
+  def paid_invoice_items(item)
+    cached_paid_invoice_items ||= begin
+      args = {
+        :repo => :invoice_item_repository,
+        :use => :paid_invoice_items
+      }
+      engine.get(args)
+    end
+    cached_paid_invoice_items.select do |ii|
+      ii.item_id == item.id
+    end
   end
 
   def paid_invoices(for_item)
