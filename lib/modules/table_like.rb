@@ -1,9 +1,7 @@
 require_relative 'find'
 require_relative 'find_by_x'
-# require_relative 'list'
 
 module TableLike
-  # include List
   include Find
   include FindByX
 
@@ -19,6 +17,10 @@ module TableLike
   def get(what, source_key_value, remote_key_name)
     foreign_repo = repo_map[what.to_sym]
     engine.send(foreign_repo).find_all_by(remote_key_name, source_key_value)
+  end
+
+  def foreign_key_for(repo, class_name)
+    engine.send(repo).holds_type.foreign_keys[class_name]
   end
 
   def repo_map
