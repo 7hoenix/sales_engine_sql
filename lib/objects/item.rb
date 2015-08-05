@@ -4,8 +4,10 @@ require 'date'
 class Item
   include RecordLike
 
-  attr_accessor :name, :description, :unit_price, :merchant_id, 
-    :created_at, :updated_at, :paid_invoices, :all_paid_invoices, :all_unpaid_invoices
+  attr_accessor :name, :description, :unit_price, :merchant_id,
+    :created_at, :updated_at, :cached_invoices, :cached_paid_invoices,
+    :cached_unpaid_invoices, :cached_invoice_items, :cached_merchant,
+    :cached_paid_invoice_items
   attr_reader :id, :repository
 
   def initialize(record)
@@ -20,19 +22,19 @@ class Item
   end
 
   def invoice_items
-    repository.get(:invoice_items, id, :item_id)
+    cached_invoice_items ||= repository.get(:invoice_items, id, :item_id)
   end
 
   def paid_invoice_items
-    @paid_invoice_items ||= repository.paid_invoice_items(self)
+    cached_paid_invoice_items ||= repository.paid_invoice_items(self)
   end
 
   def unpaid_invoices
-    invoices.reject(&:paid?)
+    cached_unpaid_invoices ||= invoices.reject(&:paid?)
   end
 
   def paid_invoices
-    @paid_invoices ||= repository.paid_invoices(self)
+    cached_paid_invoices ||= repository.paid_invoices(self)
   end
 
   def invoice_items_for(invoice_date)
@@ -46,11 +48,11 @@ class Item
   end
 
   def merchant
-    repository.get(__callee__, merchant_id, :id).reduce
+    cached_merchant ||= repository.get(:merchant, merchant_id, :id).reduce
   end
 
   def invoices
-    invoice_items.map{|ii| ii.invoice}
+    cached_invoices ||= invoice_items.map{|ii| ii.invoice}
   end
 
   def paid_invoices_for(date)

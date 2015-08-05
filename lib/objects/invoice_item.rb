@@ -3,9 +3,8 @@ require_relative '../modules/record_like.rb'
 class InvoiceItem
   include RecordLike
 
-  attr_accessor :item_id, :invoice_id,
-                :quantity , :unit_price,
-                :created_at, :updated_at
+  attr_accessor :item_id, :invoice_id, :quantity , :unit_price, :created_at,
+    :updated_at, :cached_invoice, :cached_item, :cached_price
   attr_reader :id, :repository
 
   def initialize(record)
@@ -20,15 +19,15 @@ class InvoiceItem
   end
 
   def invoice
-    @invoice ||= repository.get(:invoice, invoice_id, :id).reduce
+    cached_invoice ||= repository.get(:invoice, invoice_id, :id).reduce
   end
 
   def item
-    @item ||= repository.get(:item, item_id, :id).reduce
+    cached_item ||= repository.get(:item, item_id, :id).reduce
   end
 
   def total_price
-    @total_price ||= quantity * unit_price
+    cached_price ||= quantity * unit_price
   end
 
 end
