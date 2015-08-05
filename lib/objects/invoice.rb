@@ -3,7 +3,9 @@ require_relative '../modules/record_like.rb'
 class Invoice
   include RecordLike
 
-  attr_accessor :customer_id, :merchant_id, :status , :created_at, :updated_at
+  attr_accessor :customer_id, :merchant_id, :status , :created_at,
+    :updated_at, :cached_transactions, :cached_invoice_items, :cached_items,
+    :cached_customer, :cached_merchant
   attr_reader :id, :repository
 
   def initialize(record)
@@ -17,23 +19,25 @@ class Invoice
   end
 
   def transactions
-    repository.get(:transactions, id, :invoice_id)
+    cached_transactions ||= repository.get(:transactions, id, :invoice_id)
   end
 
   def invoice_items
-    repository.get(:invoice_items, id, :invoice_id)
+    cached_invoice_items ||= repository.get(:invoice_items, id, :invoice_id)
   end
 
   def items
-    invoice_items.map{|ii| repository.get(:items, ii.item_id, :id)}.flatten
+    cached_items ||= invoice_items.map do |ii|
+      repository.get(:items, ii.item_id, :id)
+    end.flatten
   end
 
   def customer
-    repository.get(:customer, customer_id, :id).reduce
+    cached_customer ||= repository.get(:customer, customer_id, :id).reduce
   end
 
   def merchant
-    repository.get(:merchant, merchant_id, :id).reduce
+    cached_merchant ||= repository.get(:merchant, merchant_id, :id).reduce
   end
 
   def paid?
