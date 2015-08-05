@@ -6,7 +6,7 @@ require_relative '../modules/table_like.rb'
 class CustomerRepository
   include TableLike
 
-  attr_accessor :records
+  attr_accessor :records, :all_invoices
   attr_reader :engine
 
   def initialize(args)
@@ -20,5 +20,14 @@ class CustomerRepository
 
   def create_record(record)
     Customer.new(record)
+  end
+
+  def invoices(customer)
+    @all_invoices ||= begin
+      args = {:repo => :invoice_repository,
+              :use => :all}
+      engine.get(args)
+    end
+    all_invoices.select {|invoice| invoice.customer_id == customer.id}
   end
 end
