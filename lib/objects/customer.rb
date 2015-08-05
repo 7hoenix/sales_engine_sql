@@ -16,7 +16,7 @@ class Customer
   end
 
   def invoices
-    repository.get(__callee__, self.id, :customer_id)
+    repository.get(:invoices, self.id, :customer_id)
   end
 
   def paid_invoices

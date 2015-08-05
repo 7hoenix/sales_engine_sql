@@ -1,5 +1,3 @@
-gem 'pry'
-
 module FindByX
   def find_by_id(match)
     find_by(column_name(__callee__), match)
