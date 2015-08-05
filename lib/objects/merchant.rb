@@ -4,7 +4,8 @@ require_relative '../modules/record_like'
 class Merchant
   include RecordLike
 
-  attr_accessor :name, :created_at , :updated_at
+  attr_accessor :name, :created_at , :updated_at, :cached_items, :cached_invoices,
+    :cached_paid_invoices, :cached_unpaid_invoices
   attr_reader :id, :repository
 
   def initialize(record)
@@ -16,11 +17,11 @@ class Merchant
   end
 
   def items
-    repository.get(:items, id, :merchant_id)
+    cached_items ||= repository.get(:items, id, :merchant_id)
   end
 
   def invoices
-    repository.get(:invoices, id, :merchant_id)
+    cached_invoices ||= repository.get(:invoices, id, :merchant_id)
   end
 
   def invoices_for(date)
@@ -34,11 +35,11 @@ class Merchant
   end
 
   def paid_invoices
-    repository.paid_invoices(self)
+    cached_paid_invoices ||= repository.paid_invoices(self)
   end
 
   def unpaid_invoices
-    repository.unpaid_invoices(self)
+    cached_unpaid_invoices ||= repository.unpaid_invoices(self)
   end
 
   def paid_invoices_for(date)
