@@ -5,7 +5,7 @@ class Item
   include RecordLike
 
   attr_accessor :name, :description, :unit_price, :merchant_id, 
-    :created_at, :updated_at, :paid_invoices
+    :created_at, :updated_at, :paid_invoices, :all_paid_invoices, :all_unpaid_invoices
   attr_reader :id, :repository
 
   def initialize(record)

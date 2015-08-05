@@ -24,17 +24,10 @@ class SalesEngine
     @transaction_repository = TransactionRepository.new(:path => path, :engine => self)
   end
 
-    # engine.get(__callee__, :invoice_items_repository, with_value, with_foreign)
   def get(args)
-    # puts args.inspect
-    repo = args.delete(:repo)
-    use = args.delete(:use)
-    if args.keys.include?(:x)
-      x = args.delete(:x) 
-      self.send(repo).send(use, x)
-    else
-      self.send(repo).send(use)
-    end
+    repo = args[:repo]
+    use = args[:use]
+    self.send(repo).send(use)
   end
 
   def most_items(x)
@@ -50,8 +43,7 @@ class SalesEngine
   end
 
   def inspect
-    #define this
-    "#{self.class}"
+    "#{self.class} was initialized with '#{path}'. Good show."
   end
 
 end
