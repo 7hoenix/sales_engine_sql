@@ -21,4 +21,12 @@ module Find
       array << record
     end
   end
+
+  def all
+    objects(records)
+  end
+  
+  def random
+    records.values.sample
+  end
 end

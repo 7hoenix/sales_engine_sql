@@ -1,9 +1,9 @@
 require_relative 'find'
 require_relative 'find_by_x'
-require_relative 'list'
+# require_relative 'list'
 
 module TableLike
-  include List
+  # include List
   include Find
   include FindByX
 

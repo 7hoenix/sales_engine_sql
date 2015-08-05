@@ -4,13 +4,8 @@ require 'date'
 class Item
   include RecordLike
 
-  attr_accessor :name,
-                :description,
-                :unit_price,
-                :merchant_id,
-                :created_at,
-                :updated_at,
-                :paid_invoices
+  attr_accessor :name, :description, :unit_price, :merchant_id, 
+    :created_at, :updated_at, :paid_invoices
   attr_reader :id, :repository
 
   def initialize(record)
