@@ -20,7 +20,7 @@ class Merchant
   end
 
   def invoices
-    repository.get(__callee__, id, :merchant_id)
+    repository.get(:invoices, id, :merchant_id)
   end
 
   def invoices_for(date)
@@ -38,9 +38,9 @@ class Merchant
     repository.paid_invoices(self)
   end
 
+  #clean
   def unpaid_invoices
     repository.unpaid_invoices(self)
-    # invoices.reject(&:paid?)
   end
 
   #clean
@@ -68,6 +68,7 @@ class Merchant
     invoice_items(paid_invoices_for(date))
   end
 
+  #clean
   def revenue(date = "all")
     paid_invoices_for(date).reduce(0) do |acc, invoice|
       acc + invoice.total_billed

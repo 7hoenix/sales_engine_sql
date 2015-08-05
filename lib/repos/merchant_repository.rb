@@ -26,15 +26,14 @@ class MerchantRepository
   end
 
   def most_items(x)
-    args = {
-      :use => :most_items,
-      :repo => :item_repository,
-      :x => x
-    }
-    engine.get(args).map do |item|
-      self.find_by_id(item.merchant_id)
+    items ||= engine.item_repository.all
+    grouped ||= items.group_by {|item| item.merchant_id}
+    ranked = grouped.max_by(x) do |merchant, items|
+      items.reduce(0) do |acc, item|
+        acc + item.quantity_sold
+      end
     end
-    # all.max_by(x) {|merchant| merchant.items.length}
+    ranked.flat_map{|x| self.find_by_id(x.first) }
   end
 
   def revenue(date)

@@ -37,6 +37,10 @@ class SalesEngine
     end
   end
 
+  def most_items(x)
+    self.item_repository.most_items(x)
+  end
+
   def charge(args, invoice)
     self.transaction_repository.charge(args, invoice)
   end
@@ -47,7 +51,7 @@ class SalesEngine
 
   def inspect
     #define this
-    "#{Class}"
+    "#{self.class}"
   end
 
 end
