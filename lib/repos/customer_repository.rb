@@ -34,15 +34,12 @@ class CustomerRepository
     end 
   end
 
-  # def most_items_for(customer)
-  #   items ||= engine(:repo => :item_repository, :use => :all}
-  #   grouped ||= items.group_by {|item| item.merchant_id}
-  #   ranked = grouped.max_by(x) do |merchant, items|
-  #     items.reduce(0) do |acc, item|
-  #       acc + item.quantity_sold
-  #     end
-  #   end
-  #   ranked.flat_map{|x| self.find_by_id(x.first) }
-  # end
+  def most_items
+    records.max_by{|customer| customer.paid_item_quantity}
+  end
+
+  def most_revenue
+    records.max_by{|customer| customer.revenue}
+  end
 
 end

@@ -32,6 +32,14 @@ class Customer
     end.flatten
   end
 
+  def paid_item_quantity
+    paid_invoice_items.reduce(0){|acc, ii| acc + ii.quantity}
+  end
+
+  def revenue
+    paid_invoice_items.reduce(0){|acc, ii| acc + ii.total_price}
+  end
+
   def transactions
     cached_transactions ||= invoices.map {|invoice| invoice.transactions}.flatten
   end

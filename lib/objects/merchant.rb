@@ -72,6 +72,10 @@ class Merchant
     end
   end
 
+  # def revenue(dates)
+    
+  # end
+
   def favorite_customer
     customers = paid_invoices.group_by{|invoice| invoice.customer}
     customers.max_by do |id, invoices|

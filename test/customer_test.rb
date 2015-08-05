@@ -109,4 +109,20 @@ class CustomerTest < Minitest::Test
     assert_equal 37, iis.length
     assert_includes(iis, search)
   end
+
+  def test_it_knows_how_many_items_it_has_paid_for
+    cust = @se.customer_repository.find_by_id(1)
+    qty = cust.paid_item_quantity
+
+    assert_equal 186, qty
+  end
+
+  def test_it_knows_how_much_revenue_it_has_generated
+    cust = @se.customer_repository.find_by_id(1)
+
+    expected = BigDecimal.new("9072270") / 100
+    actual = cust.revenue
+
+    assert_equal expected, actual
+  end
 end
