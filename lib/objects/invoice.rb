@@ -17,23 +17,23 @@ class Invoice
   end
 
   def transactions
-    repository.get(__callee__, id, :invoice_id)
+    repository.get(:transactions, id, :invoice_id)
   end
 
   def invoice_items
-    repository.get(__callee__, id, :invoice_id)
+    repository.get(:invoice_items, id, :invoice_id)
   end
 
   def items
-    invoice_items.map{|ii| repository.get(__callee__, ii.item_id, :id)}.flatten
+    invoice_items.map{|ii| repository.get(:items, ii.item_id, :id)}.flatten
   end
 
   def customer
-    repository.get(__callee__, customer_id, :id).reduce
+    repository.get(:customer, customer_id, :id).reduce
   end
 
   def merchant
-    repository.get(__callee__, merchant_id, :id).reduce
+    repository.get(:merchant, merchant_id, :id).reduce
   end
 
   def paid?
@@ -53,8 +53,4 @@ class Invoice
   def charge(args)
     repository.charge(args, self)
   end
-
-  # def paid_invoice_items
-  #   invoice_items.keep {|ii| repository.find_by_id(ii.invoice_id).paid?}
-  # end
 end

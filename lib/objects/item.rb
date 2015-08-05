@@ -20,7 +20,7 @@ class Item
   end
 
   def invoice_items
-    repository.get(__callee__, id, :item_id)
+    repository.get(:invoice_items, id, :item_id)
   end
 
   def paid_invoice_items

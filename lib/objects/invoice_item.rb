@@ -20,11 +20,11 @@ class InvoiceItem
   end
 
   def invoice
-    @invoice ||= repository.get(__callee__, invoice_id, :id).reduce
+    @invoice ||= repository.get(:invoice, invoice_id, :id).reduce
   end
 
   def item
-    @item ||= repository.get(__callee__, item_id, :id).reduce
+    @item ||= repository.get(:item, item_id, :id).reduce
   end
 
   def total_price
