@@ -3,7 +3,8 @@ require_relative '../modules/record_like.rb'
 class Customer
   include RecordLike
 
-  attr_accessor :first_name, :last_name, :created_at, :updated_at
+  attr_accessor :first_name, :last_name, :created_at, :updated_at,
+    :cached_invoices, :cached_paid_invoices, :cached_transactions
   attr_reader :id, :repository
 
   def initialize(record)
@@ -16,15 +17,15 @@ class Customer
   end
 
   def invoices
-    repository.get(:invoices, self.id, :customer_id)
+    cached_invoices ||= repository.invoices(self)
   end
 
   def paid_invoices
-    invoices.select{|invoice| invoice.paid?}
+    cached_paid_invoices ||= invoices.select{|invoice| invoice.paid?}
   end
 
   def transactions
-    invoices.map {|invoice| invoice.transactions}.flatten
+    cached_transactions ||= invoices.map {|invoice| invoice.transactions}.flatten
   end
 
   def merchants_from_paid_invoices
