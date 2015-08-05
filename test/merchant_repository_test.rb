@@ -57,7 +57,7 @@ class MerchantRepositoryTest < Minitest::Test
     actual = @se.merchant_repository.most_items(1)
 
     # assert_equal 1, actual.length, "Supposed to find only one"
-    assert_equal expected, actual[0]
+    assert_equal expected, actual
   end
 
   def test_it_knows_top_five_merchants_for_items

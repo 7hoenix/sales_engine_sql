@@ -3,7 +3,7 @@ require_relative '../modules/record_like.rb'
 class Customer
   include RecordLike
 
-  attr_accessor :first_name, :last_name, :created_at, :updated_at, :invoices
+  attr_accessor :first_name, :last_name, :created_at, :updated_at
   attr_reader :id, :repository
 
   def initialize(record)
@@ -16,8 +16,7 @@ class Customer
   end
 
   def invoices
-    repository.invoices(self)
-    # repository.get(__callee__, self.id, :customer_id)
+    repository.get(__callee__, self.id, :customer_id)
   end
 
   def paid_invoices
