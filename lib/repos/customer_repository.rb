@@ -33,4 +33,16 @@ class CustomerRepository
       invoice.customer_id == customer.id
     end 
   end
+
+  # def most_items_for(customer)
+  #   items ||= engine(:repo => :item_repository, :use => :all}
+  #   grouped ||= items.group_by {|item| item.merchant_id}
+  #   ranked = grouped.max_by(x) do |merchant, items|
+  #     items.reduce(0) do |acc, item|
+  #       acc + item.quantity_sold
+  #     end
+  #   end
+  #   ranked.flat_map{|x| self.find_by_id(x.first) }
+  # end
+
 end

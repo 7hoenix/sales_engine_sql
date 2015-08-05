@@ -1,10 +1,12 @@
+require 'set'
 require_relative '../modules/record_like.rb'
 
 class Customer
   include RecordLike
 
   attr_accessor :first_name, :last_name, :created_at, :updated_at,
-    :cached_invoices, :cached_paid_invoices, :cached_transactions
+    :cached_invoices, :cached_paid_invoices, :cached_transactions,
+    :cached_paid_invoice_items
   attr_reader :id, :repository
 
   def initialize(record)
@@ -24,6 +26,12 @@ class Customer
     cached_paid_invoices ||= invoices.select{|invoice| invoice.paid?}
   end
 
+  def paid_invoice_items
+    cached_paid_invoice_items ||= paid_invoices.map do |invoice|
+      invoice.invoice_items
+    end.flatten
+  end
+
   def transactions
     cached_transactions ||= invoices.map {|invoice| invoice.transactions}.flatten
   end
@@ -38,4 +46,14 @@ class Customer
       invoices.length
     end.first
   end
+
+  def days_since_activity
+    latest = transactions.max {|trans| trans.updated_at}
+    days_since = (DateTime.now - latest.updated_at).to_i
+  end
+
+  def pending_invoices
+    (Set.new(invoices) - Set.new(paid_invoices)).to_a
+  end
+
 end

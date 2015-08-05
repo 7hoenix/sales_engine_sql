@@ -67,11 +67,7 @@ class InvoiceRepositoryTest < Minitest::Test
     items.map(&:name).each do |name|
       assert_includes(invoice.items.map(&:name), name, "Missing #{name}")
     end
-
-      #   expect(invoice.merchant_id).to eq merchant.id
-      #   expect(invoice.customer.id).to eq customer.id
-      # end
-    end
+  end
 
   def test_it_creates_a_transaction
     customer = @se.customer_repository.find_by_id(7)
