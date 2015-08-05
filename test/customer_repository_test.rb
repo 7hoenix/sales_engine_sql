@@ -28,7 +28,7 @@ class CustomerRepositoryTest < Minitest::Test
   def test_we_can_access_a_customer_info_from_the_customer_repo_class
     
     expected = "Reynolds"
-    result = @customer_repository.records[10].last_name
+    result = @customer_repository.find_by_id(10).last_name
     
     assert_equal expected, result
   end

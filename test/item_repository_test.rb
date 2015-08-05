@@ -35,7 +35,7 @@ class ItemRepositoryTest < Minitest::Test
 
   def test_we_can_access_a_item_info_from_the_item_repo_class
     expected = BigDecimal.new("340.18")
-    result = @item_repository.records[10].unit_price
+    result = @item_repository.find_by_id(10).unit_price
     assert_equal expected, result
   end
 

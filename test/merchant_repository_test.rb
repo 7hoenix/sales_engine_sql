@@ -21,7 +21,7 @@ class MerchantRepositoryTest < Minitest::Test
     expected = "Willms and Sons"
     result = merchant.name
 
-    assert_equal expected,  result
+    assert_equal expected, result
   end
 
   def test_we_can_populate_merchants
@@ -30,17 +30,9 @@ class MerchantRepositoryTest < Minitest::Test
 
   def test_we_can_access_a_merchants_info_from_the_merchant_repo_class
     expected = "Bechtelar, Jones and Stokes"
-    result = @merchant_repository.records[10].name
+    actual = @merchant_repository.find_by_name("Bechtelar, Jones and Stokes")
 
-    assert_equal expected, result
-  end
-
-  def test_it_knows_merchant_with_most_revenue
-    expected = @se.merchant_repository.find_by_id(84)
-    actual = @se.merchant_repository.most_revenue(1)
-
-    assert_equal 1, actual.length, "Supposed to find only one"
-    assert_equal expected, actual.first
+    assert_equal expected, actual.name
   end
 
   def test_it_knows_top_3_merchants_for_revenue
@@ -49,14 +41,6 @@ class MerchantRepositoryTest < Minitest::Test
     expected = [84, 79, 86]
     actual = top_3.map {|x| x.id}
 
-    assert_equal expected, actual
-  end
-
-  def test_it_knows_merchant_with_most_items
-    expected = @se.merchant_repository.find_by_id(83)
-    actual = @se.merchant_repository.most_items(1)
-
-    # assert_equal 1, actual.length, "Supposed to find only one"
     assert_equal expected, actual
   end
 

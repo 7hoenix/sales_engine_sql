@@ -6,7 +6,7 @@ require_relative '../modules/table_like'
 class InvoiceRepository
   include TableLike
 
-  attr_accessor :records, :paid_invoices, :unpaid_invoices
+  attr_accessor :records, :all_paid_invoices, :all_unpaid_invoices
   attr_reader :engine
 
   def initialize(args)
@@ -27,11 +27,11 @@ class InvoiceRepository
   end
 
   def paid_invoices
-    @paid_invoices ||= all.select(&:paid?)
+    all_paid_invoices ||= all.select(&:paid?)
   end
 
   def unpaid_invoices
-    @unpaid_invoices ||= all.select{|i| !(i.paid?)}
+    all_unpaid_invoices ||= all.select{|i| !(i.paid?)}
   end
 
   def create(args)
@@ -46,7 +46,6 @@ class InvoiceRepository
     }
     items = args[:items]
     records << create_record(record)
-    # records[record[:id]] = create_record(record)
     invoice = find_by_id(record[:id])
     invoice.add_items(items)
     invoice

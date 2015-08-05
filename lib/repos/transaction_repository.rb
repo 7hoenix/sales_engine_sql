@@ -34,6 +34,5 @@ class TransactionRepository
     record[:created_at] = timestamp
     record[:updated_at] = timestamp
     records << create_record(record)
-    # records[record[:id]] = create_record(record)
   end
 end

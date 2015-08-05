@@ -32,7 +32,7 @@ class TransactionRepositoryTest < Minitest::Test
   end
 
   def test_it_knows_the_number_of_successful_transactions
-    expected = 29
+    expected = 32
     actual = @se.transaction_repository.count
 
     assert_equal expected, actual
