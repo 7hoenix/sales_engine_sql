@@ -30,12 +30,6 @@ class TransactionRepositoryTest < Minitest::Test
   def test_we_can_populate_transactions
     assert @transaction_repository.records.length > 20
   end
-  def test_we_can_access_a_invoices_info_from_the_invoice_repo_class
-    
-    expected = 4923661117104166
-    result = @transaction_repository.records[10].credit_card_number     
-    assert_equal expected, result
-  end
 
   def test_it_knows_the_number_of_successful_transactions
     expected = 29

@@ -14,10 +14,9 @@ class FindTest < Minitest::Test
     assert_equal "Sawayn", result.last_name
   end
   def test_we_can_determine_if_a_record_is_on_the_list_find_by
-    expected = @cust_repo.records[26].last_name
-    result = @cust_repo.find_by_last_name("Sawayn")
+    cust = @cust_repo.find_by_last_name("Sawayn")
 
-    assert_equal(expected, result.last_name)
+    assert_equal(cust.last_name, "Sawayn")
 
   end
   def test_we_get_back_false_if_record_doesnt_exist_find_by

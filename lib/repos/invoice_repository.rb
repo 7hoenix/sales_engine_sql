@@ -45,7 +45,8 @@ class InvoiceRepository
       :repository => self
     }
     items = args[:items]
-    records[record[:id]] = create_record(record)
+    records << create_record(record)
+    # records[record[:id]] = create_record(record)
     invoice = find_by_id(record[:id])
     invoice.add_items(items)
     invoice

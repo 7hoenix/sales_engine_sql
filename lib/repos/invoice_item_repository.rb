@@ -42,7 +42,8 @@ class InvoiceItemRepository
         :created_at => timestamp,
         :updated_at => timestamp
       }
-      records[record[:id]] = create_record(record)
+      records << create_record(record)
+      # records[record[:id]] = create_record(record)
       end
   end
 

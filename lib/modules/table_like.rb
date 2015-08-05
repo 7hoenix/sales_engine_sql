@@ -8,12 +8,13 @@ module TableLike
   include FindByX
 
   def build_from(loaded_csvs)
-    self.records = {}
+    records = []
     loaded_csvs.each do |row|
-      id = row.first
-      record = row.last
-      record[:repository] = self
-      self.records[id] = create_record(record)
+    #   id = row.first
+    #   record = row.last
+      row[:repository] = self
+    #   self.records[id] = create_record(record)
+      records << create_record(row)
     end
     records
   end
