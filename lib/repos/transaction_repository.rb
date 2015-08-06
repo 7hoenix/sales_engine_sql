@@ -6,7 +6,7 @@ require_relative '../modules/table_like'
 class TransactionRepository
   include TableLike
 
-  attr_accessor :records
+  attr_accessor :records, :cached_invoices
   attr_reader :engine
 
   def initialize(args)
@@ -19,6 +19,20 @@ class TransactionRepository
 
   def create_record(record)
     Transaction.new(record)
+  end
+
+  def get_invoice_for(transaction)
+    invoices.select do |invoice|
+      invoice.id == transaction.invoice_id
+    end.flatten
+  end
+
+  def invoices
+    cached_invoices ||= begin
+      args = {:repo => :invoice_repository,
+                :use => :all}
+      engine.get(args)
+    end
   end
 
   def count

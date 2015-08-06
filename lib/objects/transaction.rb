@@ -22,7 +22,7 @@ class Transaction
   end
 
   def invoice
-    cached_invoice ||= repository.get(__callee__, invoice_id, :id).reduce
+    cached_invoice ||= repository.get_invoice_for(self).reduce
   end
 
   def successful?
