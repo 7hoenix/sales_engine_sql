@@ -5,7 +5,8 @@ require_relative '../modules/table_like'
 class MerchantRepository
   include TableLike
 
-  attr_accessor :records, :all_paid_invoices, :all_unpaid_invoices
+  attr_accessor :records, :all_paid_invoices, :all_unpaid_invoices,
+    :cached_dates_by_revenue
   attr_reader :engine
 
   def initialize(args)
@@ -40,6 +41,41 @@ class MerchantRepository
       acc + merchant.revenue(date)
     end
   end
+
+  # def revenue(dates)
+  #   dates = dates..dates if !(dates.is_a?(Range))
+  #   invoice_items_by_date.select do |date, iis|
+  #     dates.include?(date)
+  #   end.values.reduce(0){|acc, ii| acc + ii.total_price}
+  # end
+
+  def dates_by_revenue(x = "all")
+    if x == "all"
+      all_dates_ranked
+    else
+      all_dates_ranked.take(x)
+    end
+  end
+
+  # def all_dates_ranked
+  #   invoice_items_by_date.sort_by do |date, iis|
+  #     iis.reduce(0) {|acc, ii| acc + ii.total_price}
+  #   end.map{|date, iis| date}
+  # end
+
+  # def invoice_items_by_date
+  #   paid_invoice_items.group_by do |ii| 
+  #       ii.invoice.created_at
+  #   end
+  # end
+
+  # def paid_invoice_items
+  #   cached_invoice_items ||= begin
+  #     args = { :repo => :invoice_item_repository,
+  #              :use => :paid_invoice_items }
+  #     engine.get(args)
+  #   end
+  # end
 
   def paid_invoices(for_merchant)
     args = {

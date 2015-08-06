@@ -6,7 +6,7 @@ require_relative '../modules/table_like'
 class InvoiceRepository
   include TableLike
 
-  attr_accessor :records, :all_paid_invoices, :all_unpaid_invoices
+  attr_accessor :records, :cached_paid_invoices, :cached_unpaid_invoices
   attr_reader :engine
 
   def initialize(args)
@@ -26,11 +26,77 @@ class InvoiceRepository
   end
 
   def paid_invoices
-    all_paid_invoices ||= all.select(&:paid?)
+    cached_paid_invoices ||= all.select(&:paid?)
   end
 
   def unpaid_invoices
-    all_unpaid_invoices ||= all.select{|i| !(i.paid?)}
+    cached_unpaid_invoices ||= all.reject(&:paid?)
+  end
+
+  def pending
+    unpaid_invoices
+  end
+
+  def average_revenue_all_dates
+    sum = BigDecimal.new(invoices_revenue.reduce(:+))
+    average = (sum / invoices_revenue.length).round(2)
+  end
+
+  def average_revenue(date = "all")
+    if date == "all"
+      average_revenue_all_dates
+    else
+      (revenue(date) / invoices_for(date).length).round(2)
+    end
+  end
+
+  def revenue(date)
+    invoices_for(date).reduce(0) do |acc, invoice|
+      acc + invoice.total_billed
+    end
+  end
+
+  def invoices_for(date)
+    paid_invoices.select do |invoice|
+      invoice.created_at.to_date == date.to_date
+    end
+  end
+
+  def invoices_revenue
+    paid_invoices.map{|invoice| invoice.total_billed}
+  end
+
+  def average_items
+    sum = BigDecimal.new(invoices_items_quantity.reduce(:+))
+    average = (sum / invoices_items_quantity.length).round(2)
+  end
+
+  def invoices_items_quantity
+    invoice_items_for_invoices.map do |iis|
+      iis.reduce(0){|acc, iis| acc + iis.quantity}
+    end.flatten
+  end
+
+  def invoice_items_for_invoices
+    paid_invoices.map{|invoice| invoice.invoice_items}
+  end
+
+  def paid_invoice_dates
+    paid_invoices.map do |invoice|
+      invoice.created_at.to_date
+    end.uniq
+  end
+
+  def items
+    args = {:repo => :item_repository,
+            :use => :all}
+    engine.get(args)
+  end
+
+  def quantity_sold(date = "all")
+    paid_invoice_items_for(date).reduce(0) do |acc, ii|
+      acc + ii.quantity
+    end
   end
 
   def create(args)

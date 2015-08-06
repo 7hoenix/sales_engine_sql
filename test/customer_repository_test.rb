@@ -52,11 +52,11 @@ class CustomerRepositoryTest < Minitest::Test
   end
 
   def test_it_knows_the_customer_who_has_paid_for_most_items
-    assert_equal 1, @se.customer_repository.most_items
+    assert_equal 1, @se.customer_repository.most_items.id
   end
 
   def test_it_knows_the_customer_who_has_generated_the_most_revenue
-    
+    assert_equal 4, @se.customer_repository.most_revenue.id
   end
   
 end
