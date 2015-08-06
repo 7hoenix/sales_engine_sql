@@ -66,19 +66,29 @@ class InvoiceRepository
     paid_invoices.map{|invoice| invoice.total_billed}
   end
 
-  def average_items
+  def average_items_all_dates
     sum = BigDecimal.new(invoices_items_quantity.reduce(:+))
     average = (sum / invoices_items_quantity.length).round(2)
   end
 
-  def invoices_items_quantity
-    invoice_items_for_invoices.map do |iis|
+  def average_items(date = "all")
+    if date == "all"
+      average_items_all_dates
+    else
+      iis = invoice_items_for_invoices(invoices_for(date))
+      sum = BigDecimal.new(invoices_items_quantity(iis).reduce(:+))
+      average = (sum / invoices_items_quantity(iis).length).round(2)
+    end
+  end
+
+  def invoices_items_quantity(iis = invoice_items_for_invoices)
+    iis.map do |iis|
       iis.reduce(0){|acc, iis| acc + iis.quantity}
     end.flatten
   end
 
-  def invoice_items_for_invoices
-    paid_invoices.map{|invoice| invoice.invoice_items}
+  def invoice_items_for_invoices(invoices = paid_invoices)
+    invoices.map{|invoice| invoice.invoice_items}
   end
 
   def paid_invoice_dates

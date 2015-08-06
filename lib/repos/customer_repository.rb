@@ -31,7 +31,7 @@ class CustomerRepository
     end
     cached_invoices.select do |invoice|
       invoice.customer_id == customer.id
-    end 
+    end
   end
 
   def most_items

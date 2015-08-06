@@ -64,7 +64,7 @@ class MerchantRepository
   # end
 
   # def invoice_items_by_date
-  #   paid_invoice_items.group_by do |ii| 
+  #   paid_invoice_items.group_by do |ii|
   #       ii.invoice.created_at
   #   end
   # end

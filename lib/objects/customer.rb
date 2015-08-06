@@ -41,7 +41,9 @@ class Customer
   end
 
   def transactions
-    cached_transactions ||= invoices.map {|invoice| invoice.transactions}.flatten
+    cached_transactions ||= invoices.map do |invoice|
+      invoice.transactions
+    end.flatten
   end
 
   def merchants_from_paid_invoices

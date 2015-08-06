@@ -29,7 +29,7 @@ module Find
   def all
     objects(records)
   end
-  
+
   def random
     records.sample
   end

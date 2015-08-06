@@ -4,8 +4,8 @@ require_relative '../modules/record_like'
 class Merchant
   include RecordLike
 
-  attr_accessor :name, :created_at , :updated_at, :cached_items, :cached_invoices,
-    :cached_paid_invoices, :cached_unpaid_invoices
+  attr_accessor :name, :created_at , :updated_at, :cached_items,
+  :cached_invoices, :cached_paid_invoices, :cached_unpaid_invoices
   attr_reader :id, :repository
 
   def initialize(record)
