@@ -6,7 +6,7 @@ class MerchantRepository
   include TableLike
 
   attr_accessor :records, :all_paid_invoices, :all_unpaid_invoices,
-    :cached_dates_by_revenue
+    :cached_dates_by_revenue, :cached_invoices, :cached_items
   attr_reader :engine
 
   def initialize(args)
@@ -96,6 +96,38 @@ class MerchantRepository
     @all_unpaid_invoices ||= engine.get(args)
     all_unpaid_invoices.select do |invoice|
       invoice.merchant_id == for_merchant.id
+    end
+  end
+
+  def invoices
+    cached_invoices ||= begin
+      args = {
+        :repo => :invoice_repository,
+        :use => :all
+      }
+      engine.get(args)
+    end
+  end
+
+  def items
+    cached_items ||= begin
+      args = {
+        :repo => :item_repository,
+        :use => :all
+      }
+      engine.get(args)
+    end
+  end
+
+  def items_for(merchant)
+    items.select do |item|
+      item.merchant_id == merchant.id
+    end
+  end
+
+  def invoices_for(merchant)
+    invoices.select do |invoice|
+      invoice.merchant_id == merchant.id
     end
   end
 end

@@ -17,11 +17,13 @@ class Merchant
   end
 
   def items
-    cached_items ||= repository.get(:items, id, :merchant_id)
+    # cached_items ||= repository.get(:items, id, :merchant_id)
+    cached_items ||= repository.items_for(self)
   end
 
   def invoices
-    cached_invoices ||= repository.get(:invoices, id, :merchant_id)
+    cached_invoices ||= repository.invoices_for(self)
+    # cached_invoices ||= repository.get(:invoices, id, :merchant_id)
   end
 
   def invoices_for(date)
@@ -66,8 +68,27 @@ class Merchant
     invoice_items(paid_invoices_for(date))
   end
 
-  def revenue(date = "all")
+  def revenue(dates = "all")
+    if dates == "all"
+      revenue_all
+    else
+      dates = dates..dates if !(dates.is_a?(Range))
+      revenue_range(dates)
+    end
+  end
+
+  def revenue_day(date)
     paid_invoices_for(date).reduce(0) do |acc, invoice|
+      acc + invoice.total_billed
+    end
+  end
+
+  def revenue_range(dates)
+    dates.map {|date| revenue_day(date)}.reduce(:+)
+  end
+
+  def revenue_all
+    paid_invoices_for("all").reduce(0) do |acc, invoice|
       acc + invoice.total_billed
     end
   end
