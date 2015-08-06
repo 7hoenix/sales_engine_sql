@@ -49,7 +49,7 @@ class MerchantRepository
   end
 
   def dates_by_revenue(x = "all")
-    if x = "all"
+    if x == "all"
       all_dates_ranked
     else
       all_dates_ranked.take(x)
@@ -59,7 +59,7 @@ class MerchantRepository
   def all_dates_ranked
     dates_with_sales.each_with_object({}) do |date, hash|
       hash[date] = revenue(date)
-    end.sort_by {|_, revenue| revenue}.reverse.keys
+    end.sort_by {|_, revenue| revenue}.to_h.keys.reverse
   end
 
   def dates_with_sales
