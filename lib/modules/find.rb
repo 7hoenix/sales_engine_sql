@@ -10,24 +10,13 @@ module Find
 
   def find_all_by(x, match)
     match = match.to_s.downcase
-    # found = @records.select do |id, record|
-    found = @records.select do |record|
+    records.select do |record|
       match == record.send(x).to_s.downcase
-      # match == record.send(x).to_s.downcase
     end
-    found
-    # objects(found.to_a)
-  end
-
-  def objects(data)
-    # hashed.each_with_object([]) do |(id, record), array|
-    #   array << record
-    # end
-    data
   end
 
   def all
-    objects(records)
+    records
   end
 
   def random
