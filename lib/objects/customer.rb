@@ -58,7 +58,7 @@ class Customer
   end
 
   def days_since_activity
-    latest = transactions.max {|trans| trans.updated_at}
+    latest = transactions.max_by {|trans| trans.updated_at}
     days_since = (DateTime.now - latest.updated_at).to_i
   end
 
