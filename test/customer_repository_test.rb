@@ -13,27 +13,8 @@ class CustomerRepositoryTest < Minitest::Test
     @db = customer_repository.database
   end
 
-  def test_we_can_create_a_new_customer_table_in_the_db
-    skip
-    db.execute( "CREATE TABLE customers(id INTEGER PRIMARY KEY AUTOINCREMENT,
-      first_name VARCHAR(31))" );
-    result = db.query( "SELECT * FROM customers" );
-    assert_equal [], result.to_a
-    result.close
-
-    db.execute( "INSERT INTO customers(first_name) VALUES ('Timothy')" );
-
-    result = db.query( "SELECT * FROM customers" );
-    assert_equal 'Timothy', result.to_a.first["first_name"]
-    db.execute( "DROP TABLE customers" );
-  end
-
   def test_it_can_work_with_actual_customer_data
     repo = @se.customer_repository
-    #db.execute( "CREATE TABLE customers(id INTEGER PRIMARY KEY AUTOINCREMENT,
-    #  first_name VARCHAR(31), last_name VARCHAR(31), created_at DATE, updated_at
-    #DATE)" );
-
     customer_record = {:first_name => 'george',
                         :last_name => 'timothy',
                         :created_at => Time.now.to_date,
@@ -47,16 +28,6 @@ class CustomerRepositoryTest < Minitest::Test
     results = repo.database.query( "SELECT * FROM customers" );
     assert_equal 7, results.to_a.size
     results.close
-
-    #db.execute( "INSERT INTO customers(first_name, last_name, created_at,
-    #  updated_at) VALUES ('#{customer_record[:first_name]}',
-    #  '#{customer_record[:last_name]}',
-    #  #{customer_record[:created_at]},
-    #  #{customer_record[:updated_at]});" )
-
-    #  result = db.query( "SELECT * FROM customers" );
-    #  assert_equal 1, result.to_a.size
-    #db.execute( "DROP TABLE customers" );
   end
 
   def test_make_sure_we_can_instantiate
