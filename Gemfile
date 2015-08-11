@@ -6,6 +6,6 @@ gem 'reek'
 gem 'rake'
 gem 'minitest'
 gem 'pry'
-
+gem 'sqlite3'
 
 

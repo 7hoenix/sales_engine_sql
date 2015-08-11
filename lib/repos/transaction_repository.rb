@@ -6,15 +6,36 @@ require_relative '../modules/table_like'
 class TransactionRepository
   include TableLike
 
-  attr_accessor :records, :cached_invoices
-  attr_reader :engine
+  attr_accessor :records, :cached_invoices, :database
+  attr_reader :engine, :table
 
   def initialize(args)
     filename = args.fetch(:filename, 'transactions.csv')
     path = args.fetch(:path, './data/fixtures/') + filename
     loaded_csvs = Loader.new.load_csv(path)
+    @database = args.fetch(:database, nil)
     @records = build_from(loaded_csvs)
+    create_transaction_table if database
+    @table = "transactions"
     @engine = args.fetch(:engine, nil)
+  end
+
+  def create_transaction_table
+    database.execute( "CREATE TABLE transactions(id INTEGER PRIMARY KEY
+                      AUTOINCREMENT, invoice_id INTEGER, credit_card_number
+                      INTEGER, credit_card_expiration_date DATE, result
+                      VARCHAR(31), created_at DATE, updated_at DATE)" );
+  end
+
+  def add_record_to_database(record)
+    database.execute( "INSERT INTO transactions(invoice_id, credit_card_number,
+                      credit_card_expiration_date, status, created_at,
+                      updated_at) VALUES ('#{record[:invoice_id]}',
+                      '#{record[:credit_card_number]}',
+                      '#{record[:credit_card_expiration_date]}',
+                      '#{record[:status]}',
+                      #{record[:created_at].to_date},
+                      #{record[:updated_at].to_date});" )
   end
 
   def create_record(record)

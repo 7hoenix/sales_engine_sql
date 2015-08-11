@@ -7,15 +7,31 @@ class MerchantRepository
 
   attr_accessor :records, :all_paid_invoices, :all_unpaid_invoices,
     :cached_dates_by_revenue, :cached_invoices, :cached_items,
-    :cached_dates_with_sales
-  attr_reader :engine
+    :cached_dates_with_sales, :database
+  attr_reader :engine, :table
 
   def initialize(args)
     filename = args.fetch(:filename, 'merchants.csv')
     path = args.fetch(:path, './data/fixtures/') + filename
     loaded_csvs = Loader.new.load_csv(path)
+    @database = args.fetch(:database, nil)
+    create_merchant_table if database
     @records = build_from(loaded_csvs)
+    @table = "merchants"
     @engine = args.fetch(:engine, nil)
+  end
+
+  def create_merchant_table
+    database.execute( "CREATE TABLE merchants(id INTEGER PRIMARY KEY
+                      AUTOINCREMENT, name VARCHAR(31), created_at DATE,
+                      updated_at DATE)" );
+  end
+
+  def add_record_to_database(record)
+    database.execute( "INSERT INTO merchants(name, created_at, updated_at)
+                      VALUES ('#{record[:name]}',
+                      #{record[:created_at].to_date},
+                      #{record[:updated_at].to_date});" )
   end
 
   def create_record(record)

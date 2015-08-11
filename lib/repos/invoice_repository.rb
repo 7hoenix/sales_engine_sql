@@ -6,15 +6,34 @@ require_relative '../modules/table_like'
 class InvoiceRepository
   include TableLike
 
-  attr_accessor :records, :cached_paid_invoices, :cached_unpaid_invoices
-  attr_reader :engine
+  attr_accessor :records, :cached_paid_invoices, :cached_unpaid_invoices,
+    :database
+  attr_reader :engine, :table
 
   def initialize(args)
     filename = args.fetch(:filename, 'invoices.csv')
     path = args.fetch(:path, './data/fixtures/') + filename
     loaded_csvs = Loader.new.load_csv(path)
+    @database = args.fetch(:database, nil)
+    create_invoice_table if database
     @records = build_from(loaded_csvs)
+    @table = "invoices"
     @engine = args.fetch(:engine, nil)
+  end
+
+  def create_invoice_table
+    database.execute( "CREATE TABLE invoices(id INTEGER PRIMARY KEY
+                      AUTOINCREMENT, customer_id INTEGER, merchant_id INTEGER,
+                      status VARCHAR(31), created_at DATE, updated_at DATE)" );
+  end
+
+  def add_record_to_database(record)
+    database.execute( "INSERT INTO invoices(customer_id, merchant_id, status, created_at,
+                      updated_at) VALUES ('#{record[:customer_id]}',
+                      '#{record[:merchant_id]}',
+                      '#{record[:status]}',
+                      #{record[:created_at].to_date},
+                      #{record[:updated_at].to_date});" )
   end
 
   def create_record(record)
