@@ -4,9 +4,14 @@ require_relative '../lib/sales_engine.rb'
 
 class CustomerRepositoryTest < Minitest::Test
   def setup
-    @customer_repository = CustomerRepository.new(:path => './fixtures/')
+    @customer_repository = CustomerRepository.new(:path => './fixtures/',
+      :db => "data/databases/customers.db")
     @se = SalesEngine.new
     @se.startup
+  end
+
+  def test_we_can_instantiate_a_new_db
+    assert_equal SQLite3::Database, @customer_repository.database.class
   end
 
   def test_make_sure_we_can_instantiate
@@ -14,16 +19,16 @@ class CustomerRepositoryTest < Minitest::Test
   end
 
   def test_we_can_make_instances_of_Customer
-    
+
     customer_record = {:first_name => 'george',
                         :last_name => 'timothy',
                         :created_at => "sometime",
                         :updated_at => "someothertime"}
     customer = @customer_repository.create_record(customer_record)
-    
+
     expected = "timothy"
     result = customer.last_name
-    
+
     assert_equal expected,  result
   end
 
@@ -34,7 +39,7 @@ class CustomerRepositoryTest < Minitest::Test
   def test_we_can_access_a_customer_info_from_the_customer_repo_class
     expected = "Reynolds"
     result = @customer_repository.find_by_id(10).last_name
-    
+
     assert_equal expected, result
   end
 
@@ -56,5 +61,5 @@ class CustomerRepositoryTest < Minitest::Test
   def test_it_knows_the_customer_who_has_generated_the_most_revenue
     assert_equal 4, @se.customer_repository.most_revenue.id
   end
-  
+
 end

@@ -2,18 +2,20 @@ require 'pry'
 require_relative '../loader.rb'
 require_relative '../objects/customer.rb'
 require_relative '../modules/table_like.rb'
+require_relative '../database_wrapper'
 
 class CustomerRepository
   include TableLike
 
   attr_accessor :records, :cached_invoices
-  attr_reader :engine
+  attr_reader :engine, :database
 
   def initialize(args)
     filename = args.fetch(:filename, 'customers.csv')
     path = args.fetch(:path, './data/fixtures/') + filename
     loaded_csvs = Loader.new.load_csv(path)
     @records = build_from(loaded_csvs)
+    @database = DatabaseWrapper.new(args.fetch(:db, './data/databases/customers.db')).database
     @engine = args.fetch(:engine, nil)
   end
 
