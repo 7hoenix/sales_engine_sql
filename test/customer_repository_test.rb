@@ -1,6 +1,7 @@
 require_relative 'test_helper.rb'
 require_relative '../lib/repos/customer_repository'
 require_relative '../lib/sales_engine.rb'
+require 'date'
 
 class CustomerRepositoryTest < Minitest::Test
   attr_reader :customer_repository, :db
@@ -27,6 +28,26 @@ class CustomerRepositoryTest < Minitest::Test
 
     result = db.query( "SELECT * FROM customers" );
     assert_equal 'Timothy', result.to_a.first["first_name"]
+    db.execute( "DROP TABLE customers" );
+  end
+
+  def test_it_can_work_with_actual_customer_data
+    db.execute( "CREATE TABLE customers(id INTEGER PRIMARY KEY AUTOINCREMENT,
+      first_name VARCHAR(31), last_name VARCHAR(31), created_at DATE, updated_at
+    DATE)" );
+
+    customer_record = {:first_name => 'george',
+                        :last_name => 'timothy',
+                        :created_at => Time.now.to_date,
+                        :updated_at => Time.now.to_date}
+    db.execute( "INSERT INTO customers(first_name, last_name, created_at,
+      updated_at) VALUES ('#{customer_record[:first_name]}',
+      '#{customer_record[:last_name]}',
+      #{customer_record[:created_at]},
+      #{customer_record[:updated_at]});" )
+
+      result = db.query( "SELECT * FROM customers" );
+      assert_equal 1, result.to_a.size
   end
 
   def test_make_sure_we_can_instantiate
