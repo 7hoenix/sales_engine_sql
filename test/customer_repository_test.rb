@@ -8,16 +8,13 @@ class CustomerRepositoryTest < Minitest::Test
 
   def setup
     @customer_repository = CustomerRepository.new(:path => './fixtures/')
-    @db = customer_repository.database
     @se = SalesEngine.new
     @se.startup
-  end
-
-  def test_we_can_instantiate_a_new_db
-    assert_equal SQLite3::Database, db.class
+    @db = customer_repository.database
   end
 
   def test_we_can_create_a_new_customer_table_in_the_db
+    skip
     db.execute( "CREATE TABLE customers(id INTEGER PRIMARY KEY AUTOINCREMENT,
       first_name VARCHAR(31))" );
     result = db.query( "SELECT * FROM customers" );
@@ -32,22 +29,34 @@ class CustomerRepositoryTest < Minitest::Test
   end
 
   def test_it_can_work_with_actual_customer_data
-    db.execute( "CREATE TABLE customers(id INTEGER PRIMARY KEY AUTOINCREMENT,
-      first_name VARCHAR(31), last_name VARCHAR(31), created_at DATE, updated_at
-    DATE)" );
+    repo = @se.customer_repository
+    #db.execute( "CREATE TABLE customers(id INTEGER PRIMARY KEY AUTOINCREMENT,
+    #  first_name VARCHAR(31), last_name VARCHAR(31), created_at DATE, updated_at
+    #DATE)" );
 
     customer_record = {:first_name => 'george',
                         :last_name => 'timothy',
                         :created_at => Time.now.to_date,
                         :updated_at => Time.now.to_date}
-    db.execute( "INSERT INTO customers(first_name, last_name, created_at,
-      updated_at) VALUES ('#{customer_record[:first_name]}',
-      '#{customer_record[:last_name]}',
-      #{customer_record[:created_at]},
-      #{customer_record[:updated_at]});" )
+    results = repo.database.query( "SELECT * FROM customers" );
+    assert_equal 6, results.to_a.size
+    results.close
 
-      result = db.query( "SELECT * FROM customers" );
-      assert_equal 1, result.to_a.size
+    repo.add_record_to_database(customer_record)
+
+    results = repo.database.query( "SELECT * FROM customers" );
+    assert_equal 7, results.to_a.size
+    results.close
+
+    #db.execute( "INSERT INTO customers(first_name, last_name, created_at,
+    #  updated_at) VALUES ('#{customer_record[:first_name]}',
+    #  '#{customer_record[:last_name]}',
+    #  #{customer_record[:created_at]},
+    #  #{customer_record[:updated_at]});" )
+
+    #  result = db.query( "SELECT * FROM customers" );
+    #  assert_equal 1, result.to_a.size
+    #db.execute( "DROP TABLE customers" );
   end
 
   def test_make_sure_we_can_instantiate

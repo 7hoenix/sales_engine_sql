@@ -3,6 +3,7 @@ require_relative '../loader.rb'
 require_relative '../objects/customer.rb'
 require_relative '../modules/table_like.rb'
 require_relative '../database_wrapper'
+require 'date'
 
 class CustomerRepository
   include TableLike
@@ -14,12 +15,28 @@ class CustomerRepository
     filename = args.fetch(:filename, 'customers.csv')
     path = args.fetch(:path, './data/fixtures/') + filename
     loaded_csvs = Loader.new.load_csv(path)
+    @database = args.fetch(:database, nil)
+    create_customer_table if database
     @records = build_from(loaded_csvs)
-    @database = DatabaseWrapper.new.database
     @engine = args.fetch(:engine, nil)
   end
 
+  def create_customer_table
+    database.execute( "CREATE TABLE customers(id INTEGER PRIMARY KEY AUTOINCREMENT,
+      first_name VARCHAR(31), last_name VARCHAR(31), created_at DATE, updated_at
+    DATE)" );
+  end
+
+  def add_record_to_database(record)
+    database.execute( "INSERT INTO customers(first_name, last_name, created_at,
+      updated_at) VALUES ('#{record[:first_name]}',
+      '#{record[:last_name]}',
+      #{record[:created_at].to_date},
+      #{record[:updated_at].to_date});" )
+  end
+
   def create_record(record)
+    add_record_to_database(record) if database
     Customer.new(record)
   end
 

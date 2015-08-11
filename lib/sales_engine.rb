@@ -4,6 +4,7 @@ require_relative './repos/item_repository'
 require_relative './repos/invoice_item_repository'
 require_relative './repos/customer_repository'
 require_relative './repos/transaction_repository'
+require_relative './database_wrapper'
 
 
 class SalesEngine
@@ -13,7 +14,8 @@ class SalesEngine
 
   def initialize(path = './data/fixtures/')
     @path = path
-    @args = {:path => path, :engine => self}
+    @database = DatabaseWrapper.new.database
+    @args = {:path => path, :engine => self, :database => @database}
   end
 
   def startup
