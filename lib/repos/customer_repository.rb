@@ -7,15 +7,15 @@ require_relative '../database_wrapper'
 class CustomerRepository
   include TableLike
 
-  attr_accessor :records, :cached_invoices
-  attr_reader :engine, :database
+  attr_accessor :records, :cached_invoices, :database
+  attr_reader :engine
 
   def initialize(args)
     filename = args.fetch(:filename, 'customers.csv')
     path = args.fetch(:path, './data/fixtures/') + filename
     loaded_csvs = Loader.new.load_csv(path)
     @records = build_from(loaded_csvs)
-    @database = DatabaseWrapper.new(args.fetch(:db, './data/databases/customers.db')).database
+    @database = DatabaseWrapper.new.database
     @engine = args.fetch(:engine, nil)
   end
 
