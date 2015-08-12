@@ -4,10 +4,10 @@ require_relative '../lib/sales_engine.rb'
 
 class MerchantRepositoryTest < Minitest::Test
   def setup
-    @merchant_repository = MerchantRepository.new(:path => './fixtures/')
     @se = SalesEngine.new
     @se.startup
-  end 
+    @merchant_repository = @se.merchant_repository
+  end
 
   def test_make_sure_we_can_instantiate
     assert @merchant_repository.class == MerchantRepository
@@ -17,7 +17,7 @@ class MerchantRepositoryTest < Minitest::Test
 
     hash = {:name=>"Willms and Sons", :created_at=>"2012-03-27 14:53:59 UTC", :updated_at=>"2012-03-27 14:53:59 UTC"}
     merchant = @merchant_repository.create_record(hash)
-    
+
     expected = "Willms and Sons"
     result = merchant.name
 
@@ -74,6 +74,6 @@ class MerchantRepositoryTest < Minitest::Test
   end
 
   def test_it_knows_the_customer_with_the_most_successful_transactions
-    
+
   end
 end

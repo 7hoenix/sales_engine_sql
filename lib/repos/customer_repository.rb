@@ -2,10 +2,12 @@ require 'pry'
 require_relative '../loader.rb'
 require_relative '../objects/customer.rb'
 require_relative '../modules/table_like.rb'
+require_relative '../modules/jit_object_builder'
 require 'date'
 
 class CustomerRepository
   include TableLike
+  include JITObjectBuilder
 
   attr_accessor :records, :cached_invoices, :database
   attr_reader :engine, :table
@@ -15,7 +17,11 @@ class CustomerRepository
     path = args.fetch(:path, './data/fixtures/') + filename
     loaded_csvs = Loader.new.load_csv(path)
     @database = args.fetch(:database, nil)
-    create_customer_table if database
+
+      create_customer_table
+      build_for_database(loaded_csvs)
+      @new_records ||= table_records
+
     @records = build_from(loaded_csvs)
     @table = "customers"
     @engine = args.fetch(:engine, nil)
@@ -27,7 +33,17 @@ class CustomerRepository
                       VARCHAR(31), created_at DATE, updated_at DATE)" );
   end
 
+  def sanitize_record(record)
+    if record[:first_name].include?("'")
+      record[:first_name].gsub!("'", "")
+    elsif record[:last_name].include?("'")
+      record[:last_name].gsub!("'", "")
+    end
+    record
+  end
+
   def add_record_to_database(record)
+    record = sanitize_record(record)
     database.execute( "INSERT INTO customers(first_name, last_name, created_at,
                       updated_at) VALUES ('#{record[:first_name]}',
                       '#{record[:last_name]}',
@@ -36,8 +52,14 @@ class CustomerRepository
   end
 
   def create_record(record)
-    add_record_to_database(record) if database
+    #add_record_to_database(record) if database
     Customer.new(record)
+  end
+
+  def table_records
+    database.execute( "SELECT * FROM customers" )
+      .map { |row|
+      Customer.new(row) }
   end
 
   def invoices(customer)
@@ -58,7 +80,9 @@ class CustomerRepository
   end
 
   def most_revenue
-    records.max_by{|customer| customer.revenue}
+    records.max_by do|customer|
+      customer.revenue
+    end
   end
 
 end

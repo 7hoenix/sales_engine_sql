@@ -14,8 +14,12 @@ class TransactionRepository
     path = args.fetch(:path, './data/fixtures/') + filename
     loaded_csvs = Loader.new.load_csv(path)
     @database = args.fetch(:database, nil)
+
+      create_transaction_table
+      build_for_database(loaded_csvs)
+      @new_records ||= table_records
+
     @records = build_from(loaded_csvs)
-    create_transaction_table if database
     @table = "transactions"
     @engine = args.fetch(:engine, nil)
   end
@@ -29,7 +33,7 @@ class TransactionRepository
 
   def add_record_to_database(record)
     database.execute( "INSERT INTO transactions(invoice_id, credit_card_number,
-                      credit_card_expiration_date, status, created_at,
+                      credit_card_expiration_date, result, created_at,
                       updated_at) VALUES ('#{record[:invoice_id]}',
                       '#{record[:credit_card_number]}',
                       '#{record[:credit_card_expiration_date]}',
@@ -40,6 +44,10 @@ class TransactionRepository
 
   def create_record(record)
     Transaction.new(record)
+  end
+
+  def table_records
+    database.execute( "SELECT * FROM transactions" ).map { |row| Transaction.new(row) }
   end
 
   def get_invoice_for(transaction)

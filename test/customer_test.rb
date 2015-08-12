@@ -4,7 +4,6 @@ require_relative '../lib/sales_engine.rb'
 
 class CustomerTest < Minitest::Test
 
-
   def setup
     @example_record1 =  {
       :first_name => 'george',
@@ -72,7 +71,7 @@ class CustomerTest < Minitest::Test
     assert_equal expected, actual
   end
 
-  def test_it_has_a_favorite_merchant 
+  def test_it_has_a_favorite_merchant
     #most number successful transactions for a merchant
     cust = @se.customer_repository.find_by_id(7777777)
 

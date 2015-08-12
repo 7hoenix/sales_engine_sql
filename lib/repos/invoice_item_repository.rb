@@ -14,7 +14,11 @@ class InvoiceItemRepository
     path = args.fetch(:path, './data/fixtures/') + filename
     loaded_csvs = Loader.new.load_csv(path)
     @database = args.fetch(:database, nil)
-    create_invoice_item_table if database
+
+      create_invoice_item_table
+      build_for_database(loaded_csvs)
+      @new_records ||= table_records
+
     @records = build_from(loaded_csvs)
     @table = "invoice_items"
     @engine = args.fetch(:engine, nil)
@@ -41,6 +45,10 @@ class InvoiceItemRepository
   def create_record(record)
     record[:unit_price] = BigDecimal.new(record[:unit_price]) / 100
     InvoiceItem.new(record)
+  end
+
+  def table_records
+    database.execute( "SELECT * FROM invoice_items" ).map { |row| InvoiceItem.new(row) }
   end
 
   def paid_invoice_items

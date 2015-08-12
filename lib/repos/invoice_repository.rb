@@ -15,7 +15,11 @@ class InvoiceRepository
     path = args.fetch(:path, './data/fixtures/') + filename
     loaded_csvs = Loader.new.load_csv(path)
     @database = args.fetch(:database, nil)
-    create_invoice_table if database
+
+      create_invoice_table
+      build_for_database(loaded_csvs)
+      @new_records ||= table_records
+
     @records = build_from(loaded_csvs)
     @table = "invoices"
     @engine = args.fetch(:engine, nil)
@@ -38,6 +42,10 @@ class InvoiceRepository
 
   def create_record(record)
     Invoice.new(record)
+  end
+
+  def table_records
+    database.execute( "SELECT * FROM invoices" ).map { |row| Invoice.new(row) }
   end
 
   def clean_status(match)

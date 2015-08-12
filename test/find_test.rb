@@ -1,24 +1,34 @@
 require_relative 'test_helper.rb'
 require_relative '../lib/repos/customer_repository'
 require_relative '../lib/objects/customer'
+require_relative '../lib/sales_engine'
 
 class FindTest < Minitest::Test
+
   def setup
     @fixtures_1 = './data/fixtures/'
-    @cust_repo = CustomerRepository.new(:path => './fixtures/')
-    @cust_repo_1 = CustomerRepository.new(:path => @fixtures_1)
+    @engine = SalesEngine.new('./fixtures/')
+    @engine.startup
+    @engine_1 = SalesEngine.new(@fixtures_1)
+    @engine_1.startup
+
+    @cust_repo = @engine.customer_repository
+    @cust_repo_1 = @engine_1.customer_repository
   end
+
   def test_we_can_determine_if_our_records_have_x_type_find_by
     result = @cust_repo.find_by_last_name("Sawayn")
 
     assert_equal "Sawayn", result.last_name
   end
+
   def test_we_can_determine_if_a_record_is_on_the_list_find_by
     cust = @cust_repo.find_by_last_name("Sawayn")
 
     assert_equal(cust.last_name, "Sawayn")
 
   end
+
   def test_we_get_back_false_if_record_doesnt_exist_find_by
     result = @cust_repo.find_by_last_name("Sawadfyn")
 
@@ -43,7 +53,7 @@ class FindTest < Minitest::Test
     record = {:id => 4, :first_name => "Leanne", :last_name => "Braun",
       :created_at => "2012-03-27 14:54:10 UTC", :updated_at => "2012-03-27 14:54:10 UTC",
       :repository => @cust_repo_1}
-    
+
     cust = Customer.new(record)
     found_cust = @cust_repo_1.find_by_id("4")
 
