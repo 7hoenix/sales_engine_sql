@@ -15,7 +15,11 @@ class MerchantRepository
     path = args.fetch(:path, './data/fixtures/') + filename
     loaded_csvs = Loader.new.load_csv(path)
     @database = args.fetch(:database, nil)
-    create_merchant_table if database
+
+      create_merchant_table
+      build_for_database(loaded_csvs)
+      @new_records ||= table_records
+
     @records = build_from(loaded_csvs)
     @table = "merchants"
     @engine = args.fetch(:engine, nil)
@@ -27,7 +31,15 @@ class MerchantRepository
                       updated_at DATE)" );
   end
 
+  def sanitize_record(record)
+    if record[:name].include?("'")
+      record[:name].gsub!("'", "")
+    end
+    record
+  end
+
   def add_record_to_database(record)
+    record = sanitize_record(record)
     database.execute( "INSERT INTO merchants(name, created_at, updated_at)
                       VALUES ('#{record[:name]}',
                       #{record[:created_at].to_date},
@@ -36,6 +48,10 @@ class MerchantRepository
 
   def create_record(record)
     Merchant.new(record)
+  end
+
+  def table_records
+    database.execute( "SELECT * FROM merchants" ).map { |row| Merchant.new(row) }
   end
 
   def most_revenue(x)

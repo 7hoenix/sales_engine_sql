@@ -3,11 +3,11 @@ require_relative '../lib/repos/item_repository'
 require_relative '../lib/sales_engine'
 
 class ItemRepositoryTest < Minitest::Test
-  
+
   def setup
-    @item_repository = ItemRepository.new(:path => './fixtures/')
-    @se = SalesEngine.new
+    @se = SalesEngine.new('./data/fixtures/')
     @se.startup
+    @item_repository = @se.item_repository
   end
 
   def test_make_sure_we_can_instantiate
@@ -25,7 +25,7 @@ class ItemRepositoryTest < Minitest::Test
 
     expected = BigDecimal.new("75107") / 100
     result = item.unit_price
-    
+
     assert_equal expected,  result
   end
 
