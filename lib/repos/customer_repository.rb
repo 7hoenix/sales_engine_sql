@@ -19,7 +19,7 @@ class CustomerRepository
     @database = args.fetch(:database, nil)
 
       create_customer_table
-      build_from_for_customer(loaded_csvs)
+      build_for_database(loaded_csvs)
       @new_records ||= table_records
 
     @records = build_from(loaded_csvs)

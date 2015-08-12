@@ -14,7 +14,7 @@ module TableLike
     records
   end
 
-  def build_from_for_customer(loaded_csvs)
+  def build_for_database(loaded_csvs)
     loaded_csvs.each do |row|
       row[:repository] = self
       add_record_to_database(row) if database
