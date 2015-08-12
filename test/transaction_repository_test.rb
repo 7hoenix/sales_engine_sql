@@ -10,6 +10,15 @@ class TransactionRepositoryTest < Minitest::Test
     @transaction_repository = @se.transaction_repository
   end
 
+  def test_we_can_find_results
+    skip
+    @engine = SalesEngine.new('./data/')
+    @engine.startup
+    @transaction_repo = @engine.transaction_repository
+    invoices = @transaction_repo.find_all_by_invoice_id(1)
+    assert_equal [2,3,4], invoices.map { |invoice| invoice.id }
+  end
+
   def test_make_sure_we_can_instantiate
     assert @transaction_repository.class == TransactionRepository
   end

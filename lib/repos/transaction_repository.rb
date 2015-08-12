@@ -37,7 +37,7 @@ class TransactionRepository
                       updated_at) VALUES ('#{record[:invoice_id]}',
                       '#{record[:credit_card_number]}',
                       '#{record[:credit_card_expiration_date]}',
-                      '#{record[:status]}',
+                      '#{record[:result]}',
                       #{record[:created_at].to_date},
                       #{record[:updated_at].to_date});" )
   end

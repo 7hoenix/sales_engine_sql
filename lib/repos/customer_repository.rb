@@ -57,9 +57,7 @@ class CustomerRepository
   end
 
   def table_records
-    database.execute( "SELECT * FROM customers" )
-      .map { |row|
-      Customer.new(row) }
+    database.execute( "SELECT * FROM customers" ).map { |row| Customer.new(row) }
   end
 
   def invoices(customer)
