@@ -14,27 +14,27 @@
       <img src="./assets/0.10.0/loading.gif" alt="loading"/>
     </div>
     <div id="wrapper" style="display:none;">
-      <div class="timestamp">Generated <abbr class="timeago" title="2015-08-12T15:35:43-06:00">2015-08-12T15:35:43-06:00</abbr></div>
+      <div class="timestamp">Generated <abbr class="timeago" title="2015-08-12T15:45:10-06:00">2015-08-12T15:45:10-06:00</abbr></div>
       <ul class="group_tabs"></ul>
 
       <div id="content">
         <div class="file_list_container" id="AllFiles">
   <h2>
     <span class="group_name">All Files</span>
-    (<span class="covered_percent"><span class="green">92.41%</span></span>
+    (<span class="covered_percent"><span class="green">92.5%</span></span>
      covered at
      <span class="covered_strength">
        <span class="green">
-         2916.79
+         2960.12
        </span>
     </span> hits/line)
   </h2>
   <a name="AllFiles"></a>
   <div>
     <b>37</b> files in total.
-    <b>1463</b> relevant lines. 
-    <span class="green"><b>1352</b> lines covered</span> and
-    <span class="red"><b>111</b> lines missed </span>
+    <b>1467</b> relevant lines. 
+    <span class="green"><b>1357</b> lines covered</span> and
+    <span class="red"><b>110</b> lines missed </span>
   </div>
   <table class="file_list">
     <thead>
@@ -67,7 +67,7 @@
         <td>13</td>
         <td>13</td>
         <td>0</td>
-        <td>51747.1</td>
+        <td>51593.5</td>
       </tr>
       
       <tr>
@@ -117,7 +117,7 @@
         <td>30</td>
         <td>27</td>
         <td>3</td>
-        <td>17602.7</td>
+        <td>18031.1</td>
       </tr>
       
       <tr>
@@ -177,7 +177,7 @@
         <td>18</td>
         <td>18</td>
         <td>0</td>
-        <td>3231.8</td>
+        <td>6056.7</td>
       </tr>
       
       <tr>
@@ -232,12 +232,12 @@
       
       <tr>
         <td class="strong"><a href="#b90d643e9cc52e7be3bfd0cc7ac25e1f42fd5eb9" class="src_link" title="lib/repos/transaction_repository.rb">lib/repos/transaction_repository.rb</a></td>
-        <td class="green strong">97.5 %</td>
-        <td>72</td>
-        <td>40</td>
-        <td>39</td>
-        <td>1</td>
-        <td>217.2</td>
+        <td class="green strong">100.0 %</td>
+        <td>80</td>
+        <td>44</td>
+        <td>44</td>
+        <td>0</td>
+        <td>505.0</td>
       </tr>
       
       <tr>
@@ -403,7 +403,7 @@
       <tr>
         <td class="strong"><a href="#fa0c98245edad446a00b71d879d9a808baa3511c" class="src_link" title="test/transaction_repository_test.rb">test/transaction_repository_test.rb</a></td>
         <td class="green strong">100.0 %</td>
-        <td>40</td>
+        <td>41</td>
         <td>22</td>
         <td>22</td>
         <td>0</td>
@@ -570,14 +570,14 @@
           <code class="ruby">  def load_csv(str)</code>
         </li>
       
-        <li class="covered" data-hits="917" data-linenumber="7">
-          <span class="hits">917</span>
+        <li class="covered" data-hits="913" data-linenumber="7">
+          <span class="hits">913</span>
           
           <code class="ruby">    records  = []</code>
         </li>
       
-        <li class="covered" data-hits="917" data-linenumber="8">
-          <span class="hits">917</span>
+        <li class="covered" data-hits="913" data-linenumber="8">
+          <span class="hits">913</span>
           
           <code class="ruby">    args = {:headers =&gt; true,</code>
         </li>
@@ -594,38 +594,38 @@
           <code class="ruby">            :converters =&gt; :all}</code>
         </li>
       
-        <li class="covered" data-hits="917" data-linenumber="11">
-          <span class="hits">917</span>
+        <li class="covered" data-hits="913" data-linenumber="11">
+          <span class="hits">913</span>
           
           <code class="ruby">    CSV.foreach(str, args) do |row|</code>
         </li>
       
-        <li class="covered" data-hits="133808" data-linenumber="12">
-          <span class="hits">133808</span>
+        <li class="covered" data-hits="133412" data-linenumber="12">
+          <span class="hits">133412</span>
           
           <code class="ruby">        headers = row.headers[0..-1]</code>
         </li>
       
-        <li class="covered" data-hits="133808" data-linenumber="13">
-          <span class="hits">133808</span>
+        <li class="covered" data-hits="133412" data-linenumber="13">
+          <span class="hits">133412</span>
           
           <code class="ruby">        fields = row.fields[0..-1]</code>
         </li>
       
-        <li class="covered" data-hits="133808" data-linenumber="14">
-          <span class="hits">133808</span>
+        <li class="covered" data-hits="133412" data-linenumber="14">
+          <span class="hits">133412</span>
           
           <code class="ruby">        fields[-2] = DateTime.parse(fields[-1])</code>
         </li>
       
-        <li class="covered" data-hits="133808" data-linenumber="15">
-          <span class="hits">133808</span>
+        <li class="covered" data-hits="133412" data-linenumber="15">
+          <span class="hits">133412</span>
           
           <code class="ruby">        fields[-1] = DateTime.parse(fields[-1])</code>
         </li>
       
-        <li class="covered" data-hits="133808" data-linenumber="16">
-          <span class="hits">133808</span>
+        <li class="covered" data-hits="133412" data-linenumber="16">
+          <span class="hits">133412</span>
           
           <code class="ruby">        records &lt;&lt; Hash[headers.zip(fields)]</code>
         </li>
@@ -636,8 +636,8 @@
           <code class="ruby">    end</code>
         </li>
       
-        <li class="covered" data-hits="917" data-linenumber="18">
-          <span class="hits">917</span>
+        <li class="covered" data-hits="913" data-linenumber="18">
+          <span class="hits">913</span>
           
           <code class="ruby">    records</code>
         </li>
@@ -2160,26 +2160,26 @@
           <code class="ruby">  def build_from(loaded_csvs)</code>
         </li>
       
-        <li class="covered" data-hits="916" data-linenumber="9">
-          <span class="hits">916</span>
+        <li class="covered" data-hits="912" data-linenumber="9">
+          <span class="hits">912</span>
           
           <code class="ruby">    records = []</code>
         </li>
       
-        <li class="covered" data-hits="916" data-linenumber="10">
-          <span class="hits">916</span>
+        <li class="covered" data-hits="912" data-linenumber="10">
+          <span class="hits">912</span>
           
           <code class="ruby">    loaded_csvs.each do |row|</code>
         </li>
       
-        <li class="covered" data-hits="133708" data-linenumber="11">
-          <span class="hits">133708</span>
+        <li class="covered" data-hits="133312" data-linenumber="11">
+          <span class="hits">133312</span>
           
           <code class="ruby">      row[:repository] = self</code>
         </li>
       
-        <li class="covered" data-hits="133708" data-linenumber="12">
-          <span class="hits">133708</span>
+        <li class="covered" data-hits="133312" data-linenumber="12">
+          <span class="hits">133312</span>
           
           <code class="ruby">      records &lt;&lt; create_record(row)</code>
         </li>
@@ -2190,8 +2190,8 @@
           <code class="ruby">    end</code>
         </li>
       
-        <li class="covered" data-hits="916" data-linenumber="14">
-          <span class="hits">916</span>
+        <li class="covered" data-hits="912" data-linenumber="14">
+          <span class="hits">912</span>
           
           <code class="ruby">    records</code>
         </li>
@@ -2214,20 +2214,20 @@
           <code class="ruby">  def build_for_database(loaded_csvs)</code>
         </li>
       
-        <li class="covered" data-hits="760" data-linenumber="18">
-          <span class="hits">760</span>
+        <li class="covered" data-hits="912" data-linenumber="18">
+          <span class="hits">912</span>
           
           <code class="ruby">    loaded_csvs.each do |row|</code>
         </li>
       
-        <li class="covered" data-hits="126560" data-linenumber="19">
-          <span class="hits">126560</span>
+        <li class="covered" data-hits="133312" data-linenumber="19">
+          <span class="hits">133312</span>
           
           <code class="ruby">      row[:repository] = self</code>
         </li>
       
-        <li class="covered" data-hits="126560" data-linenumber="20">
-          <span class="hits">126560</span>
+        <li class="covered" data-hits="133312" data-linenumber="20">
+          <span class="hits">133312</span>
           
           <code class="ruby">      add_record_to_database(row) if database</code>
         </li>
@@ -4902,50 +4902,50 @@
           <code class="ruby">  def initialize(record)</code>
         </li>
       
-        <li class="covered" data-hits="7157" data-linenumber="14">
-          <span class="hits">7157</span>
+        <li class="covered" data-hits="13513" data-linenumber="14">
+          <span class="hits">13513</span>
           
-          <code class="ruby">    @id                           = record[:id]</code>
+          <code class="ruby">    @id                           = record[:id] || record[&quot;id&quot;]</code>
         </li>
       
-        <li class="covered" data-hits="7157" data-linenumber="15">
-          <span class="hits">7157</span>
+        <li class="covered" data-hits="13513" data-linenumber="15">
+          <span class="hits">13513</span>
           
-          <code class="ruby">    @invoice_id                   = record[:invoice_id]</code>
+          <code class="ruby">    @invoice_id                   = record[:invoice_id] || record[&quot;invoice_id&quot;]</code>
         </li>
       
-        <li class="covered" data-hits="7157" data-linenumber="16">
-          <span class="hits">7157</span>
+        <li class="covered" data-hits="13513" data-linenumber="16">
+          <span class="hits">13513</span>
           
-          <code class="ruby">    @credit_card_number           = record[:credit_card_number]</code>
+          <code class="ruby">    @credit_card_number           = record[:credit_card_number] || record[&quot;credit_card_number&quot;]</code>
         </li>
       
-        <li class="covered" data-hits="7157" data-linenumber="17">
-          <span class="hits">7157</span>
+        <li class="covered" data-hits="13513" data-linenumber="17">
+          <span class="hits">13513</span>
           
-          <code class="ruby">    @credit_card_expiration_date  = record[:credit_card_expiration_date]</code>
+          <code class="ruby">    @credit_card_expiration_date  = record[:credit_card_expiration_date] || record[&quot;credit_card_expiration_date&quot;]</code>
         </li>
       
-        <li class="covered" data-hits="7157" data-linenumber="18">
-          <span class="hits">7157</span>
+        <li class="covered" data-hits="13513" data-linenumber="18">
+          <span class="hits">13513</span>
           
-          <code class="ruby">    @result                       = record[:result]</code>
+          <code class="ruby">    @result                       = record[:result] || record[&quot;result&quot;]</code>
         </li>
       
-        <li class="covered" data-hits="7157" data-linenumber="19">
-          <span class="hits">7157</span>
+        <li class="covered" data-hits="13513" data-linenumber="19">
+          <span class="hits">13513</span>
           
-          <code class="ruby">    @created_at                   = record[:created_at]</code>
+          <code class="ruby">    @created_at                   = record[:created_at] || record[&quot;created_at&quot;]</code>
         </li>
       
-        <li class="covered" data-hits="7157" data-linenumber="20">
-          <span class="hits">7157</span>
+        <li class="covered" data-hits="13513" data-linenumber="20">
+          <span class="hits">13513</span>
           
-          <code class="ruby">    @updated_at                   = record[:updated_at]</code>
+          <code class="ruby">    @updated_at                   = record[:updated_at] || record[&quot;updated_at&quot;]</code>
         </li>
       
-        <li class="covered" data-hits="7157" data-linenumber="21">
-          <span class="hits">7157</span>
+        <li class="covered" data-hits="13513" data-linenumber="21">
+          <span class="hits">13513</span>
           
           <code class="ruby">    @repository                   = record.fetch(:repository, nil)</code>
         </li>
@@ -8497,11 +8497,11 @@
         <div class="source_table" id="b90d643e9cc52e7be3bfd0cc7ac25e1f42fd5eb9">
   <div class="header">
     <h3>lib/repos/transaction_repository.rb</h3>
-    <h4><span class="green">97.5 %</span> covered</h4>
+    <h4><span class="green">100.0 %</span> covered</h4>
     <div>
-      <b>40</b> relevant lines. 
-      <span class="green"><b>39</b> lines covered</span> and
-      <span class="red"><b>1</b> lines missed.</span>
+      <b>44</b> relevant lines. 
+      <span class="green"><b>44</b> lines covered</span> and
+      <span class="red"><b>0</b> lines missed.</span>
     </div>
   </div>
   
@@ -8580,184 +8580,184 @@
           <code class="ruby">  def initialize(args)</code>
         </li>
       
-        <li class="covered" data-hits="156" data-linenumber="13">
-          <span class="hits">156</span>
+        <li class="covered" data-hits="152" data-linenumber="13">
+          <span class="hits">152</span>
           
           <code class="ruby">    filename = args.fetch(:filename, &#39;transactions.csv&#39;)</code>
         </li>
       
-        <li class="covered" data-hits="156" data-linenumber="14">
-          <span class="hits">156</span>
+        <li class="covered" data-hits="152" data-linenumber="14">
+          <span class="hits">152</span>
           
           <code class="ruby">    path = args.fetch(:path, &#39;./data/fixtures/&#39;) + filename</code>
         </li>
       
-        <li class="covered" data-hits="156" data-linenumber="15">
-          <span class="hits">156</span>
+        <li class="covered" data-hits="152" data-linenumber="15">
+          <span class="hits">152</span>
           
           <code class="ruby">    loaded_csvs = Loader.new.load_csv(path)</code>
         </li>
       
-        <li class="covered" data-hits="156" data-linenumber="16">
-          <span class="hits">156</span>
+        <li class="covered" data-hits="152" data-linenumber="16">
+          <span class="hits">152</span>
           
           <code class="ruby">    @database = args.fetch(:database, nil)</code>
         </li>
       
-        <li class="covered" data-hits="156" data-linenumber="17">
-          <span class="hits">156</span>
+        <li class="never" data-hits="" data-linenumber="17">
           
-          <code class="ruby">    @records = build_from(loaded_csvs)</code>
+          
+          <code class="ruby"></code>
         </li>
       
-        <li class="covered" data-hits="156" data-linenumber="18">
-          <span class="hits">156</span>
+        <li class="covered" data-hits="152" data-linenumber="18">
+          <span class="hits">152</span>
           
-          <code class="ruby">    create_transaction_table if database</code>
+          <code class="ruby">      create_transaction_table</code>
         </li>
       
-        <li class="covered" data-hits="156" data-linenumber="19">
-          <span class="hits">156</span>
+        <li class="covered" data-hits="152" data-linenumber="19">
+          <span class="hits">152</span>
           
-          <code class="ruby">    @table = &quot;transactions&quot;</code>
+          <code class="ruby">      build_for_database(loaded_csvs)</code>
         </li>
       
-        <li class="covered" data-hits="156" data-linenumber="20">
-          <span class="hits">156</span>
+        <li class="covered" data-hits="152" data-linenumber="20">
+          <span class="hits">152</span>
           
-          <code class="ruby">    @engine = args.fetch(:engine, nil)</code>
+          <code class="ruby">      @new_records ||= table_records</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="21">
           
           
-          <code class="ruby">  end</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="22">
-          
-          
           <code class="ruby"></code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="23">
-          <span class="hits">1</span>
+        <li class="covered" data-hits="152" data-linenumber="22">
+          <span class="hits">152</span>
           
-          <code class="ruby">  def create_transaction_table</code>
+          <code class="ruby">    @records = build_from(loaded_csvs)</code>
+        </li>
+      
+        <li class="covered" data-hits="152" data-linenumber="23">
+          <span class="hits">152</span>
+          
+          <code class="ruby">    @table = &quot;transactions&quot;</code>
         </li>
       
         <li class="covered" data-hits="152" data-linenumber="24">
           <span class="hits">152</span>
           
-          <code class="ruby">    database.execute( &quot;CREATE TABLE transactions(id INTEGER PRIMARY KEY</code>
+          <code class="ruby">    @engine = args.fetch(:engine, nil)</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="25">
           
           
-          <code class="ruby">                      AUTOINCREMENT, invoice_id INTEGER, credit_card_number</code>
+          <code class="ruby">  end</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="26">
           
           
-          <code class="ruby">                      INTEGER, credit_card_expiration_date DATE, result</code>
+          <code class="ruby"></code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="27">
+        <li class="covered" data-hits="1" data-linenumber="27">
+          <span class="hits">1</span>
           
-          
-          <code class="ruby">                      VARCHAR(31), created_at DATE, updated_at DATE)&quot; );</code>
+          <code class="ruby">  def create_transaction_table</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="28">
+        <li class="covered" data-hits="152" data-linenumber="28">
+          <span class="hits">152</span>
           
-          
-          <code class="ruby">  end</code>
+          <code class="ruby">    database.execute( &quot;CREATE TABLE transactions(id INTEGER PRIMARY KEY</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="29">
           
           
-          <code class="ruby"></code>
+          <code class="ruby">                      AUTOINCREMENT, invoice_id INTEGER, credit_card_number</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="30">
-          <span class="hits">1</span>
+        <li class="never" data-hits="" data-linenumber="30">
           
-          <code class="ruby">  def add_record_to_database(record)</code>
+          
+          <code class="ruby">                      INTEGER, credit_card_expiration_date DATE, result</code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="31">
+        <li class="never" data-hits="" data-linenumber="31">
           
           
-          <code class="ruby">    database.execute( &quot;INSERT INTO transactions(invoice_id, credit_card_number,</code>
+          <code class="ruby">                      VARCHAR(31), created_at DATE, updated_at DATE)&quot; );</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="32">
           
           
-          <code class="ruby">                      credit_card_expiration_date, status, created_at,</code>
+          <code class="ruby">  end</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="33">
           
           
-          <code class="ruby">                      updated_at) VALUES (&#39;#{record[:invoice_id]}&#39;,</code>
+          <code class="ruby"></code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="34">
+        <li class="covered" data-hits="1" data-linenumber="34">
+          <span class="hits">1</span>
           
-          
-          <code class="ruby">                      &#39;#{record[:credit_card_number]}&#39;,</code>
+          <code class="ruby">  def add_record_to_database(record)</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="35">
+        <li class="covered" data-hits="6752" data-linenumber="35">
+          <span class="hits">6752</span>
           
-          
-          <code class="ruby">                      &#39;#{record[:credit_card_expiration_date]}&#39;,</code>
+          <code class="ruby">    database.execute( &quot;INSERT INTO transactions(invoice_id, credit_card_number,</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="36">
           
           
-          <code class="ruby">                      &#39;#{record[:status]}&#39;,</code>
+          <code class="ruby">                      credit_card_expiration_date, result, created_at,</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="37">
           
           
-          <code class="ruby">                      #{record[:created_at].to_date},</code>
+          <code class="ruby">                      updated_at) VALUES (&#39;#{record[:invoice_id]}&#39;,</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="38">
           
           
-          <code class="ruby">                      #{record[:updated_at].to_date});&quot; )</code>
+          <code class="ruby">                      &#39;#{record[:credit_card_number]}&#39;,</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="39">
           
           
-          <code class="ruby">  end</code>
+          <code class="ruby">                      &#39;#{record[:credit_card_expiration_date]}&#39;,</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="40">
           
           
-          <code class="ruby"></code>
+          <code class="ruby">                      &#39;#{record[:status]}&#39;,</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="41">
-          <span class="hits">1</span>
+        <li class="never" data-hits="" data-linenumber="41">
           
-          <code class="ruby">  def create_record(record)</code>
+          
+          <code class="ruby">                      #{record[:created_at].to_date},</code>
         </li>
       
-        <li class="covered" data-hits="7150" data-linenumber="42">
-          <span class="hits">7150</span>
+        <li class="never" data-hits="" data-linenumber="42">
           
-          <code class="ruby">    Transaction.new(record)</code>
+          
+          <code class="ruby">                      #{record[:updated_at].to_date});&quot; )</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="43">
@@ -8775,73 +8775,73 @@
         <li class="covered" data-hits="1" data-linenumber="45">
           <span class="hits">1</span>
           
-          <code class="ruby">  def get_invoice_for(transaction)</code>
+          <code class="ruby">  def create_record(record)</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="46">
+        <li class="covered" data-hits="6754" data-linenumber="46">
+          <span class="hits">6754</span>
           
-          
-          <code class="ruby">    invoices.select do |invoice|</code>
+          <code class="ruby">    Transaction.new(record)</code>
         </li>
       
-        <li class="covered" data-hits="66" data-linenumber="47">
-          <span class="hits">66</span>
-          
-          <code class="ruby">      invoice.id == transaction.invoice_id</code>
-        </li>
-      
-        <li class="covered" data-hits="2" data-linenumber="48">
-          <span class="hits">2</span>
-          
-          <code class="ruby">    end.flatten</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="49">
+        <li class="never" data-hits="" data-linenumber="47">
           
           
           <code class="ruby">  end</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="50">
+        <li class="never" data-hits="" data-linenumber="48">
           
           
           <code class="ruby"></code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="51">
+        <li class="covered" data-hits="1" data-linenumber="49">
           <span class="hits">1</span>
           
-          <code class="ruby">  def invoices</code>
+          <code class="ruby">  def table_records</code>
+        </li>
+      
+        <li class="covered" data-hits="6904" data-linenumber="50">
+          <span class="hits">6904</span>
+          
+          <code class="ruby">    database.execute( &quot;SELECT * FROM transactions&quot; ).map { |row| Transaction.new(row) }</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="51">
+          
+          
+          <code class="ruby">  end</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="52">
           
           
-          <code class="ruby">    cached_invoices ||= begin</code>
+          <code class="ruby"></code>
         </li>
       
-        <li class="covered" data-hits="2" data-linenumber="53">
-          <span class="hits">2</span>
+        <li class="covered" data-hits="1" data-linenumber="53">
+          <span class="hits">1</span>
           
-          <code class="ruby">      args = {:repo =&gt; :invoice_repository,</code>
+          <code class="ruby">  def get_invoice_for(transaction)</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="54">
           
           
-          <code class="ruby">                :use =&gt; :all}</code>
+          <code class="ruby">    invoices.select do |invoice|</code>
         </li>
       
-        <li class="covered" data-hits="2" data-linenumber="55">
-          <span class="hits">2</span>
+        <li class="covered" data-hits="66" data-linenumber="55">
+          <span class="hits">66</span>
           
-          <code class="ruby">      engine.get(args)</code>
+          <code class="ruby">      invoice.id == transaction.invoice_id</code>
         </li>
       
         <li class="covered" data-hits="2" data-linenumber="56">
           <span class="hits">2</span>
           
-          <code class="ruby">    end</code>
+          <code class="ruby">    end.flatten</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="57">
@@ -8859,82 +8859,130 @@
         <li class="covered" data-hits="1" data-linenumber="59">
           <span class="hits">1</span>
           
-          <code class="ruby">  def count</code>
+          <code class="ruby">  def invoices</code>
         </li>
       
-        <li class="covered" data-hits="39" data-linenumber="60">
-          <span class="hits">39</span>
+        <li class="never" data-hits="" data-linenumber="60">
           
-          <code class="ruby">    all.count{|trans| trans.successful?}</code>
+          
+          <code class="ruby">    cached_invoices ||= begin</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="61">
+        <li class="covered" data-hits="2" data-linenumber="61">
+          <span class="hits">2</span>
           
-          
-          <code class="ruby">  end</code>
+          <code class="ruby">      args = {:repo =&gt; :invoice_repository,</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="62">
           
           
-          <code class="ruby"></code>
+          <code class="ruby">                :use =&gt; :all}</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="63">
-          <span class="hits">1</span>
+        <li class="covered" data-hits="2" data-linenumber="63">
+          <span class="hits">2</span>
           
-          <code class="ruby">  def charge(args, invoice)</code>
+          <code class="ruby">      engine.get(args)</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="64">
-          <span class="hits">1</span>
+        <li class="covered" data-hits="2" data-linenumber="64">
+          <span class="hits">2</span>
           
-          <code class="ruby">    record = args</code>
+          <code class="ruby">    end</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="65">
-          <span class="hits">1</span>
-          
-          <code class="ruby">    record[:invoice_id] = invoice</code>
-        </li>
-      
-        <li class="covered" data-hits="1" data-linenumber="66">
-          <span class="hits">1</span>
-          
-          <code class="ruby">    record[:id] = next_id</code>
-        </li>
-      
-        <li class="covered" data-hits="1" data-linenumber="67">
-          <span class="hits">1</span>
-          
-          <code class="ruby">    record[:result] = args[:result]</code>
-        </li>
-      
-        <li class="covered" data-hits="1" data-linenumber="68">
-          <span class="hits">1</span>
-          
-          <code class="ruby">    record[:created_at] = timestamp</code>
-        </li>
-      
-        <li class="covered" data-hits="1" data-linenumber="69">
-          <span class="hits">1</span>
-          
-          <code class="ruby">    record[:updated_at] = timestamp</code>
-        </li>
-      
-        <li class="covered" data-hits="1" data-linenumber="70">
-          <span class="hits">1</span>
-          
-          <code class="ruby">    records &lt;&lt; create_record(record)</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="71">
+        <li class="never" data-hits="" data-linenumber="65">
           
           
           <code class="ruby">  end</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="72">
+        <li class="never" data-hits="" data-linenumber="66">
+          
+          
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="67">
+          <span class="hits">1</span>
+          
+          <code class="ruby">  def count</code>
+        </li>
+      
+        <li class="covered" data-hits="39" data-linenumber="68">
+          <span class="hits">39</span>
+          
+          <code class="ruby">    all.count{|trans| trans.successful?}</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="69">
+          
+          
+          <code class="ruby">  end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="70">
+          
+          
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="71">
+          <span class="hits">1</span>
+          
+          <code class="ruby">  def charge(args, invoice)</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="72">
+          <span class="hits">1</span>
+          
+          <code class="ruby">    record = args</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="73">
+          <span class="hits">1</span>
+          
+          <code class="ruby">    record[:invoice_id] = invoice</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="74">
+          <span class="hits">1</span>
+          
+          <code class="ruby">    record[:id] = next_id</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="75">
+          <span class="hits">1</span>
+          
+          <code class="ruby">    record[:result] = args[:result]</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="76">
+          <span class="hits">1</span>
+          
+          <code class="ruby">    record[:created_at] = timestamp</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="77">
+          <span class="hits">1</span>
+          
+          <code class="ruby">    record[:updated_at] = timestamp</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="78">
+          <span class="hits">1</span>
+          
+          <code class="ruby">    records &lt;&lt; create_record(record)</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="79">
+          
+          
+          <code class="ruby">  end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="80">
           
           
           <code class="ruby">end</code>
@@ -16527,7 +16575,7 @@
         <li class="never" data-hits="" data-linenumber="6">
           
           
-          <code class="ruby">  </code>
+          <code class="ruby"></code>
         </li>
       
         <li class="covered" data-hits="1" data-linenumber="7">
@@ -16539,196 +16587,202 @@
         <li class="covered" data-hits="4" data-linenumber="8">
           <span class="hits">4</span>
           
-          <code class="ruby">    @transaction_repository = TransactionRepository.new(:path =&gt; &#39;./fixtures/&#39;)</code>
+          <code class="ruby">    @se = SalesEngine.new</code>
         </li>
       
         <li class="covered" data-hits="4" data-linenumber="9">
           <span class="hits">4</span>
           
-          <code class="ruby">    @se = SalesEngine.new</code>
+          <code class="ruby">    @se.startup</code>
         </li>
       
         <li class="covered" data-hits="4" data-linenumber="10">
           <span class="hits">4</span>
           
-          <code class="ruby">    @se.startup</code>
+          <code class="ruby">    @transaction_repository = @se.transaction_repository</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="11">
           
           
-          <code class="ruby">  end  </code>
+          <code class="ruby">  end</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="12">
-          <span class="hits">1</span>
+        <li class="never" data-hits="" data-linenumber="12">
           
-          <code class="ruby">  def test_make_sure_we_can_instantiate</code>
+          
+          <code class="ruby"></code>
         </li>
       
         <li class="covered" data-hits="1" data-linenumber="13">
           <span class="hits">1</span>
           
+          <code class="ruby">  def test_make_sure_we_can_instantiate</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="14">
+          <span class="hits">1</span>
+          
           <code class="ruby">    assert @transaction_repository.class == TransactionRepository</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="14">
+        <li class="never" data-hits="" data-linenumber="15">
           
           
           <code class="ruby">  end</code>
-        </li>
-      
-        <li class="covered" data-hits="1" data-linenumber="15">
-          <span class="hits">1</span>
-          
-          <code class="ruby">  def test_we_can_make_instances_of_Transaction</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="16">
           
           
-          <code class="ruby">    </code>
+          <code class="ruby"></code>
         </li>
       
         <li class="covered" data-hits="1" data-linenumber="17">
           <span class="hits">1</span>
           
-          <code class="ruby">    transaction_record = {:invoice_id =&gt; &#39;23034&#39;,</code>
+          <code class="ruby">  def test_we_can_make_instances_of_Transaction</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="18">
+        <li class="covered" data-hits="1" data-linenumber="18">
+          <span class="hits">1</span>
           
-          
-          <code class="ruby">                        :credit_card_number =&gt; &#39;892384923&#39;,</code>
+          <code class="ruby">    transaction_record = {:invoice_id =&gt; &#39;23034&#39;,</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="19">
           
           
-          <code class="ruby">                        :credit_card_expiration_date =&gt; &quot;9283&quot;,</code>
+          <code class="ruby">                        :credit_card_number =&gt; &#39;892384923&#39;,</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="20">
           
           
-          <code class="ruby">                        :result =&gt; &quot;good&quot;,</code>
+          <code class="ruby">                        :credit_card_expiration_date =&gt; &quot;9283&quot;,</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="21">
           
           
-          <code class="ruby">                        :created_at =&gt; &quot;sometime&quot;,</code>
+          <code class="ruby">                        :result =&gt; &quot;good&quot;,</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="22">
           
           
+          <code class="ruby">                        :created_at =&gt; &quot;sometime&quot;,</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="23">
+          
+          
           <code class="ruby">                        :updated_at =&gt; &quot;someothertime&quot;}</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="23">
+        <li class="covered" data-hits="1" data-linenumber="24">
           <span class="hits">1</span>
           
           <code class="ruby">    transaction = @transaction_repository.create_record(transaction_record)</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="24">
+        <li class="never" data-hits="" data-linenumber="25">
           
           
-          <code class="ruby">    </code>
-        </li>
-      
-        <li class="covered" data-hits="1" data-linenumber="25">
-          <span class="hits">1</span>
-          
-          <code class="ruby">    expected = &quot;someothertime&quot;</code>
+          <code class="ruby"></code>
         </li>
       
         <li class="covered" data-hits="1" data-linenumber="26">
           <span class="hits">1</span>
           
+          <code class="ruby">    expected = &quot;someothertime&quot;</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="27">
+          <span class="hits">1</span>
+          
           <code class="ruby">    result = transaction.updated_at</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="27">
+        <li class="never" data-hits="" data-linenumber="28">
           
           
-          <code class="ruby">    </code>
+          <code class="ruby"></code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="28">
+        <li class="covered" data-hits="1" data-linenumber="29">
           <span class="hits">1</span>
           
           <code class="ruby">    assert_equal expected,  result</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="29">
+        <li class="never" data-hits="" data-linenumber="30">
           
           
           <code class="ruby">  end</code>
-        </li>
-      
-        <li class="covered" data-hits="1" data-linenumber="30">
-          <span class="hits">1</span>
-          
-          <code class="ruby">  def test_we_can_populate_transactions</code>
         </li>
       
         <li class="covered" data-hits="1" data-linenumber="31">
           <span class="hits">1</span>
           
-          <code class="ruby">    assert @transaction_repository.records.length &gt; 20</code>
+          <code class="ruby">  def test_we_can_populate_transactions</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="32">
+        <li class="covered" data-hits="1" data-linenumber="32">
+          <span class="hits">1</span>
           
-          
-          <code class="ruby">  end</code>
+          <code class="ruby">    assert @transaction_repository.records.length &gt; 20</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="33">
           
           
-          <code class="ruby"></code>
+          <code class="ruby">  end</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="34">
-          <span class="hits">1</span>
+        <li class="never" data-hits="" data-linenumber="34">
           
-          <code class="ruby">  def test_it_knows_the_number_of_successful_transactions</code>
+          
+          <code class="ruby"></code>
         </li>
       
         <li class="covered" data-hits="1" data-linenumber="35">
           <span class="hits">1</span>
           
-          <code class="ruby">    expected = 32</code>
+          <code class="ruby">  def test_it_knows_the_number_of_successful_transactions</code>
         </li>
       
         <li class="covered" data-hits="1" data-linenumber="36">
           <span class="hits">1</span>
           
+          <code class="ruby">    expected = 32</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="37">
+          <span class="hits">1</span>
+          
           <code class="ruby">    actual = @se.transaction_repository.count</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="37">
+        <li class="never" data-hits="" data-linenumber="38">
           
           
           <code class="ruby"></code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="38">
+        <li class="covered" data-hits="1" data-linenumber="39">
           <span class="hits">1</span>
           
           <code class="ruby">    assert_equal expected, actual</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="39">
+        <li class="never" data-hits="" data-linenumber="40">
           
           
           <code class="ruby">  end</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="40">
+        <li class="never" data-hits="" data-linenumber="41">
           
           
           <code class="ruby">end</code>
