@@ -7,9 +7,9 @@ class CustomerRepositoryTest < Minitest::Test
   attr_reader :customer_repository, :db
 
   def setup
-    @customer_repository = CustomerRepository.new(:path => './fixtures/')
-    @se = SalesEngine.new
+    @se = SalesEngine.new('./data/fixtures/')
     @se.startup
+    @customer_repository = @se.customer_repository
     @db = customer_repository.database
   end
 
@@ -48,13 +48,9 @@ class CustomerRepositoryTest < Minitest::Test
     assert_equal expected,  result
   end
 
-  def test_we_can_populate_customers
-    assert customer_repository.records.length > 20
-  end
-
   def test_we_can_access_a_customer_info_from_the_customer_repo_class
-    expected = "Reynolds"
-    result = customer_repository.find_by_id(10).last_name
+    expected = "Daugherty"
+    result = customer_repository.find_by_id(7).last_name
 
     assert_equal expected, result
   end

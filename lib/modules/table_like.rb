@@ -14,6 +14,13 @@ module TableLike
     records
   end
 
+  def build_from_for_customer(loaded_csvs)
+    loaded_csvs.each do |row|
+      row[:repository] = self
+      add_record_to_database(row) if database
+    end
+  end
+
   def get(what, source_key_value, remote_key_name)
     foreign_repo = repo_map[what.to_sym]
     engine.send(foreign_repo).find_all_by(remote_key_name, source_key_value)
