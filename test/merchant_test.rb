@@ -14,13 +14,24 @@ class MerchantTest < Minitest::Test
     @se.startup
   end
 
-  def test_it_can_calculate_its_revenue
+  def test_it_can_calculate_its_revenue_for_a_date
+    skip
     @engine = SalesEngine.new('./data/')
     @engine.startup
     @merchant_repository = @engine.merchant_repository
-    @merchant = @merchant_repository.find_by_name("Dicki-Bednar")
+    merchant = @merchant_repository.find_by_name("Willms and Sons")
+    date = Date.parse("Fri, 09 Mar 2012")
 
-    assert_equal BigDecimal.new("1148393.74"), @merchant.revenue
+    assert_equal BigDecimal.new("8373.29"), merchant.revenue(date)
+  end
+
+  def test_it_can_calculate_its_revenue
+    @eng = SalesEngine.new('./data/')
+    @eng.startup
+    @merchant_repo = @eng.merchant_repository
+    merchant = @merchant_repo.find_by_name("Dicki-Bednar")
+
+    assert_equal BigDecimal.new("1148393.74"), merchant.revenue
   end
 
   def test_it_has_a_name_accessor
@@ -87,6 +98,7 @@ class MerchantTest < Minitest::Test
   end
 
   def test_it_knows_its_total_revenue
+    skip
     merchant = @se.merchant_repository.find_by_id("8")
     rev = merchant.revenue
 
