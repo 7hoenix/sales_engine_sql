@@ -8,7 +8,7 @@ module Find
     end
   end
 
-  def find_all_by(x, match)
+  def find_all_by_old(x, match)
     match = match.to_s.downcase
     #temp = find_all_by_temp(x, match)
     return_records = records.select do |record|
@@ -19,12 +19,11 @@ module Find
     #raise "boom" if !return_records.empty? && return_records == temp
   end
 
-  def find_all_by_temp(x, match)
-    records = database.execute( "SELECT * FROM #{table} WHERE #{x}=#{match};" )
-    new_records = records.map do |record|
-      thing = create_record(record)
+  def find_all_by(x, match)
+    records = database.query( "SELECT * FROM #{table} WHERE #{x}='#{match}'" )
+    records.map do |record|
+      create_record(record)
     end
-    new_records
   end
 
   def all

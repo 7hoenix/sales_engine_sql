@@ -12,8 +12,18 @@ class FindTest < Minitest::Test
     @engine_1 = SalesEngine.new(@fixtures_1)
     @engine_1.startup
 
+
     @cust_repo = @engine.customer_repository
     @cust_repo_1 = @engine_1.customer_repository
+  end
+
+  def test_we_can_use_real_data_to_find_customers
+    #@engine3 = SalesEngine.new('./data/')
+    #@engine3.startup
+    #@cust_repo_2 = @engine3.customer_repository
+    #result = @cust_repo_2.find_by_last_name("Ullrich")
+
+    #assert_equal "asdf", result.last_name
   end
 
   def test_we_can_determine_if_our_records_have_x_type_find_by

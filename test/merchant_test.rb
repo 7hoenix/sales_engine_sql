@@ -4,8 +4,7 @@ require_relative '../lib/objects/merchant'
 require_relative '../lib/sales_engine.rb'
 
 class MerchantTest < Minitest::Test
-  
-  
+
   def setup
     @example_record1 =  {:id => '1',
                         :name => 'Matt',
@@ -91,6 +90,8 @@ class MerchantTest < Minitest::Test
   end
 
   def test_it_knows_revenue_for_given_date
+    skip
+    #doesnt actually test anything
     date = Date.parse("2012-03-21")
     merchant = @se.merchant_repository.find_by_id("8")
 

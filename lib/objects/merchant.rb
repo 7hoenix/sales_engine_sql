@@ -49,7 +49,7 @@ class Merchant
       paid_invoices
     else
       paid_invoices.select do |invoice|
-        invoice.created_at.to_date == date.to_date
+        invoice.created_at == date.to_date
       end
     end
   end

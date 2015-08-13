@@ -17,38 +17,43 @@ class InvoiceItemRepository
 
       create_invoice_item_table
       build_for_database(loaded_csvs)
-      @new_records ||= table_records
+      @records ||= table_records
 
-    @records = build_from(loaded_csvs)
+    #@records = build_from(loaded_csvs)
     @table = "invoice_items"
     @engine = args.fetch(:engine, nil)
   end
 
   def create_invoice_item_table
-    database.execute( "CREATE TABLE invoice_items(id INTEGER PRIMARY KEY
-                      AUTOINCREMENT, item_id INTEGER, invoice_id INTEGER,
-                      quantity INTEGER, unit_price INTEGER, created_at DATE,
-                      updated_at DATE)" );
+    database.execute( "CREATE TABLE invoice_items(id INTEGER PRIMARY KEY,
+                      item_id INTEGER, invoice_id INTEGER, quantity INTEGER,
+                      unit_price INTEGER, created_at DATE, updated_at DATE)" );
   end
 
   def add_record_to_database(record)
-    database.execute( "INSERT INTO invoice_items(item_id, invoice_id, quantity,
-                      unit_price, created_at, updated_at)
-                      VALUES ('#{record[:item_id]}',
-                      '#{record[:invoice_id]}',
-                      '#{record[:quantity]}',
-                      '#{record[:unit_price]}',
-                      #{record[:created_at].to_date},
-                      #{record[:updated_at].to_date});" )
+    new_record = [record[:id],
+                 record[:item_id],
+                 record[:invoice_id],
+                 record[:quantity],
+                 record[:unit_price],
+                 record[:created_at],
+                 record[:updated_at]]
+    prepped = database.prepare( "INSERT INTO invoice_items(id, item_id,
+                                 invoice_id, quantity, unit_price, created_at,
+                                 updated_at) VALUES (?,?,?,?,?,?,?)")
+    prepped.execute(new_record)
   end
 
   def create_record(record)
-    record[:unit_price] = BigDecimal.new(record[:unit_price]) / 100
+    record[:repository] = self
     InvoiceItem.new(record)
   end
 
   def table_records
-    database.execute( "SELECT * FROM invoice_items" ).map { |row| InvoiceItem.new(row) }
+    database.execute( "SELECT * FROM invoice_items" ).map do |row|
+      row[:repository] = self
+      InvoiceItem.new(row)
+    end
   end
 
   def paid_invoice_items

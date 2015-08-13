@@ -18,34 +18,42 @@ class InvoiceRepository
 
       create_invoice_table
       build_for_database(loaded_csvs)
-      @new_records ||= table_records
+      @records ||= table_records
 
-    @records = build_from(loaded_csvs)
+    #@records = build_from(loaded_csvs)
     @table = "invoices"
     @engine = args.fetch(:engine, nil)
   end
 
   def create_invoice_table
-    database.execute( "CREATE TABLE invoices(id INTEGER PRIMARY KEY
-                      AUTOINCREMENT, customer_id INTEGER, merchant_id INTEGER,
-                      status VARCHAR(31), created_at DATE, updated_at DATE)" );
+    database.execute( "CREATE TABLE invoices(id INTEGER PRIMARY KEY,
+                       customer_id INTEGER, merchant_id INTEGER, status
+                       VARCHAR(31), created_at DATE, updated_at DATE)" );
   end
 
   def add_record_to_database(record)
-    database.execute( "INSERT INTO invoices(customer_id, merchant_id, status, created_at,
-                      updated_at) VALUES ('#{record[:customer_id]}',
-                      '#{record[:merchant_id]}',
-                      '#{record[:status]}',
-                      #{record[:created_at].to_date},
-                      #{record[:updated_at].to_date});" )
+    new_record = [record[:id],
+                  record[:customer_id],
+                  record[:merchant_id],
+                  record[:status],
+                  record[:created_at],
+                  record[:updated_at]]
+    prepped = database.prepare( "INSERT INTO invoices(id, customer_id,
+                                 merchant_id, status, created_at, updated_at)
+                                 VALUES (?,?,?,?,?,?)" )
+    prepped.execute(new_record)
   end
 
   def create_record(record)
+    record[:repository] = self
     Invoice.new(record)
   end
 
   def table_records
-    database.execute( "SELECT * FROM invoices" ).map { |row| Invoice.new(row) }
+    database.execute( "SELECT * FROM invoices" ).map do |row|
+      row[:repository] = self
+      Invoice.new(row)
+    end
   end
 
   def clean_status(match)

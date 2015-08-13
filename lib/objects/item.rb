@@ -1,4 +1,5 @@
 require_relative '../modules/record_like.rb'
+require 'bigdecimal'
 require 'date'
 
 class Item
@@ -14,11 +15,14 @@ class Item
     @id          = record[:id] || record["id"]
     @name        = record[:name] || record["name"]
     @description = record[:description] || record["description"]
-    @unit_price  = record[:unit_price] || record["unit_price"]
+    if record['unit_price'].nil?
+      @unit_price = BigDecimal.new(record[:unit_price])/100
+    else
+      @unit_price = BigDecimal.new(record["unit_price"])/100
+    end
     @merchant_id = record[:merchant_id] || record["merchant_id"]
     @created_at  = record[:created_at] || record["created_at"]
     @updated_at  = record[:updated_at] || record["updated_at"]
-
     @repository  = record.fetch(:repository, nil)
   end
 
@@ -71,7 +75,7 @@ class Item
       paid_invoice_items
     else
       paid_invoice_items.select do |ii|
-        ii.invoice.created_at.to_date == date.to_date
+        ii.invoice.created_at == date
       end
     end
   end
@@ -89,14 +93,15 @@ class Item
   end
 
   def dates_sold
-    paid_invoices.map{|invoice| invoice.created_at.to_date}.uniq
+    paid_invoices.map{|invoice| invoice.created_at }.uniq
   end
 
   def best_day
     if dates_sold.empty?
       nil
     else
-      dates_sold.max_by{|date| revenue(date) }
+      best_day = dates_sold.max_by{|date| revenue(date) }
+      Date.parse(best_day)
     end
   end
 

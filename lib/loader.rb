@@ -11,8 +11,6 @@ class Loader
     CSV.foreach(str, args) do |row|
         headers = row.headers[0..-1]
         fields = row.fields[0..-1]
-        fields[-2] = DateTime.parse(fields[-1])
-        fields[-1] = DateTime.parse(fields[-1])
         records << Hash[headers.zip(fields)]
     end
     records
