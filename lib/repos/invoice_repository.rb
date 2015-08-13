@@ -149,13 +149,13 @@ class InvoiceRepository
       :id => next_id,
       :customer_id => (args[:customer].id),
       :merchant_id => (args[:merchant].id),
-      :status => args[:status],
+      :status => 'shipped',
       :created_at => timestamp,
       :updated_at => timestamp,
       :repository => self
     }
     items = args[:items]
-    records << create_record(record)
+    add_record_to_database(record)
     invoice = find_by_id(record[:id])
     invoice.add_items(items)
     invoice

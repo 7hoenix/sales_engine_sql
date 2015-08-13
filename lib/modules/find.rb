@@ -16,7 +16,8 @@ module Find
   end
 
   def all
-    records
+    records = database.query( "SELECT * FROM #{table}" )
+    records.map { |record| create_record(record) }
   end
 
   def random
