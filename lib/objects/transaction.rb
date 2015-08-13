@@ -1,7 +1,9 @@
 require_relative '../modules/record_like.rb'
+require_relative '../modules/good_date.rb'
 
 class Transaction
   include RecordLike
+  include GoodDate
 
   attr_accessor :invoice_id,
                 :credit_card_number,

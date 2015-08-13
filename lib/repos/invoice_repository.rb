@@ -28,7 +28,7 @@ class InvoiceRepository
   def create_invoice_table
     database.execute( "CREATE TABLE invoices(id INTEGER PRIMARY KEY,
                        customer_id INTEGER, merchant_id INTEGER, status
-                       VARCHAR(31), created_at DATETIME, updated_at DATETIME)" );
+                       VARCHAR(31), created_at DATE, updated_at DATE)" );
   end
 
   def add_record_to_database(record)
@@ -36,7 +36,7 @@ class InvoiceRepository
                   record[:customer_id],
                   record[:merchant_id],
                   record[:status],
-                  record[:created_at],
+                  GoodDate.date(record[:created_at]),
                   record[:updated_at]]
     prepped = database.prepare( "INSERT INTO invoices(id, customer_id,
                                  merchant_id, status, created_at, updated_at)
@@ -149,13 +149,13 @@ class InvoiceRepository
       :id => next_id,
       :customer_id => (args[:customer].id),
       :merchant_id => (args[:merchant].id),
-      :status => args[:status],
+      :status => 'shipped',
       :created_at => timestamp,
       :updated_at => timestamp,
       :repository => self
     }
     items = args[:items]
-    records << create_record(record)
+    add_record_to_database(record)
     invoice = find_by_id(record[:id])
     invoice.add_items(items)
     invoice

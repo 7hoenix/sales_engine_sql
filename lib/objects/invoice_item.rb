@@ -1,8 +1,10 @@
 require_relative '../modules/record_like.rb'
+require_relative '../modules/good_date.rb'
 require 'bigdecimal'
 
 class InvoiceItem
   include RecordLike
+  include GoodDate
 
   attr_accessor :item_id, :invoice_id, :quantity , :unit_price, :created_at,
     :updated_at, :cached_invoice, :cached_item, :cached_price

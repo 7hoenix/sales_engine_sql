@@ -1,3 +1,5 @@
+require 'bigdecimal'
+
 module FindByX
   def find_by_id(match)
     find_by(column_name(__callee__), match)
@@ -72,7 +74,7 @@ module FindByX
   end
 
   def find_by_unit_price(match)
-    find_by(column_name(__callee__), match)
+    find_by(column_name(__callee__), ((match*100).to_i))
   end
 
   def find_all_by_unit_price(match)

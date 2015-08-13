@@ -70,12 +70,12 @@ class InvoiceItemRepository
         :id => next_id,
         :invoice_id => invoice_id,
         :item_id => item.id,
-        :unit_price => item.unit_price,
+        :unit_price => (item.unit_price.to_i)*100,
         :repository => item.repository,
         :created_at => timestamp,
         :updated_at => timestamp
       }
-      records << create_record(record)
+      add_record_to_database(record)
       end
   end
 
