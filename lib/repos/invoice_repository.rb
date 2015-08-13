@@ -28,7 +28,7 @@ class InvoiceRepository
   def create_invoice_table
     database.execute( "CREATE TABLE invoices(id INTEGER PRIMARY KEY,
                        customer_id INTEGER, merchant_id INTEGER, status
-                       VARCHAR(31), created_at DATE, updated_at DATE)" );
+                       VARCHAR(31), created_at DATETIME, updated_at DATETIME)" );
   end
 
   def add_record_to_database(record)
@@ -74,7 +74,7 @@ class InvoiceRepository
 
   def average_revenue_all_dates
     sum = BigDecimal.new(invoices_revenue.reduce(:+))
-    average = (sum / invoices_revenue.length).round(2)
+    (sum / invoices_revenue.length).round(2)
   end
 
   def average_revenue(date = "all")
@@ -103,7 +103,7 @@ class InvoiceRepository
 
   def average_items_all_dates
     sum = BigDecimal.new(invoices_items_quantity.reduce(:+))
-    average = (sum / invoices_items_quantity.length).round(2)
+    (sum / invoices_items_quantity.length).round(2)
   end
 
   def average_items(date = "all")
@@ -112,13 +112,13 @@ class InvoiceRepository
     else
       iis = invoice_items_for_invoices(invoices_for(date))
       sum = BigDecimal.new(invoices_items_quantity(iis).reduce(:+))
-      average = (sum / invoices_items_quantity(iis).length).round(2)
+      (sum / invoices_items_quantity(iis).length).round(2)
     end
   end
 
-  def invoices_items_quantity(iis = invoice_items_for_invoices)
-    iis.map do |iis|
-      iis.reduce(0){|acc, iis| acc + iis.quantity}
+  def invoices_items_quantity(iifs = invoice_items_for_invoices)
+    iifs.map do |iis|
+      iis.reduce(0){|acc, ii| acc + ii.quantity}
     end.flatten
   end
 
