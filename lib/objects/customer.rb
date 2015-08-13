@@ -1,8 +1,10 @@
 require 'set'
 require_relative '../modules/record_like.rb'
+require_relative '../modules/good_date.rb'
 
 class Customer
   include RecordLike
+  include GoodDate
 
   attr_accessor :first_name, :last_name, :created_at, :updated_at,
     :cached_invoices, :cached_paid_invoices, :cached_transactions,

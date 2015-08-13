@@ -1,7 +1,9 @@
 require_relative '../modules/record_like.rb'
+require_relative '../modules/good_date.rb'
 
 class Invoice
   include RecordLike
+  include GoodDate
 
   attr_accessor :customer_id, :merchant_id, :status , :created_at,
     :updated_at, :cached_transactions, :cached_invoice_items, :cached_items,

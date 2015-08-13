@@ -15,7 +15,6 @@ class MerchantTest < Minitest::Test
   end
 
   def test_it_can_calculate_its_revenue_for_a_date
-    skip
     @engine = SalesEngine.new('./data/')
     @engine.startup
     @merchant_repository = @engine.merchant_repository

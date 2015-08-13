@@ -1,9 +1,11 @@
 require 'set'
 require_relative '../modules/record_like'
+require_relative '../modules/good_date.rb'
 require 'date'
 
 class Merchant
   include RecordLike
+  include GoodDate
 
   attr_accessor :name, :created_at , :updated_at, :cached_items,
   :cached_invoices, :cached_paid_invoices, :cached_unpaid_invoices
@@ -72,43 +74,43 @@ class Merchant
     invoice_items(paid_invoices_for(date))
   end
 
- # def revenue(date = nil)
- #   if date.nil?
- #    rows = repository.database.query( "SELECT * FROM invoice_items,
- #      transactions, invoices, merchants
- #      WHERE invoices.merchant_id = '#{id}'
- #      AND transactions.invoice_id = invoices.id
- #      AND transactions.result = 'success'
- #      AND invoice_items.invoice_id = invoices.id " )
- #   else
- #     rows = revenue_with_a_date(date)
- #   end
- #   invoice_items = rows.to_a.flat_map do |row|
- #     repository.engine.invoice_item_repository.create_record(row)
- #   end
- #   invoice_items.reduce(0) do |revenue, ii|
- #     revenue += (ii.quantity * ii.unit_price)/100
- #   end
- # end
-
- # def revenue_with_a_date(date)
- #   repository.database.query( "SELECT * FROM invoice_items,
- #     transactions, invoices, merchants
- #     WHERE invoices.merchant_id = '#{id}'
- #     AND invoices.created_at = '#{date}'
- #     AND transactions.invoice_id = invoices.id
- #     AND transactions.result = 'success'
- #     AND invoice_items.invoice_id = invoices.id " )
- # end
-
- def revenue(dates = "all")
-   if dates == "all"
-     revenue_all
+  def revenue(date = nil)
+    if date.nil?
+     rows = repository.database.query( "SELECT * FROM invoice_items,
+       transactions, invoices, merchants
+       WHERE invoices.merchant_id = '#{id}'
+       AND transactions.invoice_id = invoices.id
+       AND transactions.result = 'success'
+      AND invoice_items.invoice_id = invoices.id " )
    else
-     dates = dates..dates if !(dates.is_a?(Range))
-     revenue_range(dates)
+     rows = revenue_with_a_date(date)
+   end
+   invoice_items = rows.to_a.flat_map do |row|
+     repository.engine.invoice_item_repository.create_record(row)
+   end
+   invoice_items.reduce(0) do |revenue, ii|
+     revenue += (ii.quantity * ii.unit_price)/100
    end
  end
+
+  def revenue_with_a_date(date)
+    repository.database.query( "SELECT * FROM invoice_items,
+      transactions, invoices, merchants
+      WHERE invoices.merchant_id = '#{id}'
+      AND invoices.created_at = '#{GoodDate.date(date)}'
+      AND transactions.invoice_id = invoices.id
+      AND transactions.result = 'success'
+      AND invoice_items.invoice_id = invoices.id " )
+  end
+
+# def revenue(dates = "all")
+#   if dates == "all"
+#     revenue_all
+#   else
+#     dates = dates..dates if !(dates.is_a?(Range))
+#     revenue_range(dates)
+#   end
+# end
 
   def revenue_day(date)
     paid_invoices_for(date).reduce(0) do |acc, invoice|
