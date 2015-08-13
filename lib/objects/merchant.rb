@@ -129,10 +129,11 @@ class Merchant
   end
 
   def favorite_customer
-    customers = paid_invoices.group_by{|invoice| invoice.customer}
-    customers.max_by do |id, invoices|
+    customers = paid_invoices.group_by{|invoice| invoice.customer.id}
+    id = customers.max_by do |id, invoices|
       invoices.length
     end.first
+    repository.engine.customer_repository.find_by_id(id)
   end
 
   def customers_with_pending_invoices
