@@ -22,6 +22,13 @@ class Transaction
   end
 
   def invoice
+    rows = repository.database.query( "SELECT * FROM invoices WHERE transactions.invoice_id =
+      '#{invoice_id}'" )
+    rows.to_a.flat_map { |row|
+      repository.engine.invoice_repository.create_record(row) }.first
+  end
+
+  def invoice
     cached_invoice ||= repository.get_invoice_for(self).reduce
   end
 

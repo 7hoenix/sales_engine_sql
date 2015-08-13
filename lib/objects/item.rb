@@ -27,7 +27,17 @@ class Item
   end
 
   def invoice_items
-    cached_invoice_items ||= repository.get(:invoice_items, id, :item_id)
+    rows = repository.database.query( "SELECT * FROM invoice_items WHERE invoice_items.item_id =
+      '#{id}'" )
+    rows.to_a.flat_map { |row|
+      repository.engine.invoice_item_repository.create_record(row) }
+  end
+
+  def merchant
+    rows = repository.database.query( "SELECT * FROM merchants WHERE items.merchant_id =
+      '#{merchant_id}'" )
+    rows.to_a.flat_map { |row|
+      repository.engine.merchant_repository.create_record(row) }.first
   end
 
   def paid_invoice_items

@@ -14,6 +14,15 @@ class MerchantTest < Minitest::Test
     @se.startup
   end
 
+  def test_it_can_calculate_its_revenue
+    @engine = SalesEngine.new('./data/')
+    @engine.startup
+    @merchant_repository = @engine.merchant_repository
+    @merchant = @merchant_repository.find_by_name("Dicki-Bednar")
+
+    assert_equal BigDecimal.new("1148393.74"), @merchant.revenue
+  end
+
   def test_it_has_a_name_accessor
     @merchant = Merchant.new(@example_record1)
     assert @merchant.respond_to?(:name)

@@ -24,11 +24,17 @@ class InvoiceItem
   end
 
   def invoice
-    cached_invoice ||= repository.get(:invoice, invoice_id, :id).reduce
+    rows = repository.database.query( "SELECT * FROM invoices WHERE invoices.id =
+      '#{invoice_id}'" )
+    rows.to_a.flat_map { |row|
+      repository.engine.invoice_repository.create_record(row) }.first
   end
 
   def item
-    cached_item ||= repository.get(:item, item_id, :id).reduce
+    rows = repository.database.query( "SELECT * FROM items WHERE items.id =
+      '#{item_id}'" )
+    rows.to_a.flat_map { |row|
+      repository.engine.item_repository.create_record(row) }.first
   end
 
   def total_price
