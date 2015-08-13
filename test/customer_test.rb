@@ -81,24 +81,6 @@ class CustomerTest < Minitest::Test
     assert_equal expected, actual
   end
 
-  def test_it_knows_days_since_last_transaction
-    cust = @se.customer_repository.find_by_id(1)
-
-    expected = (DateTime.now - DateTime.parse("2012-03-27T14:54:10+00:00")).to_i
-    actual = cust.days_since_activity
-
-    assert_equal expected, actual
-  end
-
-  def test_it_knows_different_days_since_last_transaction
-    cust = @se.customer_repository.find_by_id(7777777)
-
-    expected = (DateTime.now - DateTime.parse("2012-03-25T13:54:11+00:00")).to_i
-    actual = cust.days_since_activity
-
-    assert_equal expected, actual
-  end
-
   def test_it_knows_its_paid_invoice_items
     cust = @se.customer_repository.find_by_id(1)
     iis = cust.paid_invoice_items

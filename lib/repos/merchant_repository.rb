@@ -18,40 +18,38 @@ class MerchantRepository
 
       create_merchant_table
       build_for_database(loaded_csvs)
-      @new_records ||= table_records
+      @records ||= table_records
 
-    @records = build_from(loaded_csvs)
+    #@records = build_from(loaded_csvs)
     @table = "merchants"
     @engine = args.fetch(:engine, nil)
   end
 
   def create_merchant_table
-    database.execute( "CREATE TABLE merchants(id INTEGER PRIMARY KEY
-                      AUTOINCREMENT, name VARCHAR(31), created_at DATE,
-                      updated_at DATE)" );
-  end
-
-  def sanitize_record(record)
-    if record[:name].include?("'")
-      record[:name].gsub!("'", "")
-    end
-    record
+    database.execute( "CREATE TABLE merchants(id INTEGER PRIMARY KEY, name
+                       VARCHAR(31), created_at DATE, updated_at DATE)" );
   end
 
   def add_record_to_database(record)
-    record = sanitize_record(record)
-    database.execute( "INSERT INTO merchants(name, created_at, updated_at)
-                      VALUES ('#{record[:name]}',
-                      #{record[:created_at].to_date},
-                      #{record[:updated_at].to_date});" )
+    new_record = [record[:id],
+                 record[:name],
+                 record[:created_at],
+                 record[:updated_at]]
+    prepped = database.prepare( "INSERT INTO merchants(id, name, created_at,
+                                 updated_at) VALUES (?,?,?,?)" )
+    prepped.execute(new_record)
   end
 
   def create_record(record)
+    record[:repository] = self
     Merchant.new(record)
   end
 
   def table_records
-    database.execute( "SELECT * FROM merchants" ).map { |row| Merchant.new(row) }
+    database.execute( "SELECT * FROM merchants" ).map do |row|
+      row[:repository] = self
+      Merchant.new(row)
+    end
   end
 
   def most_revenue(x)

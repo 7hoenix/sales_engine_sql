@@ -9,16 +9,10 @@ module Find
   end
 
   def find_all_by(x, match)
-    match = match.to_s.downcase
-    #temp = find_all_by_temp(x, match) if !database.nil?
-    records.select do |record|
-      match == record.send(x).to_s.downcase
+    records = database.query( "SELECT * FROM #{table} WHERE #{x}='#{match}'" )
+    records.map do |record|
+      create_record(record)
     end
-    #raise "boom" if !return_records.empty? && return_records == temp
-  end
-
-  def find_all_by_temp(x, match)
-    database.execute( "SELECT * FROM #{table} WHERE #{x}=#{match};" )
   end
 
   def all

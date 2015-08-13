@@ -17,38 +17,44 @@ class ItemRepository
 
       create_item_table
       build_for_database(loaded_csvs)
-      @new_records ||= table_records
+      @records ||= table_records
 
-    @records = build_from(loaded_csvs)
+    #@records = build_from(loaded_csvs)
     @table = "items"
     @engine = args.fetch(:engine, nil)
   end
 
   def create_item_table
-    database.execute( "CREATE TABLE items(id INTEGER PRIMARY KEY
-                      AUTOINCREMENT, name VARCHAR(31), description
-                      VARCHAR(255), unit_price INTEGER, merchant_id INTEGER,
-                      created_at DATE, updated_at DATE)" );
+    database.execute( "CREATE TABLE items(id INTEGER PRIMARY KEY, name
+                      VARCHAR(31), description VARCHAR(255), unit_price
+                      INTEGER, merchant_id INTEGER, created_at DATE,
+                      updated_at DATE)" );
   end
 
   def add_record_to_database(record)
-    database.execute( "INSERT INTO items(name, description, unit_price,
+    new_record = [record[:id],
+                  record[:name],
+                  record[:description],
+                  record[:unit_price],
+                  record[:merchant_id],
+                  record[:created_at],
+                  record[:updated_at]]
+    prepped = database.prepare( "INSERT INTO items(id, name, description, unit_price,
                       merchant_id, created_at, updated_at)
-                      VALUES ('#{record[:name]}',
-                      '#{record[:description]}',
-                      '#{record[:unit_price]}',
-                      '#{record[:merchant_id]}',
-                      #{record[:created_at].to_date},
-                      #{record[:updated_at].to_date});" )
+                      VALUES (?,?,?,?,?,?,?)" )
+    prepped.execute(new_record)
   end
 
   def create_record(record)
-    record[:unit_price] = BigDecimal.new(record[:unit_price]) / 100
+    record[:repository] = self
     Item.new(record)
   end
 
   def table_records
-    database.execute( "SELECT * FROM items" ).map { |row| Item.new(row) }
+    database.execute( "SELECT * FROM items" ).map do |row|
+      row[:repository] = self
+      Item.new(row)
+    end
   end
 
   def paid_invoice_items(item)

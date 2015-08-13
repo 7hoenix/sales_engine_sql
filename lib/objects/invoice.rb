@@ -19,25 +19,37 @@ class Invoice
   end
 
   def transactions
-    cached_transactions ||= repository.get(:transactions, id, :invoice_id)
+    rows = repository.database.query( "SELECT * FROM transactions WHERE invoice_id = '#{id}'" )
+    rows.to_a.flat_map { |row|
+      repository.engine.transaction_repository.create_record(row) }
   end
 
   def invoice_items
-    cached_invoice_items ||= repository.get(:invoice_items, id, :invoice_id)
+    rows = repository.database.query( "SELECT * FROM invoice_items WHERE invoice_id = '#{id}'" )
+    rows.to_a.flat_map { |row|
+      repository.engine.invoice_item_repository.create_record(row) }
   end
 
   def items
-    cached_items ||= invoice_items.map do |ii|
-      repository.get(:items, ii.item_id, :id)
-    end.flatten
+    rows = repository.database.query(
+      "SELECT * FROM items, invoice_items, invoices
+       WHERE invoices.id = '#{id}'
+       AND invoice_items.invoice_id = invoices.id
+       AND items.id = invoice_items.item_id" )
+    rows.to_a.flat_map { |row| repository.engine.item_repository.create_record(row) }
   end
 
   def customer
-    cached_customer ||= repository.get(:customer, customer_id, :id).reduce
+    rows = repository.database.query( "SELECT * FROM customers WHERE customers.id = '#{customer_id}' " )
+    rows.to_a.flat_map { |row|
+      repository.engine.customer_repository.create_record(row) }.first
   end
 
   def merchant
-    cached_merchant ||= repository.get(:merchant, merchant_id, :id).reduce
+    rows = repository.database.query( "SELECT * FROM merchants WHERE
+      merchants.id = '#{merchant_id}'" )
+    rows.to_a.flat_map { |row|
+      repository.engine.merchant_repository.create_record(row) }.first
   end
 
   def paid?

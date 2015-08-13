@@ -4,8 +4,7 @@ require_relative '../lib/objects/merchant'
 require_relative '../lib/sales_engine.rb'
 
 class MerchantTest < Minitest::Test
-  
-  
+
   def setup
     @example_record1 =  {:id => '1',
                         :name => 'Matt',
@@ -13,6 +12,15 @@ class MerchantTest < Minitest::Test
                         :updated_at => "someothertime"}
     @se = SalesEngine.new
     @se.startup
+  end
+
+  def test_it_can_calculate_its_revenue
+    @engine = SalesEngine.new('./data/')
+    @engine.startup
+    @merchant_repository = @engine.merchant_repository
+    @merchant = @merchant_repository.find_by_name("Dicki-Bednar")
+
+    assert_equal BigDecimal.new("1148393.74"), @merchant.revenue
   end
 
   def test_it_has_a_name_accessor
@@ -91,6 +99,8 @@ class MerchantTest < Minitest::Test
   end
 
   def test_it_knows_revenue_for_given_date
+    skip
+    #doesnt actually test anything
     date = Date.parse("2012-03-21")
     merchant = @se.merchant_repository.find_by_id("8")
 

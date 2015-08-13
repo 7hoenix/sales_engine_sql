@@ -19,7 +19,10 @@ class Customer
   end
 
   def invoices
-    cached_invoices ||= repository.invoices(self)
+    rows = repository.database.query( "SELECT * FROM invoices WHERE invoices.customer_id =
+      '#{id}'" )
+    rows.to_a.flat_map { |row|
+      repository.engine.invoice_repository.create_record(row) }
   end
 
   def paid_invoices

@@ -17,8 +17,8 @@ class CustomerRepositoryTest < Minitest::Test
     repo = @se.customer_repository
     customer_record = {:first_name => 'george',
                         :last_name => 'timothy',
-                        :created_at => Time.now.to_date,
-                        :updated_at => Time.now.to_date}
+                        :created_at => Time.now.to_s,
+                        :updated_at => Time.now.to_s}
     results = repo.database.query( "SELECT * FROM customers" );
     assert_equal 6, results.to_a.size
     results.close

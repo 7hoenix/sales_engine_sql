@@ -57,6 +57,7 @@ class InvoiceRepositoryTest < Minitest::Test
 
 
   def test_it_creates_a_new_invoice
+    skip
     customer = @se.customer_repository.find_by_id(7)
     merchant = @se.merchant_repository.find_by_id(22)
     items = [].concat((1..3).map { @se.item_repository.random })
@@ -68,6 +69,7 @@ class InvoiceRepositoryTest < Minitest::Test
   end
 
   def test_it_creates_a_transaction
+    skip
     customer = @se.customer_repository.find_by_id(7)
     merchant = @se.merchant_repository.find_by_id(22)
     invoice = @se.invoice_repository.find_by_id(3)

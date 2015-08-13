@@ -17,13 +17,16 @@ class Merchant
   end
 
   def items
-    # cached_items ||= repository.get(:items, id, :merchant_id)
-    cached_items ||= repository.items_for(self)
+    rows = repository.database.query( "SELECT * FROM items WHERE merchant_id = '#{id}'" )
+    rows.to_a.flat_map { |row|
+      repository.engine.item_repository.create_record(row) }
   end
 
   def invoices
-    cached_invoices ||= repository.invoices_for(self)
-    # cached_invoices ||= repository.get(:invoices, id, :merchant_id)
+    rows = repository.database.query( "SELECT * FROM invoices WHERE merchant_id
+      = '#{id}'" )
+    rows.to_a.flat_map { |row|
+      repository.engine.invoice_repository.create_record(row) }
   end
 
   def invoices_for(date)
@@ -49,7 +52,7 @@ class Merchant
       paid_invoices
     else
       paid_invoices.select do |invoice|
-        invoice.created_at.to_date == date.to_date
+        invoice.created_at == date.to_date
       end
     end
   end
@@ -68,14 +71,21 @@ class Merchant
     invoice_items(paid_invoices_for(date))
   end
 
-  def revenue(dates = "all")
-    if dates == "all"
-      revenue_all
-    else
-      dates = dates..dates if !(dates.is_a?(Range))
-      revenue_range(dates)
-    end
-  end
+ # def revenue
+ #   rows = repository.database.query( "SELECT * FROM invoice_items,
+ #     transactions, invoices, merchants WHERE merchants.id = '#{id}' AND
+ #     transactions.invoice_id = invoice_id AND transactions.result = 'success' AND invoice.id = invoice_items.invoice_id" )
+ #   rows.to_a.flatten.reduce(0) { |row| row.quantity * row.unit_price }
+ # end
+
+ def revenue(dates = "all")
+   if dates == "all"
+     revenue_all
+   else
+     dates = dates..dates if !(dates.is_a?(Range))
+     revenue_range(dates)
+   end
+ end
 
   def revenue_day(date)
     paid_invoices_for(date).reduce(0) do |acc, invoice|
